@@ -3,7 +3,7 @@ public class Main {
         Player p1 = new Dog(100, new Point(0, 0));
         Player p2 = new Dog(150, new Point(300, 300));
 
-        /world
+        //world
         //controller
         //view
         //game start

@@ -1,4 +1,5 @@
 package player;
 
-public class Player {
+public class Player (int damage, Point location){
+
 }
