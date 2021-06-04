@@ -7,6 +7,8 @@ public class ObstacleImageRenderer implements ImageRenderer{
     public ObstacleImageRenderer(Obstacle obstacle){ this.obstacle = obstacle; }
     @Override
     void render(Graphics g, Image image) {
+        //Coordinate +- range
+
         /*Direction face = knight.getFace();
         Rectangle range = knight.getRange();
         Rectangle body = knight.getBody();
