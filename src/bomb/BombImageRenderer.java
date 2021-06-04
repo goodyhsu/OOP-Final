@@ -1,10 +1,10 @@
-package obstacle;
+package bomb;
 
 import java.awt.*;
 
-public class ObstacleImageRenderer implements ImageRenderer{
-    private Obstacle obstacle;
-    public ObstacleImageRenderer(Obstacle obstacle){ this.obstacle = obstacle; }
+public class BombImageRenderer implements ImageRenderer{
+    private Bomb bomb;
+    public BombImageRenderer(Bomb bomb){ this.bomb = bomb; }
 
     @Override
     void render(Graphics g, Image image) {
