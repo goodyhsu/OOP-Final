@@ -1,9 +1,16 @@
 package player;
 
+import fsm.FiniteStateMachine;
+import fsm.ImageRenderer;
+import fsm.State;
+import fsm.WaitingPerFrame;
 import model.Direction;
 import model.HealthPointSprite;
+import model.SpriteShape;
 
 import java.awt.*;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 public class Player extends HealthPointSprite {
     public final Image bomb_image;
