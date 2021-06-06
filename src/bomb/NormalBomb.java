@@ -17,9 +17,9 @@ public class NormalBomb extends Bomb{
     }
 
     @Override
-    public void add_smallBomb(){
-        SpriteCoordinate[] directions = {new SpriteCoordinate(0, 1), new SpriteCoordinate(1, 0),
-                new SpriteCoordinate(0, -1), new SpriteCoordinate(-1, 0)};
+    public void add_smallBomb(int num_smallBomb){
+        SpriteCoordinate[] directions = {new SpriteCoordinate(0, num_smallBomb), new SpriteCoordinate(num_smallBomb, 0),
+                new SpriteCoordinate(0, -num_smallBomb), new SpriteCoordinate(-num_smallBomb, 0)};
         for(int i = 0; i < 4; i++) {
             SpriteCoordinate smallbomb_coordinate = coordinate_addition(this.coordinate, directions[i]);
             SmallBomb smallBomb = new_smallBomb(this.owner, coordinate_to_location(smallbomb_coordinate), this.damage, 0,

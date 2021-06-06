@@ -46,12 +46,12 @@ public abstract class Bomb extends Sprite {
             explode_effect();
         if(this.exploded && this.num_smallBomb < this.explode_range){
             this.num_smallBomb++;
-            add_smallBomb();
+            add_smallBomb(this.num_smallBomb);
         }
         if(this.after_explode_counter.time_up())
             this.world.removeSprite(this);
     }
 
-    public void onDamaged(Rectangle r, int i){}
+    public void onDamaged(Rectangle r, int i){ this.exploded = true; }
     public void render(Graphics g){ this.renderer.render(g, this.owner.bomb_image); }
 }
