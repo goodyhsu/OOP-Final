@@ -1,5 +1,7 @@
 package obstacle;
 
+import fsm.ImageRenderer;
+
 import java.awt.*;
 
 public class ObstacleImageRenderer implements ImageRenderer{
@@ -7,18 +9,8 @@ public class ObstacleImageRenderer implements ImageRenderer{
     public ObstacleImageRenderer(Obstacle obstacle){ this.obstacle = obstacle; }
 
     @Override
-    void render(Graphics g, Image image) {
-        //Coordinate +- range
-
-        /*Direction face = knight.getFace();
-        Rectangle range = knight.getRange();
-        Rectangle body = knight.getBody();
-        if (face == Direction.LEFT) {
-            g.drawImage(image, range.x + range.width, range.y, -range.width, range.height, null);
-        } else {
-            g.drawImage(image, range.x, range.y, range.width, range.height, null);
-        }
-        g.setColor(Color.RED);
-        g.drawRect(body.x, body.y, body.width, body.height);*/
+    public void render(Image image, Graphics g) {
+        Rectangle range = this.obstacle.getRange();
+        g.drawImage(image, range.x, range.y, range.width, range.height, null);
     }
 }
