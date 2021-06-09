@@ -21,16 +21,16 @@ public class NormalBomb extends Bomb{
         SpriteCoordinate[] directions = {new SpriteCoordinate(0, num_smallBomb), new SpriteCoordinate(num_smallBomb, 0),
                 new SpriteCoordinate(0, -num_smallBomb), new SpriteCoordinate(-num_smallBomb, 0)};
         for(int i = 0; i < 4; i++) {
-            SpriteCoordinate smallbomb_coordinate = coordinate_addition(this.coordinate, directions[i]);
-            SmallBomb smallBomb = new_smallBomb(this.owner, coordinate_to_location(smallbomb_coordinate), this.damage, 0,
+            SpriteCoordinate smallBomb_coordinate = coordinate_addition(this.coordinate, directions[i]);
+            SmallBomb smallBomb = new_smallBomb(this.owner, coordinate_to_location(smallBomb_coordinate), this.damage, 0,
                     this.before_explode_counter, this.after_explode_counter);
             this.world.addSprite(smallBomb);
         }
     }
 
-    public SmallBomb new_smallBomb(Player owner, Point smallbomb_location, int damage, int explode_range,
+    public SmallBomb new_smallBomb(Player owner, Point smallBomb_location, int damage, int explode_range,
                                    Counter before, Counter after){
-        return new NormalSmallBomb(owner, smallbomb_location, damage, explode_range, before, after);
+        return new NormalSmallBomb(owner, smallBomb_location, damage, explode_range, before, after);
     }
 
     public void explode_effect(){

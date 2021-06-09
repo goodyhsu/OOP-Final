@@ -3,6 +3,7 @@ package bomb;
 import model.Sprite;
 import model.SpriteCoordinate;
 import model.Counter;
+import model.SpriteShape;
 import player.Player;
 import static utils.ImageStateUtils.readImage;
 import static utils.LocationUtils.*;
@@ -34,7 +35,7 @@ public abstract class Bomb extends Sprite {
         this.renderer = new BombImageRenderer(this);
     }
 
-    protected abstract void add_smallBomb();
+    protected abstract void add_smallBomb(int num_smallBomb);
     protected abstract SmallBomb new_smallBomb(Player owner, Point owner_location, int damage, int explode_range,
                                                Counter before, Counter after);
     protected abstract void explode_effect();
@@ -52,6 +53,14 @@ public abstract class Bomb extends Sprite {
             this.world.removeSprite(this);
     }
 
+    @Override
     public void onDamaged(Rectangle r, int i){ this.exploded = true; }
-    public void render(Graphics g){ this.renderer.render(g, this.owner.bomb_image); }
+
+    @Override
+    public void render(Graphics g){ this.renderer.render(this.owner.bomb_image, g); }
+
+    @Override
+    public Point getLocation() {
+        return location;
+    }
 }
