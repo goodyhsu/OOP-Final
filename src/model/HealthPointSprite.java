@@ -2,6 +2,8 @@ package model;
 
 import player.HealthPointBar;
 
+import java.awt.*;
+
 public abstract class HealthPointSprite extends Sprite {
     protected HealthPointBar hpBar;
 
@@ -9,6 +11,7 @@ public abstract class HealthPointSprite extends Sprite {
         this.hpBar = new HealthPointBar(hp);
         hpBar.setOwner(this);
     }
+
 
     @Override
     public void onDamaged(Rectangle damageArea, int damage) {

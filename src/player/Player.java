@@ -12,11 +12,18 @@ import java.awt.*;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import static fsm.FiniteStateMachine.Transition.from;
+import static player.Player.Event.*;
+import static model.Direction.LEFT;
+import static utils.ImageStateUtils.imageStatesFromFolder;
+
+
 public class Player extends HealthPointSprite {
-    public final Image bomb_image;
-    public final Image smallBomb_image;
+    //public final Image bomb_image;
+    //public final Image smallBomb_image;
 
     public static final int HP = 1;
+    private final SpriteShape shape;
     private final FiniteStateMachine fsm;
     private final Set<Direction> directions = new CopyOnWriteArraySet<>();
     private final int damage;
@@ -25,27 +32,27 @@ public class Player extends HealthPointSprite {
         WALK, STOP, ATTACK, DAMAGED
     }
 
-    public Knight(int damage, Point location) {
-        super(KNIGHT_HP);
+    public Player(int damage, Point location) {
+        super(HP);
         this.damage = damage;
         this.location = location;
         shape = new SpriteShape(new Dimension(146, 176),
                 new Dimension(33, 38), new Dimension(66, 105));
         fsm = new FiniteStateMachine();
 
-        ImageRenderer imageRenderer = new KnightImageRenderer(this);
+        ImageRenderer imageRenderer = new PlayerImageRenderer(this);
         State idle = new WaitingPerFrame(4,
-                new Idle(imageStatesFromFolder("assets/idle", imageRenderer)));
+                new Idle(imageStatesFromFolder("sprites/dog/idle", imageRenderer)));
         State walking = new WaitingPerFrame(2,
-                new Walking(this, imageStatesFromFolder("assets/walking", imageRenderer)));
-        State attacking = new WaitingPerFrame(3,
-                new Attacking(this, fsm, imageStatesFromFolder("assets/attack", imageRenderer)));
+                new Walking(this, imageStatesFromFolder("sprites/dog/walking", imageRenderer)));
+        //State attacking = new WaitingPerFrame(3,
+        //        new Attacking(this, fsm, imageStatesFromFolder("sprites/dog/attack", imageRenderer)));
 
         fsm.setInitialState(idle);
         fsm.addTransition(from(idle).when(WALK).to(walking));
-        fsm.addTransition(from(walking).when(STOP).to(idle));
-        fsm.addTransition(from(idle).when(ATTACK).to(attacking));
-        fsm.addTransition(from(walking).when(ATTACK).to(attacking));
+        //fsm.addTransition(from(walking).when(STOP).to(idle));
+        //fsm.addTransition(from(idle).when(ATTACK).to(attacking));
+        //fsm.addTransition(from(walking).when(ATTACK).to(attacking));
     }
 
     public void attack() {

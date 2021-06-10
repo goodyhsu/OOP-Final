@@ -5,9 +5,6 @@ import model.Direction;
 
 import java.awt.*;
 
-/**
- * @author - johnny850807@gmail.com (Waterball)
- */
 public class PlayerImageRenderer implements ImageRenderer {
     protected Player player;
 
@@ -16,10 +13,10 @@ public class PlayerImageRenderer implements ImageRenderer {
     }
 
     @Override
-    /*public void render(Image image, Graphics g) {
+    public void render(Image image, Graphics g) {
         Direction face = player.getFace();
         Rectangle range = player.getRange();
-        Rectangle body = knight.getBody();
+        Rectangle body = player.getBody();
         if (face == Direction.LEFT) {
             g.drawImage(image, range.x + range.width, range.y, -range.width, range.height, null);
         } else {
@@ -27,5 +24,5 @@ public class PlayerImageRenderer implements ImageRenderer {
         }
         g.setColor(Color.RED);
         g.drawRect(body.x, body.y, body.width, body.height);
-    }*/
+    }
 }

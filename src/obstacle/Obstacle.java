@@ -16,7 +16,7 @@ public abstract class Obstacle extends Sprite{
         this.renderer = new ObstacleImageRenderer(this);
     }
     @Override
-    public void render(Graphics g){ this.renderer.render(g, this.image); }
+    public void render(Graphics g){ this.renderer.render(this.image, g); }
     public void onDamaged(Rectangle r, int i) {}
 
 }
