@@ -4,6 +4,7 @@ import player.Player;
 import views.GameView;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,7 +21,10 @@ public class Main {
         GameView view = new GameView(game);
 
         // world - set Obstacles
-        world.setObstacles(view);
+        ArrayList<String> obstacle_list = new ArrayList<String>();
+        obstacle_list.add("Wood");
+        obstacle_list.add("Stone");
+        world.setObstacles(view, obstacle_list);
 
         //game start
         game.start();

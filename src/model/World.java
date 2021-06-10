@@ -23,27 +23,32 @@ public class World {
     private final List<Sprite> sprites = new CopyOnWriteArrayList<>();
 //    private final CollisionHandler collisionHandler;
     private final int obstacle_type = 2;    // ?
-    private final ArrayList<String> obstacle_list = new ArrayList<String>();    // ?
+    private ArrayList<String> obstacle_list;
 
     public World(Sprite... sprites) {
         addSprites(sprites);
     }
 
-    public void setObstacles(GameView view) throws ClassNotFoundException, NoSuchMethodException,
-            InvocationTargetException, InstantiationException, IllegalAccessException {
+    public void setObstacles(GameView view, ArrayList<String> obstacle_list){
         int min = 20;    // ?
         int max = 50;    // ?
         int obstacle_num = getRandomNumberUsingNextInt(min, max);
+        this.obstacle_list = obstacle_list;
         for (int i = 0; i < obstacle_num; i++) {
             String name = obstacle_list.get(getRandomNumberUsingNextInt(0, obstacle_type));
             File file = new File(".");  //?
             boolean legalObstacle = false;
-            Obstacle new_obstacle = getObstacleFromName(name, file, getCoordinate(view));
-            while (!legalObstacle) {
-                if (!checkCollision(new_obstacle))
-                    legalObstacle = true;
+            try {
+                Obstacle new_obstacle = getObstacleFromName(name, file, getCoordinate(view));
+                while (!legalObstacle) {
+                    if (!checkCollision(new_obstacle))
+                        legalObstacle = true;
+                }
+                addSprite(new_obstacle);
+            } catch (ClassNotFoundException | NoSuchMethodException |
+                    InvocationTargetException | InstantiationException | IllegalAccessException e) {
+                continue;
             }
-            addSprite(new_obstacle);
         }
     }
 
