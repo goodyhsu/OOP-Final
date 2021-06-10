@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * @author - johnny850807@gmail.com (Waterball)
  */
-public class KnightCollisionHandler implements CollisionHandler {
+public class PlayerCollisionHandler implements CollisionHandler {
     @Override
     public void handle(Point originalLocation, Sprite from, Sprite to) {
         if (from instanceof Player && to instanceof Player) {
