@@ -121,7 +121,6 @@ public class GameView extends JFrame {
             // Now, let's paint
             g.setColor(Color.WHITE); // paint background with all white
             g.fillRect(0, 0, GameView.WIDTH, GameView.HEIGHT);
-            world.render(g); // ask the world to paint itself and paint the sprites on the canvas
 
             // grids
             int line_w = 2;
@@ -133,6 +132,8 @@ public class GameView extends JFrame {
             for (int y = 0; y < GameView.WIDTH; y += GameView.BLOCK_HEIGHT) {
                 g.fillRect(0, y, GameView.WIDTH, line_w);
             }
+            
+            world.render(g); // ask the world to paint itself and paint the sprites on the canvas
         }
     }
 
