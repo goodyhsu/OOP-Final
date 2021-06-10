@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         // players
         Player p1 = new Player(1, new Point(0, 0));
-        //Player p2 = new Dog(150, new Point(300, 300));
+        Player p2 = new Player(1, new Point(300, 300));
 
         //world
         World world = new World(p1, p2);
@@ -24,6 +24,6 @@ public class Main {
 
         //game start
         game.start();
-        view launch
+        view launch;
     }
 }

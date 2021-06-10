@@ -45,14 +45,14 @@ public class Player extends HealthPointSprite {
                 new Idle(imageStatesFromFolder("sprites/dog/idle", imageRenderer)));
         State walking = new WaitingPerFrame(2,
                 new Walking(this, imageStatesFromFolder("sprites/dog/walking", imageRenderer)));
-        //State attacking = new WaitingPerFrame(3,
-        //        new Attacking(this, fsm, imageStatesFromFolder("sprites/dog/attack", imageRenderer)));
+        State attacking = new WaitingPerFrame(3,
+                new Attacking(this, fsm, imageStatesFromFolder("sprites/dog/attack", imageRenderer)));
 
         fsm.setInitialState(idle);
         fsm.addTransition(from(idle).when(WALK).to(walking));
-        //fsm.addTransition(from(walking).when(STOP).to(idle));
-        //fsm.addTransition(from(idle).when(ATTACK).to(attacking));
-        //fsm.addTransition(from(walking).when(ATTACK).to(attacking));
+        fsm.addTransition(from(walking).when(STOP).to(idle));
+        fsm.addTransition(from(idle).when(ATTACK).to(attacking));
+        fsm.addTransition(from(walking).when(ATTACK).to(attacking));
     }
 
     public void attack() {
