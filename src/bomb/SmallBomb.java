@@ -13,5 +13,5 @@ public abstract class SmallBomb extends Bomb{
     }
 
     @Override
-    public void render(Graphics g){ this.renderer.render(g, this.owner.smallBomb_image); }
+    public void render(Graphics g){ this.renderer.render(this.owner.smallBomb_image, g); }
 }

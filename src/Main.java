@@ -28,6 +28,6 @@ public class Main {
 
         //game start
         game.start();
-        view launch;
+        view.launch();
     }
 }

@@ -3,6 +3,7 @@ package bomb;
 import model.Counter;
 import model.Sprite;
 import model.SpriteCoordinate;
+import model.SpriteShape;
 import player.Player;
 
 import java.awt.*;
@@ -11,9 +12,12 @@ import static utils.LocationUtils.coordinate_addition;
 import static utils.LocationUtils.coordinate_to_location;
 
 public class NormalBomb extends Bomb{
+    private SpriteShape shape;
     public NormalBomb(Player owner, Point owner_location, int damage, int explode_range,
                 Counter before, Counter after){
         super(owner, owner_location, damage, explode_range, before, after);
+        this.shape = new SpriteShape(new Dimension(146, 176),
+                new Dimension(33, 38), new Dimension(66, 105));
     }
 
     @Override
@@ -28,11 +32,13 @@ public class NormalBomb extends Bomb{
         }
     }
 
+    @Override
     public SmallBomb new_smallBomb(Player owner, Point smallBomb_location, int damage, int explode_range,
                                    Counter before, Counter after){
         return new NormalSmallBomb(owner, smallBomb_location, damage, explode_range, before, after);
     }
 
+    @Override
     public void explode_effect(){
         // Deal damage
         Rectangle damageArea = getRange();
@@ -41,4 +47,20 @@ public class NormalBomb extends Bomb{
             sprite.onDamaged(damageArea, this.damage);
         }
     }
+
+    @Override
+    public Rectangle getRange() {
+        return new Rectangle(location, shape.size);
+    }
+
+    @Override
+    public Dimension getBodyOffset() {
+        return shape.bodyOffset;
+    }
+
+    @Override
+    public Dimension getBodySize() {
+        return shape.bodySize;
+    }
+
 }

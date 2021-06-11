@@ -19,8 +19,8 @@ import static utils.ImageStateUtils.imageStatesFromFolder;
 
 
 public class Player extends HealthPointSprite {
-    //public final Image bomb_image;
-    //public final Image smallBomb_image;
+    public Image bomb_image;
+    public Image smallBomb_image;
 
     public static final int HP = 1;
     private final SpriteShape shape;
