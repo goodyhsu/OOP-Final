@@ -47,7 +47,7 @@ public class World {
             try {
                 Obstacle new_obstacle = getObstacleFromName(name, file, getCoordinate(view));
                 while (!legalObstacle) {
-                    if (!checkCollision(new_obstacle))
+                    if (!isCollision(new_obstacle))
                         legalObstacle = true;
                 }
                 addSprite(new_obstacle);
@@ -91,7 +91,7 @@ public class World {
         sprite.setWorld(null);
     }
 
-    private boolean checkCollision(Sprite current) {
+    private boolean isCollision(Sprite current) {
         Rectangle body = current.getBody();
         for (Sprite other : sprites) {
             if (other != current && body.intersects(other.getBody()))
@@ -103,13 +103,13 @@ public class World {
     public void move(Sprite from, Dimension offset) {
         Point originalLocation = new Point(from.getLocation());
         from.getLocation().translate(offset.width, offset.height);
-        boolean collision = checkCollision(from);
+        boolean collision = isCollision(from);
         if (collision)
             from.setLocation(originalLocation);
     }
 
     public boolean setBomb(Sprite bomb) {
-        boolean collision = checkCollision(bomb);
+        boolean collision = isCollision(bomb);
         if (collision)
             return false;
         addSprite(bomb);

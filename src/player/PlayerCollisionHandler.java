@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class PlayerCollisionHandler implements CollisionHandler {
     @Override
-    public boolean checkCollision(Sprite from) {
+    public boolean isCollision(Sprite from) {
         return false;
     }
 
