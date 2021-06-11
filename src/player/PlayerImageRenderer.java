@@ -17,7 +17,7 @@ public class PlayerImageRenderer implements ImageRenderer {
         Direction face = player.getFace();
         Rectangle range = player.getRange();
         Rectangle body = player.getBody();
-        if (face == Direction.LEFT) {
+        if (face == Direction.RIGHT) {
             g.drawImage(image, range.x + range.width, range.y, -range.width, range.height, null);
         } else {
             g.drawImage(image, range.x, range.y, range.width, range.height, null);

@@ -36,8 +36,8 @@ public class Player extends HealthPointSprite {
         super(HP);
         this.damage = damage;
         this.location = location;
-        shape = new SpriteShape(new Dimension(100, 110),
-                new Dimension(20, 35), new Dimension(60, 60));
+        shape = new SpriteShape(new Dimension(70, 80),
+                new Dimension(10, 15), new Dimension(50, 50));
         fsm = new FiniteStateMachine();
 
         ImageRenderer imageRenderer = new PlayerImageRenderer(this);
