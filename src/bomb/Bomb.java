@@ -1,9 +1,6 @@
 package bomb;
 
-import model.Sprite;
-import model.SpriteCoordinate;
-import model.Counter;
-import model.SpriteShape;
+import model.*;
 import player.Player;
 import static utils.ImageStateUtils.readImage;
 import static utils.LocationUtils.*;
@@ -37,7 +34,7 @@ public abstract class Bomb extends Sprite {
 
     protected abstract void add_smallBomb(int num_smallBomb);
     protected abstract SmallBomb new_smallBomb(Player owner, Point owner_location, int damage, int explode_range,
-                                               Counter before, Counter after);
+                                               Counter before, Counter after, Direction face);
     protected abstract void explode_effect();
 
     @Override

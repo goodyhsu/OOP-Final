@@ -1,6 +1,7 @@
 package bomb;
 
 import model.Counter;
+import model.Direction;
 import model.Sprite;
 import model.SpriteShape;
 import player.Player;
@@ -10,8 +11,8 @@ import java.awt.*;
 public class NormalSmallBomb extends SmallBomb{
     private SpriteShape shape;
     public NormalSmallBomb(Player owner, Point location, int damage, int explode_range,
-                     Counter before, Counter after){
-        super(owner, location, damage, explode_range, before, after);
+                           Counter before, Counter after, Direction face){
+        super(owner, location, damage, explode_range, before, after, face);
         this.shape = new SpriteShape(new Dimension(146, 176),
                 new Dimension(33, 38), new Dimension(66, 105));
     }
@@ -28,7 +29,7 @@ public class NormalSmallBomb extends SmallBomb{
 
     @Override
     public SmallBomb new_smallBomb(Player owner, Point smallBomb_location, int damage, int explode_range,
-                                   Counter before, Counter after){
+                                   Counter before, Counter after, Direction face){
         return null;
     }
 

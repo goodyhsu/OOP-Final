@@ -1,9 +1,6 @@
 package bomb;
 
-import model.Counter;
-import model.Sprite;
-import model.SpriteCoordinate;
-import model.SpriteShape;
+import model.*;
 import player.Player;
 
 import java.awt.*;
@@ -24,18 +21,20 @@ public class NormalBomb extends Bomb{
     public void add_smallBomb(int num_smallBomb){
         SpriteCoordinate[] directions = {new SpriteCoordinate(0, num_smallBomb), new SpriteCoordinate(num_smallBomb, 0),
                 new SpriteCoordinate(0, -num_smallBomb), new SpriteCoordinate(-num_smallBomb, 0)};
+
+        Direction[] smallBomb_directions = Direction.values();
         for(int i = 0; i < 4; i++) {
             SpriteCoordinate smallBomb_coordinate = coordinate_addition(this.coordinate, directions[i]);
             SmallBomb smallBomb = new_smallBomb(this.owner, coordinate_to_location(smallBomb_coordinate), this.damage, 0,
-                    this.before_explode_counter, this.after_explode_counter);
+                    this.before_explode_counter, this.after_explode_counter, smallBomb_directions[i]);
             this.world.addSprite(smallBomb);
         }
     }
 
     @Override
     public SmallBomb new_smallBomb(Player owner, Point smallBomb_location, int damage, int explode_range,
-                                   Counter before, Counter after){
-        return new NormalSmallBomb(owner, smallBomb_location, damage, explode_range, before, after);
+                                   Counter before, Counter after, Direction face){
+        return new NormalSmallBomb(owner, smallBomb_location, damage, explode_range, before, after, face);
     }
 
     @Override

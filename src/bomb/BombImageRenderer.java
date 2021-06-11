@@ -6,6 +6,7 @@ import java.awt.*;
 
 public class BombImageRenderer implements ImageRenderer {
     private Bomb bomb;
+    public BombImageRenderer(){}
     public BombImageRenderer(Bomb bomb){ this.bomb = bomb; }
 
     @Override
