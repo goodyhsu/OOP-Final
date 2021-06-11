@@ -1,6 +1,8 @@
+import bomb.BombCollisionHandler;
 import controller.Game;
 import model.World;
 import player.Player;
+import player.PlayerCollisionHandler;
 import views.GameView;
 
 import java.awt.*;
@@ -12,8 +14,12 @@ public class Main {
         Player p1 = new Player(1, new Point(0, 0));
         Player p2 = new Player(1, new Point(300, 300));
 
+        // CollisionHandler
+        PlayerCollisionHandler playerCollisionHandler = new PlayerCollisionHandler();
+        BombCollisionHandler bombCollisionHandler = new BombCollisionHandler();
+
         //world
-        World world = new World(p1, p2);
+        World world = new World(playerCollisionHandler, bombCollisionHandler, p1, p2);
 
         //controller
         Game game = new Game(world, p1, p2);

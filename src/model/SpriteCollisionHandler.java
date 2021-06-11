@@ -8,6 +8,11 @@ import java.awt.*;
 
 public class SpriteCollisionHandler implements CollisionHandler {
     @Override
+    public boolean checkCollision(Sprite from) {
+        return false;
+    }
+
+    @Override
     public void handle(Point originalLocation, Sprite from, Sprite to) {
 //        if (from instanceof Player && (to instanceof Obstacle or to instanceof ))
     }
