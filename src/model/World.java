@@ -1,6 +1,8 @@
 package model;
 
+import bomb.BombCollisionHandler;
 import obstacle.Obstacle;
+import player.PlayerCollisionHandler;
 import views.GameView;
 
 import java.awt.*;
@@ -24,8 +26,12 @@ public class World {
 //    private final CollisionHandler collisionHandler;
     private final int obstacle_type = 2;    // ?
     private ArrayList<String> obstacle_list;
+    private PlayerCollisionHandler playerCollisionHandler;
+    private BombCollisionHandler bombCollisionHandler;
 
-    public World(Sprite... sprites) {
+    public World(PlayerCollisionHandler playerCollisionHandler, BombCollisionHandler bombCollisionHandler, Sprite... sprites) {
+        this.playerCollisionHandler = playerCollisionHandler;
+        this.bombCollisionHandler = bombCollisionHandler;
         addSprites(sprites);
     }
 
@@ -140,6 +146,14 @@ public class World {
         for (Sprite sprite : sprites) {
             sprite.render(g);
         }
+    }
+
+    public PlayerCollisionHandler getPlayerCollisionHandler() {
+        return playerCollisionHandler;
+    }
+
+    public BombCollisionHandler getBombCollisionHandler() {
+        return bombCollisionHandler;
     }
 
     private Obstacle getObstacleFromName(String class_name, File file, SpriteCoordinate coordinate) throws

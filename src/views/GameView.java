@@ -13,7 +13,7 @@ import javax.swing.*;
 
 public class GameView extends JFrame {
     public static final int HEIGHT = 600;
-    public static final int WIDTH = 1000;
+    public static final int WIDTH = 1050;
     public static final int P1 = 1;
     public static final int P2 = 2;
     private final Canvas canvas = new Canvas();
@@ -125,12 +125,14 @@ public class GameView extends JFrame {
             // grids
             int line_w = 2;
             g.setColor(Color.BLACK);
-            for (int x = 0; x < GameView.WIDTH; x += GameView.BLOCK_WIDTH) {
-                g.fillRect(x, 0, line_w, GameView.HEIGHT);
+            for (int x = 0; x <= GameView.WIDTH; x += GameView.BLOCK_WIDTH) {
+//                int xx = (x - 1 >= 0)? x-1 : 0;
+//                System.out.println(x);
+                g.fillRect(x, 0, line_w, GameView.HEIGHT+line_w);
             }
 
-            for (int y = 0; y < GameView.WIDTH; y += GameView.BLOCK_HEIGHT) {
-                g.fillRect(0, y, GameView.WIDTH, line_w);
+            for (int y = 0; y <= GameView.HEIGHT; y += GameView.BLOCK_HEIGHT) {
+                g.fillRect(0, y, GameView.WIDTH+line_w, line_w);
             }
             
             world.render(g); // ask the world to paint itself and paint the sprites on the canvas
