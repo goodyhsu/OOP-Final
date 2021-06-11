@@ -12,7 +12,7 @@ import javax.swing.*;
 //import javax.swing.event.*;
 
 public class GameView extends JFrame {
-    public static final int HEIGHT = 1000;
+    public static final int HEIGHT = 600;
     public static final int WIDTH = 1000;
     public static final int P1 = 1;
     public static final int P2 = 2;
@@ -20,8 +20,8 @@ public class GameView extends JFrame {
     private final Game game;
 
     // Need to define the size of a BLOCK
-    public static final int BLOCK_HEIGHT = 100;
-    public static final int BLOCK_WIDTH = 100;
+    public static final int BLOCK_HEIGHT = 75;
+    public static final int BLOCK_WIDTH = 75;
 
     public GameView(Game game) throws HeadlessException {
         this.game = game;

@@ -44,7 +44,7 @@ public class Player extends HealthPointSprite {
         State idle = new WaitingPerFrame(4,
                 new Idle(imageStatesFromFolder("sprites/dog/idle", imageRenderer)));
         State walking = new WaitingPerFrame(2,
-                new Walking(this, imageStatesFromFolder("sprites/dog/walking", imageRenderer)));
+                new Walking(this, imageStatesFromFolder("sprites/dog/walk", imageRenderer)));
         State attacking = new WaitingPerFrame(3,
                 new Attacking(this, fsm, imageStatesFromFolder("sprites/dog/attack", imageRenderer)));
 
