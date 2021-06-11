@@ -8,9 +8,8 @@ import java.awt.*;
 
 public abstract class SmallBomb extends Bomb{
     Direction face;
-    public SmallBomb(Player owner, Point location, int damage, int explode_range,
-                     Counter before, Counter after, Direction face){
-        super(owner, location, damage, explode_range, before, after);
+    public SmallBomb(Player owner, Point location, int damage, int explode_range, Direction face){
+        super(owner, location, damage, explode_range);
         this.exploded = true;
         this.face = face;
         this.renderer = new SmallBombImageRenderer(this);

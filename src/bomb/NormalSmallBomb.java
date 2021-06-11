@@ -11,9 +11,9 @@ import java.awt.*;
 public class NormalSmallBomb extends SmallBomb{
     private SpriteShape shape;
     public NormalSmallBomb(Player owner, Point location, int damage, int explode_range,
-                           Counter before, Counter after, Direction face){
-        super(owner, location, damage, explode_range, before, after, face);
-        this.shape = new SpriteShape(new Dimension(146, 176),
+                           Direction face){
+        super(owner, location, damage, explode_range, face);
+        this.shape = new SpriteShape(new Dimension(176, 176),
                 new Dimension(33, 38), new Dimension(66, 105));
     }
 
