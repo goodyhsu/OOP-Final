@@ -17,6 +17,8 @@ public class Dog extends Player {
 
         this.damage = damage;
         this.location = location;
+        bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bone/0.png");
+        smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bone/0.png");
 
         ImageRenderer imageRenderer = new PlayerImageRenderer(this);
         State idle = new WaitingPerFrame(4,

@@ -22,7 +22,7 @@ import static java.util.stream.Collectors.toSet;
  * @author - johnny850807@gmail.com (Waterball)
  */
 public class World {
-    private final List<Sprite> sprites = new CopyOnWriteArrayList<>();
+    private static final List<Sprite> sprites = new CopyOnWriteArrayList<>();
 //    private final CollisionHandler collisionHandler;
     private final int obstacle_type = 2;    // ?
     private ArrayList<String> obstacle_list;
@@ -91,7 +91,7 @@ public class World {
         sprite.setWorld(null);
     }
 
-    private boolean isCollision(Sprite current) {
+    private boolean isCollision(Sprite current) { /*之後刪掉*/
         Rectangle body = current.getBody();
         for (Sprite other : sprites) {
             if (other != current && body.intersects(other.getBody()))
@@ -102,16 +102,20 @@ public class World {
 
     public void move(Sprite from, Dimension offset) {
         Point originalLocation = new Point(from.getLocation());
+        PlayerCollisionHandler collisionHandler = getPlayerCollisionHandler();
+        boolean now_collision = collisionHandler.isCollision(from);
         from.getLocation().translate(offset.width, offset.height);
-        boolean collision = isCollision(from);
-        if (collision)
-            from.setLocation(originalLocation);
+        if (!now_collision) {
+            boolean collision = collisionHandler.isCollision(from);
+            if (collision)
+                from.setLocation(originalLocation);
+        }
     }
 
     public boolean setBomb(Sprite bomb) {
-        boolean collision = isCollision(bomb);
-        if (collision)
-            return false;
+        //boolean collision = isCollision(bomb);
+        //if (collision)
+        //    return false;
         addSprite(bomb);
         return true;
     }
@@ -133,7 +137,7 @@ public class World {
                 .collect(toSet());
     }
 
-    public List<Sprite> getSprites() {
+    public static List<Sprite> getSprites() {
         return sprites;
     }
 

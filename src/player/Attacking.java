@@ -1,5 +1,6 @@
 package player;
 
+import bomb.NormalBomb;
 import fsm.Sequence;
 import fsm.State;
 import fsm.StateMachine;
@@ -26,10 +27,13 @@ public class Attacking extends Sequence {
     public void update() {
         if (player.isAlive()) {
             super.update();
-            if (damagingStateNumbers.contains(currentPosition)) {
-                effectDamage();
-            }
+            effectDamage();
         }
+    }
+
+    private Rectangle damageArea() {
+        return player.getArea(new Dimension(10, 15),
+                new Dimension(50, 50));
     }
 
     @Override
@@ -42,19 +46,8 @@ public class Attacking extends Sequence {
 
     private void effectDamage() {
         World world = player.getWorld();
-        Rectangle damageArea = damageArea();
-        var sprites = world.getSprites(damageArea);
-        boolean hasClash = false;
-        for (Sprite sprite : sprites) {
-            if (player != sprite) {
-                sprite.onDamaged(damageArea, player.getDamage());
-            }
-        }
-    }
-
-    private Rectangle damageArea() {
-        return player.getArea(new Dimension(87, 70),
-                new Dimension(55, 88));
+        NormalBomb bomb = new NormalBomb(player, player.getLocation(), player.getDamage(), player.getDamageArea());
+        world.setBomb(bomb);
     }
 
     @Override

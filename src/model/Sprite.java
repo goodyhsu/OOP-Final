@@ -1,5 +1,7 @@
 package model;
 
+import player.Player;
+
 import java.awt.*;
 
 /**
