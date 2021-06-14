@@ -1,7 +1,8 @@
 import bomb.BombCollisionHandler;
 import controller.Game;
 import model.World;
-import player.Player;
+import player.Dog;
+import player.Cat;
 import player.PlayerCollisionHandler;
 import views.GameView;
 
@@ -11,8 +12,8 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         // players
-        Player p1 = new Player(1, new Point(0, 0));
-        Player p2 = new Player(1, new Point(300, 300));
+        Dog p1 = new Dog(1, new Point(0, 0));
+        Cat p2 = new Cat(1, new Point(300, 300));
 
         // CollisionHandler
         PlayerCollisionHandler playerCollisionHandler = new PlayerCollisionHandler();

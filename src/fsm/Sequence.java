@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * The sequential gallery, it requires the resource homePath where the images are located.
  * The sequence will contain all the images in the homePath directory, it expects all the image file names
- * are in number form, (e.g. 0.png, 2.png, 4.png,...), so that it can determine the sequence order (ascending).
+ * are in number form, (e.g. 0.png, 4.png, 4.png,...), so that it can determine the sequence order (ascending).
  *
  * @author johnny850807 (waterball)
  */
