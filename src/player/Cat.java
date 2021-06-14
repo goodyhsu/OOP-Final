@@ -34,5 +34,4 @@ public class Cat extends Player {
         fsm.addTransition(from(walking).when(ATTACK).to(attacking));
     }
 
-
 }

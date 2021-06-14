@@ -100,16 +100,11 @@ public class World {
         return false;
     }
 
-    public void move(Sprite from, Dimension offset) {
-        Point originalLocation = new Point(from.getLocation());
+    public void move(Sprite player, Dimension offset) {
         PlayerCollisionHandler collisionHandler = getPlayerCollisionHandler();
-        boolean now_collision = collisionHandler.isCollision(from);
-        from.getLocation().translate(offset.width, offset.height);
-        if (!now_collision) {
-            boolean collision = collisionHandler.isCollision(from);
-            if (collision)
-                from.setLocation(originalLocation);
-        }
+        boolean collision = collisionHandler.isCollision(player, offset);
+        if (!collision)
+            player.getLocation().translate(offset.width, offset.height);
     }
 
     public boolean setBomb(Sprite bomb) {

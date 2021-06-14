@@ -1,10 +1,11 @@
 package player;
 
 import bomb.NormalBomb;
+import bomb.NormalSmallBomb;
 import fsm.Sequence;
 import fsm.State;
 import fsm.StateMachine;
-import model.Sprite;
+import bomb.Bomb;
 import model.World;
 
 import java.awt.*;
@@ -46,7 +47,7 @@ public class Attacking extends Sequence {
 
     private void effectDamage() {
         World world = player.getWorld();
-        NormalBomb bomb = new NormalBomb(player, player.getLocation(), player.getDamage(), player.getDamageArea());
+        Bomb bomb = new NormalBomb(player, player.getLocation(), player.getDamage(), player.getDamageArea());
         world.setBomb(bomb);
     }
 

@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class SpriteCollisionHandler implements CollisionHandler {
     @Override
-    public boolean isCollision(Sprite from) {
+    public boolean isCollision(Sprite from, Dimension offset) {
         return false;
     }
 

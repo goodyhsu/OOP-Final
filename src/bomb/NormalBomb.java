@@ -12,7 +12,7 @@ public class NormalBomb extends Bomb{
     private SpriteShape shape;
     public NormalBomb(Player owner, Point owner_location, int damage, int explode_range){
         super(owner, owner_location, damage, explode_range);
-        this.shape = new SpriteShape(new Dimension(70, 80),
+        this.shape = new SpriteShape(new Dimension(75, 75),
                 new Dimension(10, 15), new Dimension(50, 50));
     }
 

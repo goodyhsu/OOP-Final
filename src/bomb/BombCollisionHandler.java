@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class BombCollisionHandler implements CollisionHandler {
     @Override
-    public boolean isCollision(Sprite from) {
+    public boolean isCollision(Sprite from, Dimension offset) {
         SpriteCoordinate from_coordinate = location_to_coordinate(from.getLocation());
         for (Sprite to: from.getWorld().getSprites()) {
             SpriteCoordinate to_coordinate = location_to_coordinate(to.getLocation());
