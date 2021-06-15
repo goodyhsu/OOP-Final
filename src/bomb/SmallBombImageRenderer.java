@@ -15,7 +15,7 @@ public class SmallBombImageRenderer extends BombImageRenderer{
     public void render(Image image, Graphics g) {
         Direction face = this.smallBomb.getFace();
         Rectangle range = this.smallBomb.getRange();
-        g.drawImage(image, range.x, range.y, range.width, range.height, null);
+        //g.drawImage(image, range.x, range.y, range.width, range.height, null);
         if (face == Direction.LEFT) {
             g.drawImage(image, range.x + range.width, range.y, -range.width, range.height, null);
         }

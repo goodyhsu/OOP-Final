@@ -24,11 +24,12 @@ public class NormalBomb extends Bomb{
         Direction[] smallBomb_directions = Direction.values();
         for(int i = 0; i < 4; i++) {
             SpriteCoordinate smallBomb_coordinate = coordinate_addition(this.coordinate, coordinate_offset[i]);
-            //System.err.format("debug: coordinate = %d %d\n", smallBomb_coordinate.getX(), smallBomb_coordinate.getY());
+            System.err.format("debug: coordinate = %d %d\n", smallBomb_coordinate.getX(), smallBomb_coordinate.getY());
             SmallBomb smallBomb = new_smallBomb(this.owner, coordinate_to_location(smallBomb_coordinate), this.damage, 0,
                     this.before_explode_counter, this.after_explode_counter, smallBomb_directions[i]);
             this.world.addSprite(smallBomb);
         }
+        System.err.println();
     }
 
     @Override

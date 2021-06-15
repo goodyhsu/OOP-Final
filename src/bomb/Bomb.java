@@ -48,8 +48,10 @@ public abstract class Bomb extends Sprite {
             this.num_smallBomb++;
             add_smallBomb(this.num_smallBomb);
         }
-        if(this.after_explode_counter.time_up())
+        if(this.after_explode_counter.time_up()) {
             this.world.removeSprite(this);
+            this.owner.setNum_bomb_current(this.owner.getNum_bomb_current()-1);
+        }
     }
 
     @Override

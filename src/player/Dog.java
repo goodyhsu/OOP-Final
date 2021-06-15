@@ -20,7 +20,7 @@ public class Dog extends Player {
         num_bomb_max = 3;
         num_bomb_current = 0;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bone/0.png");
-        smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bone/0.png");
+        smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/smallBone/0.png");
 
         ImageRenderer imageRenderer = new PlayerImageRenderer(this);
         State idle = new WaitingPerFrame(4,
