@@ -14,7 +14,7 @@ public class NormalSmallBomb extends SmallBomb{
                            Direction face){
         super(owner, location, damage, explode_range, face);
         this.shape = new SpriteShape(new Dimension(75, 75),
-                new Dimension(10, 15), new Dimension(50, 50));
+                new Dimension(28, 31), new Dimension(15, 15));
     }
 
     @Override
@@ -50,4 +50,6 @@ public class NormalSmallBomb extends SmallBomb{
     public Dimension getBodySize() {
         return shape.bodySize;
     }
+
+    public Rectangle getBody(){return getArea(getBodyOffset(), getBodySize());}
 }

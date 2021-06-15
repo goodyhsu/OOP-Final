@@ -1,6 +1,7 @@
 package bomb;
 
 import model.Direction;
+import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -15,7 +16,6 @@ public class SmallBombImageRenderer extends BombImageRenderer{
     public void render(Image image, Graphics g) {
         Direction face = this.smallBomb.getFace();
         Rectangle range = this.smallBomb.getRange();
-        //g.drawImage(image, range.x, range.y, range.width, range.height, null);
         if (face == Direction.LEFT) {
             g.drawImage(image, range.x + range.width, range.y, -range.width, range.height, null);
         }
@@ -23,16 +23,20 @@ public class SmallBombImageRenderer extends BombImageRenderer{
             g.drawImage(image, range.x, range.y, range.width, range.height, null);
         }
         else if(face == Direction.UP){
-            rotate_drawImage(-90, (Graphics2D) g, image, range.x, range.y, range.width, range.height);
+            rotate_drawImage(-90, (Graphics2D) g, image, range.x+10, range.y-10, range.width, range.height);
         }
         else{
-            rotate_drawImage(90, (Graphics2D) g, image, range.x, range.y, range.width, range.height);
+            rotate_drawImage(90, (Graphics2D) g, image, range.x-12, range.y+14, range.width, range.height);
         }
 
+        Rectangle body = this.smallBomb.getBody();
+        g.drawRect(range.x, range.y, range.width, range.height);
+        g.drawRect(body.x, body.y, body.width, body.height);
 
     }
 
-    private void rotate_drawImage( int angle, Graphics2D g, Image image, int x, int y, int width, int height) {
+    private void rotate_drawImage( int angle, Graphics2D g, Image image, int x, int y,
+                                   int width, int height) {
         AffineTransform tr = new AffineTransform();
         // X and Y are the coordinates of the image
         tr.translate(x, y);
