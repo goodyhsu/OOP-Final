@@ -17,11 +17,13 @@ public abstract class Player extends HealthPointSprite {
     public Image smallBomb_image;
 
     public static final int HP = 10;
-    public static int damage_area = 1;
+    public static int damage_area = 5;
     private final SpriteShape shape;
     public final FiniteStateMachine fsm;
     private final Set<Direction> directions = new CopyOnWriteArraySet<>();
     public static int damage;
+    protected int num_bomb_max;
+    protected int num_bomb_current;
 
     public enum Event {
         WALK, STOP, ATTACK, DAMAGED
@@ -43,6 +45,11 @@ public abstract class Player extends HealthPointSprite {
     public int getDamage() {
         return damage;
     }
+
+    public int getNum_bomb_max(){ return num_bomb_max; }
+    public int getNum_bomb_current(){ return num_bomb_current; }
+    public void setNum_bomb_max(int num){ num_bomb_max = num; }
+    public void setNum_bomb_current(int num){ num_bomb_current = num; }
 
     public void move(Direction direction) {
         if (direction == LEFT || direction == Direction.RIGHT) {

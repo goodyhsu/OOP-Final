@@ -17,6 +17,8 @@ public class Dog extends Player {
 
         this.damage = damage;
         this.location = location;
+        num_bomb_max = 3;
+        num_bomb_current = 0;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bone/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bone/0.png");
 
