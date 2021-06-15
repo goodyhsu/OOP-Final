@@ -2,6 +2,7 @@ package bomb;
 
 import model.*;
 import player.Player;
+import static utils.LocationUtils.isInBoundary;
 
 import java.awt.*;
 
@@ -25,9 +26,11 @@ public class NormalBomb extends Bomb{
         for(int i = 0; i < 4; i++) {
             SpriteCoordinate smallBomb_coordinate = coordinate_addition(this.coordinate, coordinate_offset[i]);
             //System.err.format("debug: coordinate = %d %d\n", smallBomb_coordinate.getX(), smallBomb_coordinate.getY());
-            SmallBomb smallBomb = new_smallBomb(this.owner, coordinate_to_location(smallBomb_coordinate), this.damage, 0,
-                    this.before_explode_counter, this.after_explode_counter, smallBomb_directions[i]);
-            this.world.addSprite(smallBomb);
+            if (isInBoundary(smallBomb_coordinate)) {
+                SmallBomb smallBomb = new_smallBomb(this.owner, coordinate_to_location(smallBomb_coordinate), this.damage, 0,
+                        this.before_explode_counter, this.after_explode_counter, smallBomb_directions[i]);
+                this.world.addSprite(smallBomb);
+            }
         }
         System.err.println();
     }
@@ -35,7 +38,7 @@ public class NormalBomb extends Bomb{
     @Override
     public SmallBomb new_smallBomb(Player owner, Point smallBomb_location, int damage, int explode_range,
                                    Counter before, Counter after, Direction face){
-        return new NormalSmallBomb(owner, smallBomb_location, damage, explode_range, face);
+        return new NormalSmallBomb(owner, smallBomb_location, damage, explode_range, face, this.after_explode_counter);
     }
 
     @Override

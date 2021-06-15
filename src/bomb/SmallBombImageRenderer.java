@@ -1,7 +1,6 @@
 package bomb;
 
 import model.Direction;
-import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;

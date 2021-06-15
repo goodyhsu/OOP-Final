@@ -32,4 +32,7 @@ public class LocationUtils {
         return new SpriteCoordinate(x, y);
     }
 
+    public static boolean isInBoundary(SpriteCoordinate coordinate){
+        return (coordinate.getX() >= 0 && coordinate.getY() >= 0);
+    }
 }
