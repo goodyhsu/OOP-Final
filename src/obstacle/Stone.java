@@ -10,8 +10,10 @@ public class Stone extends Obstacle{
     private SpriteShape shape;
     public Stone(File file, SpriteCoordinate coordinate){
         super(file, coordinate);
-        this.shape = new SpriteShape(new Dimension(146, 176),
-                new Dimension(33, 38), new Dimension(66, 105));
+        this.shape = new SpriteShape(new Dimension(75, 75),
+                new Dimension(coordinate.getX()*75, coordinate.getY()*75), new Dimension(75, 75));
+        Dimension offset = this.shape.bodyOffset;
+        this.getLocation().translate(offset.width, offset.height);
     }
 
     @Override
