@@ -28,7 +28,6 @@ public class Attacking extends Sequence {
     public void update() {
         if (player.isAlive()) {
             super.update();
-            effectDamage();
         }
     }
 
@@ -43,12 +42,6 @@ public class Attacking extends Sequence {
         Rectangle damageArea = damageArea();
         g.setColor(Color.BLUE);
         g.drawRect(damageArea.x, damageArea.y, damageArea.width, damageArea.height);
-    }
-
-    private void effectDamage() {
-        World world = player.getWorld();
-        Bomb bomb = new NormalBomb(player, player.getLocation(), player.getDamage(), player.getDamageArea());
-        world.setBomb(bomb);
     }
 
     @Override

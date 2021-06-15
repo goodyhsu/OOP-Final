@@ -45,7 +45,6 @@ public abstract class Bomb extends Sprite {
         if(this.exploded)
             explode_effect();
         if(this.exploded && this.num_smallBomb < this.explode_range){
-            System.err.format("debug: num_smallBomb = %d\n", this.num_smallBomb);
             this.num_smallBomb++;
             add_smallBomb(this.num_smallBomb);
         }

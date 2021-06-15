@@ -1,9 +1,12 @@
 package player;
 
+import bomb.Bomb;
+import bomb.NormalBomb;
 import fsm.FiniteStateMachine;
 import model.Direction;
 import model.HealthPointSprite;
 import model.SpriteShape;
+import model.World;
 
 import java.awt.*;
 import java.util.Set;
@@ -40,6 +43,16 @@ public abstract class Player extends HealthPointSprite {
 
     public void attack() {
         fsm.trigger(ATTACK);
+        setNewBomb();
+    }
+
+    private void setNewBomb(){
+        if(getNum_bomb_current() < getNum_bomb_max()) {
+            World world = getWorld();
+            Bomb bomb = new NormalBomb(this, this.getLocation(), this.getDamage(), this.getDamageArea());
+            world.setBomb(bomb);
+            setNum_bomb_current(getNum_bomb_max()+1);
+        }
     }
 
     public int getDamage() {
