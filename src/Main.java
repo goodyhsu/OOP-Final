@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         // players
-        Dog p1 = new Dog(1, new Point(0, 0));
-        Cat p2 = new Cat(1, new Point(300, 300));
+        Dog p1 = new Dog(1, new Point(75, 75));
+        Cat p2 = new Cat(1, new Point(900, 450));
 
         // CollisionHandler
         PlayerCollisionHandler playerCollisionHandler = new PlayerCollisionHandler();
@@ -33,9 +33,12 @@ public class Main {
 
         // world - set Obstacles
         ArrayList<String> obstacle_list = new ArrayList<String>();
+        ArrayList<String> obstacle_img_list = new ArrayList<String>();
         obstacle_list.add("Wood");
         obstacle_list.add("Stone");
-        world.setObstacles(view, obstacle_list);
+        obstacle_img_list.add("sprites/wood/0.png");
+        obstacle_img_list.add("sprites/stone/0.png");
+        world.setObstacles(view, obstacle_list, obstacle_img_list);
 
         //game start
         game.start();

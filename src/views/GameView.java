@@ -126,8 +126,6 @@ public class GameView extends JFrame {
             int line_w = 2;
             g.setColor(Color.BLACK);
             for (int x = 0; x <= GameView.WIDTH; x += GameView.BLOCK_WIDTH) {
-//                int xx = (x - 1 >= 0)? x-1 : 0;
-//                System.out.println(x);
                 g.fillRect(x, 0, line_w, GameView.HEIGHT+line_w);
             }
 

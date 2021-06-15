@@ -4,6 +4,8 @@ import bomb.BombCollisionHandler;
 import obstacle.Obstacle;
 import player.PlayerCollisionHandler;
 import views.GameView;
+import obstacle.Wood;
+import obstacle.Stone;
 
 import java.awt.*;
 import java.io.File;
@@ -23,8 +25,7 @@ import static java.util.stream.Collectors.toSet;
  */
 public class World {
     private static final List<Sprite> sprites = new CopyOnWriteArrayList<>();
-//    private final CollisionHandler collisionHandler;
-    private final int obstacle_type = 2;    // ?
+    private final int obstacle_type = 2;
     private ArrayList<String> obstacle_list;
     private PlayerCollisionHandler playerCollisionHandler;
     private BombCollisionHandler bombCollisionHandler;
@@ -35,27 +36,42 @@ public class World {
         addSprites(sprites);
     }
 
-    public void setObstacles(GameView view, ArrayList<String> obstacle_list){
+    public void setObstacles(GameView view, ArrayList<String> obstacle_list, ArrayList<String> obstacle_img_list){
         int min = 20;    // ?
-        int max = 50;    // ?
-        int obstacle_num = getRandomNumberUsingNextInt(min, max);
+        int max = 30;    // ?
+//        int obstacle_num = getRandomNumberUsingNextInt(min, max);
+//        System.out.printf("obstacle_num = %d\n", obstacle_num);
         this.obstacle_list = obstacle_list;
-        for (int i = 0; i < obstacle_num; i++) {
-            String name = obstacle_list.get(getRandomNumberUsingNextInt(0, obstacle_type));
-            File file = new File(".");  //?
-            boolean legalObstacle = false;
-            try {
-                Obstacle new_obstacle = getObstacleFromName(name, file, getCoordinate(view));
-                while (!legalObstacle) {
-                    if (!isCollision(new_obstacle))
-                        legalObstacle = true;
-                }
-                addSprite(new_obstacle);
-            } catch (ClassNotFoundException | NoSuchMethodException |
-                    InvocationTargetException | InstantiationException | IllegalAccessException e) {
-                continue;
-            }
+        int num_block_w = view.WIDTH / view.BLOCK_WIDTH;
+        int num_block_h = view.HEIGHT / view.BLOCK_HEIGHT;
+//        System.out.printf("num_block_w = %d\n", num_block_w);
+        for (int x = 0; x < num_block_w; x++) {
+            addObstacle(obstacle_list, obstacle_img_list, new SpriteCoordinate(x, 0), 0);
+            addObstacle(obstacle_list, obstacle_img_list, new SpriteCoordinate(x, num_block_h-1), 0);
         }
+        for (int y = 1; y < num_block_h-1; y++) {
+            addObstacle(obstacle_list, obstacle_img_list, new SpriteCoordinate(0, y), 0);
+            addObstacle(obstacle_list, obstacle_img_list, new SpriteCoordinate(num_block_w-1, y), 0);
+        }
+//        for (int i = 0; i < obstacle_num; i++) {
+//            int idx = getRandomNumberUsingNextInt(0, obstacle_type);
+//            String name = obstacle_list.get(idx);
+//            File file = new File(obstacle_img_list.get(idx));  //?
+////            System.out.println(name);
+//            boolean legalObstacle = false;
+//            try {
+//                Obstacle new_obstacle = getObstacleFromName(name, file, getCoordinate(view));
+//                while (!legalObstacle) {
+////                    if (!isCollision(new_obstacle))
+//                    legalObstacle = true;
+//                }
+//                addSprite(new_obstacle);
+//            } catch (ClassNotFoundException | NoSuchMethodException |
+//                    InvocationTargetException | InstantiationException | IllegalAccessException e) {
+//                System.out.println("exception");
+//                continue;
+//            }
+//        }
     }
 
     private SpriteCoordinate getCoordinate(GameView view) {
@@ -91,14 +107,14 @@ public class World {
         sprite.setWorld(null);
     }
 
-    private boolean isCollision(Sprite current) { /*之後刪掉*/
-        Rectangle body = current.getBody();
-        for (Sprite other : sprites) {
-            if (other != current && body.intersects(other.getBody()))
-                return true;
-        }
-        return false;
-    }
+//    private boolean isCollision(Sprite current) { /*之後刪掉*/
+//        Rectangle body = current.getBody();
+//        for (Sprite other : sprites) {
+//            if (other != current && body.intersects(other.getBody()))
+//                return true;
+//        }
+//        return false;
+//    }
 
     public void move(Sprite player, Dimension offset) {
         PlayerCollisionHandler collisionHandler = getPlayerCollisionHandler();
@@ -155,12 +171,18 @@ public class World {
         return bombCollisionHandler;
     }
 
-    private Obstacle getObstacleFromName(String class_name, File file, SpriteCoordinate coordinate) throws
-            NoSuchMethodException, ClassNotFoundException, IllegalAccessException,
-            InstantiationException, InvocationTargetException {
-        Class<?> clazz = Class.forName(class_name);
-        Constructor<?> ctor = clazz.getConstructor(File.class, SpriteCoordinate.class);
-        Obstacle the_class = (Obstacle) ctor.newInstance(file, coordinate);
-        return the_class;
+    private void addObstacle(ArrayList<String> obstacle_list, ArrayList<String> obstacle_img_list, SpriteCoordinate coordinate, int specific) {
+        int idx;
+        if (specific == -1)
+            idx = getRandomNumberUsingNextInt(0, obstacle_type);
+        else idx = specific;
+        String name = obstacle_list.get(idx);
+        File file = new File(obstacle_img_list.get(idx));
+        Obstacle obstacle;
+        if (name == "Wood")
+            obstacle = (Obstacle) new Wood(file, coordinate);
+        else
+            obstacle = (Obstacle) new Stone(file, coordinate);
+        addSprite(obstacle);
     }
 }

@@ -14,7 +14,6 @@ public abstract class Obstacle extends Sprite{
         this.coordinate = coordinate;
         this.image = readImage(file);
         this.renderer = new ObstacleImageRenderer(this);
-        System.out.printf("x = %d, y = %d\n", coordinate.getX(), coordinate.getY());
     }
     @Override
     public void render(Graphics g){ this.renderer.render(this.image, g); }
