@@ -37,4 +37,12 @@ public class Counter {
     public void stopCounter() {
         running = false;
     }
+
+    public int getCurrent_time() {
+        return current_time;
+    }
+
+    public int getTime_limit() {
+        return time_limit;
+    }
 }

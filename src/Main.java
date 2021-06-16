@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         // players
         Dog p1 = new Dog(1, new Point(75, 75));
-        Cat p2 = new Cat(1, new Point(900, 450));
+        Cat p2 = new Cat(1, new Point(900, 525));
 
         // CollisionHandler
         PlayerCollisionHandler playerCollisionHandler = new PlayerCollisionHandler();
@@ -28,6 +28,7 @@ public class Main {
 
         //controller
         Game game = new Game(world, p1, p2);
+
         //view
         GameView view = new GameView(game);
 

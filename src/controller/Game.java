@@ -1,5 +1,6 @@
 package controller;
 
+import model.Counter;
 import model.Direction;
 import model.World;
 import player.Player;
@@ -37,5 +38,10 @@ public class Game extends GameLoop {
     @Override
     protected World getWorld() {
         return world;
+    }
+
+    @Override
+    protected boolean roundOver(Counter counter) {
+        return !p1.isAlive() | !p2.isAlive() | counter.time_up();
     }
 }
