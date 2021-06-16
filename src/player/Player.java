@@ -19,8 +19,8 @@ public abstract class Player extends HealthPointSprite {
     public Image bomb_image;
     public Image smallBomb_image;
 
-    public static final int HP = 10;
-    public static int damage_area = 5;
+    public static final int HP = 500;
+    public static int damage_area = 1;
     private final SpriteShape shape;
     public final FiniteStateMachine fsm;
     private final Set<Direction> directions = new CopyOnWriteArraySet<>();

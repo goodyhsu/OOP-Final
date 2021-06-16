@@ -22,7 +22,7 @@ public class PlayerCollisionHandler implements CollisionHandler {
         for (Sprite other : sprites) {
             if (other instanceof Player)
                 continue;
-            if (other instanceof Bomb) {
+            if (other instanceof Bomb || other instanceof Obstacle) {
                 if (originalBody.intersects(other.getBody()))
                     continue;
                 now.getLocation().translate(offset.width, offset.height);

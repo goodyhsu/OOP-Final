@@ -29,6 +29,8 @@ public class Cat extends Player {
                 new Walking(this, imageStatesFromFolder("sprites/cat/walk", imageRenderer)));
         State attacking = new WaitingPerFrame(3,
                 new Attacking(this, fsm, imageStatesFromFolder("sprites/cat/attack", imageRenderer)));
+
+
         fsm.setInitialState(idle);
         fsm.addTransition(from(idle).when(WALK).to(walking));
         fsm.addTransition(from(walking).when(STOP).to(idle));
