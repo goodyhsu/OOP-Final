@@ -18,7 +18,7 @@ public abstract class GameLoop {
 
     public void start() {
         new Thread(this::gameLoop).start();
-        counter = new Counter(400);
+        counter = new Counter(40000);
     }
 
     private void gameLoop() {
