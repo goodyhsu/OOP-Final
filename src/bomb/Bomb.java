@@ -51,6 +51,7 @@ public abstract class Bomb extends Sprite {
         if(this.after_explode_counter.time_up()) {
             this.world.removeSprite(this);
             this.owner.setNum_bomb_current(this.owner.getNum_bomb_current()-1);
+            System.out.printf("test\n");
         }
     }
 

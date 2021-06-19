@@ -13,12 +13,9 @@ import static utils.ImageStateUtils.imageStatesFromFolder;
 
 public class Cat extends Player {
 
-    public Cat(int damage, Point location) {
+    public Cat(Point location) {
 
-        this.damage = damage;
         this.location = location;
-        num_bomb_max = 3;
-        num_bomb_current = 0;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/fish/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/smallFish/0.png");
 
@@ -29,7 +26,6 @@ public class Cat extends Player {
                 new Walking(this, imageStatesFromFolder("sprites/cat/walk", imageRenderer)));
         State attacking = new WaitingPerFrame(3,
                 new Attacking(this, fsm, imageStatesFromFolder("sprites/cat/attack", imageRenderer)));
-
 
         fsm.setInitialState(idle);
         fsm.addTransition(from(idle).when(WALK).to(walking));

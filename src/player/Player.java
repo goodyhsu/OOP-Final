@@ -19,14 +19,16 @@ public abstract class Player extends HealthPointSprite {
     public Image bomb_image;
     public Image smallBomb_image;
 
-    public static final int HP = 500;
-    public static int damage_area = 1;
     private final SpriteShape shape;
     public final FiniteStateMachine fsm;
     private final Set<Direction> directions = new CopyOnWriteArraySet<>();
-    public static int damage;
-    protected int num_bomb_max;
-    protected int num_bomb_current;
+
+    public static int HP = 500;
+    public static int damage_area = 1;
+    public static int damage = 1;
+    public static int speed = 10;
+    private static int num_bomb_max = 1;
+    private static int num_bomb_current = 0;
 
     public enum Event {
         WALK, STOP, ATTACK, DAMAGED
@@ -41,28 +43,23 @@ public abstract class Player extends HealthPointSprite {
         fsm = new FiniteStateMachine();
     }
 
-    public void attack() {
-        fsm.trigger(ATTACK);
-        setNewBomb();
+    public int getDamage() {
+        return this.damage;
     }
 
-    private void setNewBomb(){
-        if(getNum_bomb_current() < getNum_bomb_max()) {
+    public int getNum_bomb_current(){ return this.num_bomb_current; }
+    public void setNum_bomb_current(int num){ this.num_bomb_current = num; }
+
+    public void attack() {
+        if (num_bomb_current < num_bomb_max) {
+            fsm.trigger(ATTACK);
             World world = getWorld();
             Bomb bomb = new NormalBomb(this, this.getLocation(), this.getDamage(), this.getDamageArea());
             world.setBomb(bomb);
-            setNum_bomb_current(getNum_bomb_max()+1);
+            setNum_bomb_current(num_bomb_current + 1);
+            System.out.printf("now bomb = %d\n", num_bomb_current);
         }
     }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public int getNum_bomb_max(){ return num_bomb_max; }
-    public int getNum_bomb_current(){ return num_bomb_current; }
-    public void setNum_bomb_max(int num){ num_bomb_max = num; }
-    public void setNum_bomb_current(int num){ num_bomb_current = num; }
 
     public void move(Direction direction) {
         if (direction == LEFT || direction == Direction.RIGHT) {

@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         // players
-        Dog p1 = new Dog(1, new Point(75, 75));
-        Cat p2 = new Cat(1, new Point(900, 525));
+        Dog p1 = new Dog(new Point(75, 75));
+        Cat p2 = new Cat(new Point(900, 525));
 
         // CollisionHandler
         PlayerCollisionHandler playerCollisionHandler = new PlayerCollisionHandler();

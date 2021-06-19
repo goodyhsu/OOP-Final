@@ -13,12 +13,9 @@ import static utils.ImageStateUtils.imageStatesFromFolder;
 
 public class Dog extends Player {
 
-    public Dog(int damage, Point location) {
+    public Dog(Point location) {
 
-        this.damage = damage;
         this.location = location;
-        num_bomb_max = 3;
-        num_bomb_current = 0;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bone/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/smallBone/0.png");
 
@@ -29,6 +26,7 @@ public class Dog extends Player {
                 new Walking(this, imageStatesFromFolder("sprites/dog/walk", imageRenderer)));
         State attacking = new WaitingPerFrame(3,
                 new Attacking(this, fsm, imageStatesFromFolder("sprites/dog/attack", imageRenderer)));
+
         fsm.setInitialState(idle);
         fsm.addTransition(from(idle).when(WALK).to(walking));
         fsm.addTransition(from(walking).when(STOP).to(idle));

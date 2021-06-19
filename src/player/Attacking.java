@@ -31,19 +31,6 @@ public class Attacking extends Sequence {
         }
     }
 
-    private Rectangle damageArea() {
-        return player.getArea(new Dimension(10, 15),
-                new Dimension(50, 50));
-    }
-
-    @Override
-    public void render(Graphics g) {
-        super.render(g);
-        Rectangle damageArea = damageArea();
-        g.setColor(Color.BLUE);
-        g.drawRect(damageArea.x, damageArea.y, damageArea.width, damageArea.height);
-    }
-
     @Override
     protected void onSequenceEnd() {
         currentPosition = 0;

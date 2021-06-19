@@ -32,6 +32,12 @@ public class PlayerCollisionHandler implements CollisionHandler {
                 }
                 now.getLocation().translate(-(offset.width), -(offset.height));
             }
+            /*
+            else if (other instanceof Item) {
+             other.effect();
+             return true;
+            }
+             */
         }
         return false;
     }
