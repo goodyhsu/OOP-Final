@@ -28,7 +28,7 @@ public abstract class Obstacle extends Sprite{
     public void render(Graphics g){ this.renderer.render(this.image, g); }
 
     @Override
-    public void onDamaged(Rectangle r, int i) {}
+    public void damaged(int i) {}
 
     @Override
     public Rectangle getRange() {

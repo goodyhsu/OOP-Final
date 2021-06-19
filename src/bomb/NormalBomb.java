@@ -47,7 +47,7 @@ public class NormalBomb extends Bomb{
         Rectangle damageArea = getRange();
         var sprites = this.world.getSprites(damageArea);
         for(Sprite sprite: sprites){
-            sprite.onDamaged(damageArea, this.damage);
+            sprite.damaged(this.damage);
         }
     }
 

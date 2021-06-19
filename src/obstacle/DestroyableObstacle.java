@@ -9,7 +9,7 @@ public abstract class DestroyableObstacle extends Obstacle{
     public DestroyableObstacle(File file, SpriteCoordinate coordinate){ super(file, coordinate); }
 
     @Override
-    public void onDamaged(Rectangle r, int i) {
+    public void damaged(int i) {
         world.removeSprite(this);
     }
 }

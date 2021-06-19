@@ -20,10 +20,6 @@ import java.awt.*;
             this.owner = owner;
         }
 
-        public void setHp(int hp) {
-            this.hp = hp;
-        }
-
         @Override
         public void update() {
         }
@@ -39,8 +35,12 @@ import java.awt.*;
         }
 
         @Override
-        public void onDamaged(Rectangle damageArea, int damage) {
-            this.hp = Math.max(hp - damage, 0);
+        public void damaged(int value) {
+            this.hp = Math.max(hp - value, 0);
+        }
+
+        public void healed(int value) {
+            this.hp = Math.min(hp + value, maxHp);
         }
 
         @Override

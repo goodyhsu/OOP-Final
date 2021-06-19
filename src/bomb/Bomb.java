@@ -56,7 +56,7 @@ public abstract class Bomb extends Sprite {
     }
 
     @Override
-    public void onDamaged(Rectangle r, int i){ this.exploded = true; }
+    public void damaged(int i){ this.exploded = true; }
 
     @Override
     public void render(Graphics g){ this.renderer.render(this.owner.bomb_image, g); }

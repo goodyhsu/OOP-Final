@@ -8,16 +8,16 @@ import java.awt.*;
 public enum Direction {
     UP, DOWN, LEFT, RIGHT;
 
-    public Dimension translate() {
+    public Dimension translate(int speed) {
         switch (this) {
             case UP:
-                return new Dimension(0, -10);
+                return new Dimension(0, -(speed));
             case DOWN:
-                return new Dimension(0, 10);
+                return new Dimension(0, speed);
             case LEFT:
-                return new Dimension(-10, 0);
+                return new Dimension(-(speed), 0);
             case RIGHT:
-                return new Dimension(10, 0);
+                return new Dimension(speed, 0);
             default:
                 throw new IllegalStateException("Impossible");
         }

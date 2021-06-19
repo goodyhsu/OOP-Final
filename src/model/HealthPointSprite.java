@@ -13,11 +13,15 @@ public abstract class HealthPointSprite extends Sprite {
     }
 
     @Override
-    public void onDamaged(Rectangle damageArea, int damage) {
-        hpBar.onDamaged(damageArea, damage);
+    public void damaged(int value) {
+        hpBar.damaged(value);
         if (hpBar.isDead()) {
             world.removeSprite(this);
         }
+    }
+
+    public void healed(int value) {
+        hpBar.healed(value);
     }
 
     @Override

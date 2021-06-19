@@ -19,7 +19,7 @@ public class Walking extends CyclicSequence {
         if (player.isAlive()) {
             super.update();
             for (Direction direction : player.getDirections()) {
-                player.getWorld().move(player, direction.translate());
+                player.getWorld().move(player, direction.translate(player.getSpeed()));
             }
         }
     }
