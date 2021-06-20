@@ -20,5 +20,21 @@ public abstract class SmallBomb extends Bomb{
     public Direction getFace() { return this.face; }
 
     @Override
+    public void update() {
+        if (before_explode_counter.time_up()) {
+            this.exploded = true;
+        }
+        if (this.exploded)
+            explode_effect();
+        if (this.exploded && this.num_smallBomb < this.explode_range) {
+            this.num_smallBomb++;
+            add_smallBomb(this.num_smallBomb);
+        }
+        if (this.after_explode_counter.time_up()) {
+            this.world.removeSprite(this);
+        }
+    }
+
+    @Override
     public void render(Graphics g){ this.renderer.render(this.owner.smallBomb_image, g); }
 }
