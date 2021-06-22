@@ -17,5 +17,5 @@ public class SpeedUp extends Item{
     public void update(){}
 
     @Override
-    public void effect(){}
+    public void effect(){ this.owner.addSpeed(); }
 }

@@ -17,5 +17,5 @@ public class IncreaseBomb_num extends Item{
     public void update(){}
 
     @Override
-    public void effect(){}
+    public void effect(){ this.owner.addNum_bomb_max(); }
 }

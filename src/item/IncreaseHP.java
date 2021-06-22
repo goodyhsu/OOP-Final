@@ -17,5 +17,5 @@ public class IncreaseHP extends Item{
     public void update(){}
 
     @Override
-    public void effect(){}
+    public void effect(){ this.owner.healed(200); }
 }

@@ -23,20 +23,27 @@ public abstract class Player extends HealthPointSprite {
     public final FiniteStateMachine fsm;
     private final Set<Direction> directions = new CopyOnWriteArraySet<>();
 
-    private static int HP_full = 500;
-    public static int HP = HP_full;
-    private static int damage_area = 3;
-    private static int damage = 1;
-    private static int speed = 10;
-    private static int num_bomb_max = 1;
-    private static int num_bomb_current = 0;
+    private int HP_full;
+    public int HP;
+    private int damage_area;
+    private int damage;
+    private int speed;
+    private int num_bomb_max;
+    private int num_bomb_current;
 
     public enum Event {
         WALK, STOP, ATTACK, DAMAGED
     }
 
     public Player() {
-        super(HP);
+        super(500);
+        HP_full = 500;
+        HP = HP_full;
+        damage_area = 3;
+        damage = 1;
+        speed = 10;
+        num_bomb_max = 1;
+        num_bomb_current = 0;
 
         shape = new SpriteShape(new Dimension(70, 80),
                 new Dimension(10, 15), new Dimension(50, 50));
@@ -51,11 +58,13 @@ public abstract class Player extends HealthPointSprite {
     public int getNum_bomb_current(){ return num_bomb_current; }
     public void setNum_bomb_current(int num){ num_bomb_current = num; }
 
+    public int getSpeed() {return speed;}
+
+    // for items
     public void addDamage() {damage += 1;}
     public void addDamageArea() {damage_area += 1;}
     public void addSpeed() {speed += 1;}
-
-    public int getSpeed() {return speed;}
+    public void addNum_bomb_max(){num_bomb_max += 1;}
 
     public void attack() {
         if (num_bomb_current < num_bomb_max) {
