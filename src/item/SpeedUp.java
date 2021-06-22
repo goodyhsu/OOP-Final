@@ -9,7 +9,7 @@ import java.io.File;
 public class SpeedUp extends Item{
     public SpeedUp(SpriteCoordinate coordinate, Player owner){
         super(coordinate, owner);
-        File imageFile = new File("sprites/speedUp/0.png");
+        File imageFile = new File("sprites/item/speedUp/0.png");
         this.image = readImage(imageFile);
     }
 

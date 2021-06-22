@@ -16,16 +16,16 @@ public class Cat extends Player {
     public Cat(Point location) {
 
         this.location = location;
-        bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/fish/0.png");
-        smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/smallFish/0.png");
+        bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/fish/0.png");
+        smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/smallFish/0.png");
 
         ImageRenderer imageRenderer = new PlayerImageRenderer(this);
         State idle = new WaitingPerFrame(4,
-                new Idle(imageStatesFromFolder("sprites/cat/idle", imageRenderer)));
+                new Idle(imageStatesFromFolder("sprites/player/cat/idle", imageRenderer)));
         State walking = new WaitingPerFrame(2,
-                new Walking(this, imageStatesFromFolder("sprites/cat/walk", imageRenderer)));
+                new Walking(this, imageStatesFromFolder("sprites/player/cat/walk", imageRenderer)));
         State attacking = new WaitingPerFrame(3,
-                new Attacking(this, fsm, imageStatesFromFolder("sprites/cat/attack", imageRenderer)));
+                new Attacking(this, fsm, imageStatesFromFolder("sprites/player/cat/attack", imageRenderer)));
 
         fsm.setInitialState(idle);
         fsm.addTransition(from(idle).when(WALK).to(walking));

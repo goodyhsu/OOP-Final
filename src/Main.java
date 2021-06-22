@@ -37,8 +37,8 @@ public class Main {
         ArrayList<String> obstacle_img_list = new ArrayList<String>();
         obstacle_list.add("Wood");
         obstacle_list.add("Stone");
-        obstacle_img_list.add("sprites/wood/0.png");
-        obstacle_img_list.add("sprites/stone/0.png");
+        obstacle_img_list.add("sprites/obstacle/wood/0.png");
+        obstacle_img_list.add("sprites/obstacle/stone/0.png");
         world.setObstacles(view, obstacle_list, obstacle_img_list);
 
         //game start

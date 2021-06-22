@@ -26,6 +26,8 @@ public abstract class Item extends Sprite {
     public abstract void triggerEffect();
     public abstract void endEffect();
 
+    public void remove_item(){ this.owner.getWorld().removeSprite(this); }
+
     @Override
     public void render(Graphics g){ this.renderer.render(this.image, g); }
 
