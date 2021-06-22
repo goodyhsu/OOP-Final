@@ -29,15 +29,17 @@ public abstract class HealthPointSprite extends Sprite {
         hpBar.healed(value);
     }
 
-    public void setStar(Image image) {
+    public void setStar() {
         this.isStar = true;
-        this.star_counter = new Counter(3);
-        //hpBar.setStar(image);
+        this.star_counter = new Counter(3000/15);
     }
 
     public void endStar() {
         this.isStar = false;
-        //hpBar.endStar();
+    }
+
+    public boolean isStar() {
+        return this.isStar;
     }
 
     @Override

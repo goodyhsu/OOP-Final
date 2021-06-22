@@ -17,5 +17,5 @@ public class Star extends Item{
     public void update(){}
 
     @Override
-    public void effect(){this.owner.setStar(image);}
+    public void effect(){this.owner.setStar();}
 }

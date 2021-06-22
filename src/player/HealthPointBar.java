@@ -1,10 +1,14 @@
 package player;
 
+import model.HealthPointSprite;
 import model.Sprite;
 
 import java.awt.*;
+import java.io.File;
 
-    /**
+import static utils.ImageStateUtils.readImage;
+
+/**
      * @author - johnny850807@gmail.com (Waterball)
      */
     public class HealthPointBar extends Sprite {
@@ -30,7 +34,10 @@ import java.awt.*;
             int width = (int) (hp * owner.getRange().getWidth() / maxHp);
             g.setColor(Color.RED);
             g.fillRect(range.x, range.y, (int) owner.getRange().getWidth(), range.height);
-            g.setColor(Color.GREEN);
+            if (((HealthPointSprite)this.owner).isStar())
+                g.setColor(Color.YELLOW);
+            else
+                g.setColor(Color.GREEN);
             g.fillRect(range.x, range.y, width, range.height);
         }
 
