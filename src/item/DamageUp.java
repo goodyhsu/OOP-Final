@@ -7,8 +7,8 @@ import static utils.ImageStateUtils.readImage;
 import java.io.File;
 
 public class DamageUp extends Item{
-    public DamageUp(SpriteCoordinate coordinate, Player owner){
-        super(coordinate, owner);
+    public DamageUp(SpriteCoordinate coordinate){
+        super(coordinate);
         File imageFile = new File("sprites/item/damageUp/0.png");
         this.image = readImage(imageFile);
     }

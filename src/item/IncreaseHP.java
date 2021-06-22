@@ -7,8 +7,8 @@ import static utils.ImageStateUtils.readImage;
 import java.io.File;
 
 public class IncreaseHP extends Item{
-    public IncreaseHP(SpriteCoordinate coordinate, Player owner){
-        super(coordinate, owner);
+    public IncreaseHP(SpriteCoordinate coordinate){
+        super(coordinate);
         File imageFile = new File("sprites/item/increaseHP/0.png");
         this.image = readImage(imageFile);
     }

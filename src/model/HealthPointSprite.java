@@ -6,14 +6,19 @@ import java.awt.*;
 
 public abstract class HealthPointSprite extends Sprite {
     protected HealthPointBar hpBar;
+    protected boolean isStar;
+    protected Counter star_counter;
 
     public HealthPointSprite(int hp) {
         this.hpBar = new HealthPointBar(hp);
         hpBar.setOwner(this);
+        this.isStar = false;
     }
 
     @Override
     public void damaged(int value) {
+        if (this.isStar)
+            return;
         hpBar.damaged(value);
         if (hpBar.isDead()) {
             world.removeSprite(this);
@@ -22,6 +27,17 @@ public abstract class HealthPointSprite extends Sprite {
 
     public void healed(int value) {
         hpBar.healed(value);
+    }
+
+    public void setStar(Image image) {
+        this.isStar = true;
+        this.star_counter = new Counter(3);
+        //hpBar.setStar(image);
+    }
+
+    public void endStar() {
+        this.isStar = false;
+        //hpBar.endStar();
     }
 
     @Override

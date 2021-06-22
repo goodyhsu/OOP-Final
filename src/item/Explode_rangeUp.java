@@ -7,8 +7,8 @@ import static utils.ImageStateUtils.readImage;
 import java.io.File;
 
 public class Explode_rangeUp extends Item{
-    public Explode_rangeUp(SpriteCoordinate coordinate, Player owner){
-        super(coordinate, owner);
+    public Explode_rangeUp(SpriteCoordinate coordinate){
+        super(coordinate);
         File imageFile = new File("sprites/item/explode_rangeUp/0.png");
         this.image = readImage(imageFile);
     }

@@ -2,7 +2,7 @@ package player;
 
 import model.CollisionHandler;
 import model.Sprite;
-import bomb.Bomb;
+import item.Item;
 import obstacle.Obstacle;
 import model.World;
 
@@ -32,11 +32,12 @@ public class PlayerCollisionHandler implements CollisionHandler {
                 }
                 now.getLocation().translate(-(offset.width), -(offset.height));
             }
-            /*
+
             else if (other instanceof Item) {
-             other.effect();
+                ((Item) other).setOwner((Player) now);
+                ((Item) other).effect();
             }
-             */
+
         }
         return false;
     }

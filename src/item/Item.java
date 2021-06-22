@@ -14,18 +14,19 @@ public abstract class Item extends Sprite {
     Image image;
     ItemImageRenderer renderer;
     Player owner;
-    public Item(SpriteCoordinate coordinate, Player owner){
+    public Item(SpriteCoordinate coordinate){
         this.coordinate = coordinate;
         this.location = coordinateToLocation(coordinate);
         this.renderer = new ItemImageRenderer(this);
         this.shape = new SpriteShape(new Dimension(75, 75),
                 new Dimension(5, 5), new Dimension(60, 60));
-        this.owner = owner;
     }
 
     public abstract void effect();
 
     public void remove_item(){ this.owner.getWorld().removeSprite(this); }
+
+    public void setOwner(Player player) {this.owner = player;}
 
     @Override
     public void render(Graphics g){ this.renderer.render(this.image, g); }

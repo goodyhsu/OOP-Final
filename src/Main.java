@@ -1,13 +1,10 @@
 import bomb.BombCollisionHandler;
-import bomb.BombImageRenderer;
-import bomb.NormalBomb;
 import controller.Game;
-import fsm.ImageRenderer;
+import model.SpriteCoordinate;
 import model.World;
 import player.Dog;
 import player.Cat;
 import player.PlayerCollisionHandler;
-import player.PlayerImageRenderer;
 import views.GameView;
 
 import java.awt.*;

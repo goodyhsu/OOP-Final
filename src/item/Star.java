@@ -7,8 +7,8 @@ import static utils.ImageStateUtils.readImage;
 import java.io.File;
 
 public class Star extends Item{
-    public Star(SpriteCoordinate coordinate, Player owner){
-        super(coordinate, owner);
+    public Star(SpriteCoordinate coordinate){
+        super(coordinate);
         File imageFile = new File("sprites/item/star/0.png");
         this.image = readImage(imageFile);
     }
@@ -17,5 +17,5 @@ public class Star extends Item{
     public void update(){}
 
     @Override
-    public void effect(){}
+    public void effect(){this.owner.setStar(image);}
 }

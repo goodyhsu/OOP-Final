@@ -73,7 +73,6 @@ public abstract class Player extends HealthPointSprite {
             Bomb bomb = new NormalBomb(this, this.getLocation(), this.getDamage(), this.getDamageArea());
             world.setBomb(bomb);
             setNum_bomb_current(num_bomb_current + 1);
-            System.out.printf("now bomb = %d\n", num_bomb_current);
         }
     }
 
@@ -95,6 +94,8 @@ public abstract class Player extends HealthPointSprite {
     }
 
     public void update() {
+        if (this.isStar && this.star_counter.time_up())
+            this.endStar();
         fsm.update();
     }
 
