@@ -6,8 +6,8 @@ import static utils.LocationUtils.isInBoundary;
 
 import java.awt.*;
 
-import static utils.LocationUtils.coordinate_addition;
-import static utils.LocationUtils.coordinate_to_location;
+import static utils.LocationUtils.coordinateAddition;
+import static utils.LocationUtils.coordinateToLocation;
 
 public class NormalBomb extends Bomb{
     private SpriteShape shape;
@@ -15,19 +15,23 @@ public class NormalBomb extends Bomb{
         super(owner, owner_location, damage, explode_range);
         this.shape = new SpriteShape(new Dimension(75, 75),
                 new Dimension(10, 15), new Dimension(50, 50));
+        this.direction_stop = new boolean[]{false, false, false, false};
     }
 
     @Override
-    public void add_smallBomb(int num_smallBomb){
+    public void add_smallBomb(int num_smallBomb, boolean[] direction_stop){
         Direction[] smallBomb_directions = Direction.values(); // UP, DOWN, LEFT, RIGHT
         SpriteCoordinate[] coordinate_offset = {new SpriteCoordinate(0, -num_smallBomb), new SpriteCoordinate(0, num_smallBomb),
                 new SpriteCoordinate(-num_smallBomb, 0), new SpriteCoordinate(num_smallBomb, 0)};
 
         for(int i = 0; i < 4; i++) {
-            SpriteCoordinate smallBomb_coordinate = coordinate_addition(this.coordinate, coordinate_offset[i]);
-            //System.err.format("debug: coordinate = %d %d\n", smallBomb_coordinate.getX(), smallBomb_coordinate.getY());
-            if (isInBoundary(smallBomb_coordinate)) {
-                SmallBomb smallBomb = new_smallBomb(this.owner, coordinate_to_location(smallBomb_coordinate), this.damage, 0,
+            SpriteCoordinate smallBomb_coordinate = coordinateAddition(this.coordinate, coordinate_offset[i]);
+            // check if the smallBomb should be stooped
+            if(isSmallBombCollision(smallBomb_coordinate))
+                direction_stop[i] = true;
+
+            if (isInBoundary(smallBomb_coordinate) && !direction_stop[i]) { // okay to add a smallBomb
+                SmallBomb smallBomb = new_smallBomb(this.owner, coordinateToLocation(smallBomb_coordinate), this.damage, 0,
                         this.before_explode_counter, this.after_explode_counter, smallBomb_directions[i]);
                 this.world.addSprite(smallBomb);
             }

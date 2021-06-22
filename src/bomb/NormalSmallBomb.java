@@ -34,7 +34,7 @@ public class NormalSmallBomb extends SmallBomb{
     }
 
     @Override
-    public void add_smallBomb(int num_smallBomb){}
+    public void add_smallBomb(int num_smallBomb, boolean[] direction_stop){}
 
     @Override
     public Rectangle getRange() {

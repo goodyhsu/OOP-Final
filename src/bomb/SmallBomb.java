@@ -26,10 +26,6 @@ public abstract class SmallBomb extends Bomb{
         }
         if (this.exploded)
             explode_effect();
-        if (this.exploded && this.num_smallBomb < this.explode_range) {
-            this.num_smallBomb++;
-            add_smallBomb(this.num_smallBomb);
-        }
         if (this.after_explode_counter.time_up()) {
             this.world.removeSprite(this);
         }

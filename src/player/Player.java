@@ -25,7 +25,7 @@ public abstract class Player extends HealthPointSprite {
 
     private static int HP_full = 500;
     public static int HP = HP_full;
-    private static int damage_area = 1;
+    private static int damage_area = 3;
     private static int damage = 1;
     private static int speed = 10;
     private static int num_bomb_max = 1;

@@ -1,12 +1,12 @@
 package bomb;
 
 import model.*;
+import obstacle.DestroyableObstacle;
+import obstacle.Obstacle;
 import player.Player;
-import static utils.ImageStateUtils.readImage;
 import static utils.LocationUtils.*;
 
 import java.awt.*;
-import java.io.File;
 import java.util.ArrayList;
 
 public abstract class Bomb extends Sprite {
@@ -18,13 +18,14 @@ public abstract class Bomb extends Sprite {
     protected Counter before_explode_counter, after_explode_counter; // 5s, 2s
     protected boolean exploded;
     protected BombImageRenderer renderer;
+    protected boolean[] direction_stop;
 
     public static ArrayList<Bomb> bomb_list = new ArrayList<Bomb>();
 
     public Bomb(Player owner, Point owner_location, int damage, int explode_range){
         this.owner = owner;
-        this.coordinate = location_to_coordinate(owner_location);
-        this.location = coordinate_to_location(this.coordinate);
+        this.coordinate = locationToCoordinate(owner_location);
+        this.location = coordinateToLocation(this.coordinate);
         this.damage = damage;
         this.explode_range = explode_range;
         this.num_smallBomb = 0;
@@ -34,7 +35,7 @@ public abstract class Bomb extends Sprite {
         this.renderer = new BombImageRenderer(this);
     }
 
-    protected abstract void add_smallBomb(int num_smallBomb);
+    protected abstract void add_smallBomb(int num_smallBomb, boolean[] direction_stop);
     protected abstract SmallBomb new_smallBomb(Player owner, Point owner_location, int damage, int explode_range,
                                                Counter before, Counter after, Direction face);
     protected abstract void explode_effect();
@@ -46,7 +47,7 @@ public abstract class Bomb extends Sprite {
             explode_effect();
         if(this.exploded && this.num_smallBomb < this.explode_range){
             this.num_smallBomb++;
-            add_smallBomb(this.num_smallBomb);
+            add_smallBomb(this.num_smallBomb, this.direction_stop);
         }
         if(this.after_explode_counter.time_up()) {
             this.world.removeSprite(this);
@@ -64,5 +65,15 @@ public abstract class Bomb extends Sprite {
     @Override
     public Point getLocation() {
         return location;
+    }
+
+    protected boolean isSmallBombCollision(SpriteCoordinate coordinate){
+        Point location = coordinateToLocation(coordinate);
+        Rectangle range = locationToRange(location);
+        var sprites = this.world.getSprites(range);
+        for(Sprite s: sprites)
+            if(s instanceof Obstacle && !(s instanceof DestroyableObstacle))
+                return true;
+        return false;
     }
 }

@@ -5,7 +5,7 @@ import model.SpriteCoordinate;
 import model.SpriteShape;
 
 import static utils.ImageStateUtils.readImage;
-import static utils.LocationUtils.coordinate_to_location;
+import static utils.LocationUtils.coordinateToLocation;
 
 import java.io.File;
 import java.awt.*;
@@ -17,7 +17,7 @@ public abstract class Obstacle extends Sprite{
     ObstacleImageRenderer renderer;
     public Obstacle(File file, SpriteCoordinate coordinate){
         this.coordinate = coordinate;
-        this.location = coordinate_to_location(coordinate);
+        this.location = coordinateToLocation(coordinate);
         this.image = readImage(file);
         this.renderer = new ObstacleImageRenderer(this);
         this.shape = new SpriteShape(new Dimension(75, 75),
