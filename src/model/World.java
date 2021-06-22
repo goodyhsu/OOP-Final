@@ -98,6 +98,9 @@ public class World {
     }
 
     public boolean setBomb(Sprite bomb) {
+        if (bombCollisionHandler.isCollision(bomb, bomb.getBodyOffset())) {
+            return false;
+        }
         addSprite(bomb);
         return true;
     }
