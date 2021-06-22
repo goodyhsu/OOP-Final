@@ -23,8 +23,7 @@ public abstract class Item extends Sprite {
         this.owner = owner;
     }
 
-    public abstract void triggerEffect();
-    public abstract void endEffect();
+    public abstract void effect();
 
     public void remove_item(){ this.owner.getWorld().removeSprite(this); }
 

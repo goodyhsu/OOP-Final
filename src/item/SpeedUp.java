@@ -17,8 +17,5 @@ public class SpeedUp extends Item{
     public void update(){}
 
     @Override
-    public void triggerEffect(){}
-
-    @Override
-    public void endEffect(){}
+    public void effect(){}
 }
