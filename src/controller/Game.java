@@ -41,7 +41,11 @@ public class Game extends GameLoop {
     }
 
     @Override
-    protected boolean roundOver(Counter counter) {
-        return !p1.isAlive() | !p2.isAlive() | counter.time_up();
+    protected boolean isOver(Counter counter) {
+        boolean over = false;
+        if (!p1.isAlive() || !p2.isAlive() || counter.time_up()) {
+            over = true;
+        }
+        return over;
     }
 }

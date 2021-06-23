@@ -38,18 +38,24 @@ public abstract class GameLoop {
             world.update();
             view.render(world, counter);
             delay(15);
-            if (roundOver(counter))
-                stop();
+            if (isOver(counter)) {
+                ((GameView.Canvas) view).roundOver();
+                roundOver();
+            }
         }
-        ((GameView.Canvas) view).roundOver();
-        view.render(getWorld(), counter);
     }
 
     protected abstract World getWorld();
 
-    public void stop() {
+    public void roundOver() {
         running = false;
         counter.stopCounter();
+        int over_loop = (int) (5 / 0.015);
+        while (over_loop > 0) {
+            over_loop--;
+            view.render(getWorld(), counter);
+            delay(15);
+        }
     }
 
     private void delay(long ms) {
@@ -60,7 +66,7 @@ public abstract class GameLoop {
         }
     }
 
-    protected abstract boolean roundOver(Counter counter);
+    protected abstract boolean isOver(Counter counter);
 
     public interface View {
         void render(World world, Counter counter);

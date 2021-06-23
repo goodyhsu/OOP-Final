@@ -5,7 +5,9 @@ import controller.GameLoop;
 import model.Counter;
 import model.Direction;
 //import model.Sprite;
+import model.Sprite;
 import model.World;
+import player.Player;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -138,6 +140,12 @@ public class GameView extends JFrame {
                 drawGrids(g);
             }
             else {
+                for (Sprite sprite : world.getSprites()) {
+                    if (sprite instanceof Player && sprite.isAlive()) {
+                        sprite.update();
+                        sprite.render(g);
+                    }
+                }
                 drawOver(g);
             }
             // timer

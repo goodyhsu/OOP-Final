@@ -28,6 +28,7 @@ public class World {
     private ArrayList<String> obstacle_list;
     private PlayerCollisionHandler playerCollisionHandler;
     private BombCollisionHandler bombCollisionHandler;
+    private ArrayList<Sprite> winner;
 
     public World(PlayerCollisionHandler playerCollisionHandler, BombCollisionHandler bombCollisionHandler, Sprite... sprites) {
         this.playerCollisionHandler = playerCollisionHandler;
