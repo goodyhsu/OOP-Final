@@ -1,6 +1,8 @@
 package model;
 
 import bomb.BombCollisionHandler;
+import item.Item;
+import item.ItemCollisionHandler;
 import obstacle.Obstacle;
 import player.PlayerCollisionHandler;
 import views.GameView;
@@ -12,34 +14,37 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toSet;
 
+import static utils.LocationUtils.coordinateToLocation;
+import static utils.LocationUtils.locationToCoordinate;
+
 /**
  * @author - johnny850807@gmail.com (Waterball)
  */
 public class World {
     private static final List<Sprite> sprites = new CopyOnWriteArrayList<>();
-    private ArrayList<String> obstacle_list;
-    private PlayerCollisionHandler playerCollisionHandler;
-    private BombCollisionHandler bombCollisionHandler;
-    private ArrayList<Sprite> winner;
+    private ArrayList<String> obstacle_img_list;
+    private PlayerCollisionHandler playerCollisionHandler = new PlayerCollisionHandler();
+    private BombCollisionHandler bombCollisionHandler = new BombCollisionHandler();
+    private ItemCollisionHandler itemCollisionHandler = new ItemCollisionHandler();
+    ArrayList<String> items = new ArrayList<String>();
 
-    public World(PlayerCollisionHandler playerCollisionHandler, BombCollisionHandler bombCollisionHandler, Sprite... sprites) {
-        this.playerCollisionHandler = playerCollisionHandler;
-        this.bombCollisionHandler = bombCollisionHandler;
-        addSprites(sprites);
+    public World(ArrayList<String> obstacle_img_list) {
+        this.obstacle_img_list = obstacle_img_list;
+        items.addAll(Arrays.asList("DamageUp", "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "Star")); // "SpeedUp",
     }
 
-    public void setObstacles(GameView view, ArrayList<String> obstacle_list, ArrayList<String> obstacle_img_list){
-        this.obstacle_list = obstacle_list;
-        int num_block_w = view.WIDTH / view.BLOCK_WIDTH;
-        int num_block_h = view.HEIGHT / view.BLOCK_HEIGHT;
+    public void setObstacles(){
+        int num_block_w = GameView.WIDTH / GameView.BLOCK_WIDTH;
+        int num_block_h = GameView.HEIGHT / GameView.BLOCK_HEIGHT;
         // boundary
         for (int x = 0; x < num_block_w; x++) {
             addObstacle(obstacle_img_list, "Stone", new SpriteCoordinate(x, 0));
@@ -50,6 +55,8 @@ public class World {
             addObstacle(obstacle_img_list, "Stone", new SpriteCoordinate(num_block_w-1, y));
         }
         setMap(obstacle_img_list);
+//        for (Sprite sprite : getSprites()) {
+//        }
     }
 
     private void setMap(ArrayList<String> obstacle_img_list) {
@@ -69,6 +76,24 @@ public class World {
         } catch(IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setItems(int item_num) {
+        while (item_num > 0) {
+            int item_idx = getRandomNumber(0, items.size());
+            int x = getRandomNumber(0, GameView.WIDTH / GameView.BLOCK_WIDTH);
+            int y = getRandomNumber(0, GameView.HEIGHT / GameView.BLOCK_HEIGHT);
+            Item new_item = createItemFromName(items.get(item_idx), new SpriteCoordinate(x, y));
+            if (!(itemCollisionHandler.isCollision(new_item, new_item.getBodyOffset()))) {
+                addSprites(new_item);
+                item_num--;
+            }
+        }
+    }
+
+    private int getRandomNumber(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min) + min;
     }
 
     public void update() {
@@ -99,7 +124,7 @@ public class World {
     }
 
     public boolean setBomb(Sprite bomb) {
-        if (bombCollisionHandler.isCollision(bomb, bomb.getBodyOffset())) {
+        if (getBombCollisionHandler().isCollision(bomb, bomb.getBodyOffset())) {
             return false;
         }
         addSprite(bomb);
@@ -138,12 +163,24 @@ public class World {
         Obstacle obstacle;
         if (name.equals("Wood")) {
             file = new File(obstacle_img_list.get(0));
-            obstacle = (Obstacle) new Wood(file, coordinate);
+            obstacle = new Wood(file, coordinate);
         }
         else {
             file = new File(obstacle_img_list.get(1));
-            obstacle = (Obstacle) new Stone(file, coordinate);
+            obstacle = new Stone(file, coordinate);
         }
         addSprite(obstacle);
+    }
+
+    private Item createItemFromName(String class_name, SpriteCoordinate coordinate) {
+        Item item = null;
+        try {
+            Class<?> clazz = Class.forName("item." + class_name);
+            Constructor<?> ctor = clazz.getConstructor(SpriteCoordinate.class);
+            item = (Item) ctor.newInstance(coordinate);
+        } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return item;
     }
 }

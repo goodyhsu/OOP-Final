@@ -15,7 +15,7 @@ public class ItemCollisionHandler implements CollisionHandler {
         SpriteCoordinate from_coordinate = locationToCoordinate(from.getLocation());
         for (Sprite to: from.getWorld().getSprites()) {
             SpriteCoordinate to_coordinate = locationToCoordinate(to.getLocation());
-            if (to != from && to_coordinate == from_coordinate) {
+            if (to != from && to_coordinate.equals(from_coordinate)) {
                 if (to instanceof Item)
                     return true;
                 else if (to instanceof Obstacle)

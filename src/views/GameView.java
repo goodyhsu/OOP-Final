@@ -2,11 +2,8 @@ package views;
 
 import controller.Game;
 import controller.GameLoop;
-import model.Counter;
-import model.Direction;
+import model.*;
 //import model.Sprite;
-import model.Sprite;
-import model.World;
 import player.Player;
 
 import java.awt.*;
@@ -23,7 +20,7 @@ public class GameView extends JFrame {
     public static final int P1 = 1;
     public static final int P2 = 2;
     private final Canvas canvas = new Canvas();
-    private final Game game;
+    private Game game;
 
     // Need to define the size of a BLOCK
     public static final int BLOCK_HEIGHT = 75;
@@ -48,35 +45,56 @@ public class GameView extends JFrame {
             public void keyPressed(KeyEvent keyEvent) {
                 switch (keyEvent.getKeyCode()) {
                     case KeyEvent.VK_W:
-                        game.movePlayer(P1, Direction.UP);
+                        if (!canvas.selecting)
+                            game.movePlayer(P1, Direction.UP);
                         break;
                     case KeyEvent.VK_S:
-                        game.movePlayer(P1, Direction.DOWN);
+                        if (!canvas.selecting)
+                            game.movePlayer(P1, Direction.DOWN);
                         break;
                     case KeyEvent.VK_A:
-                        game.movePlayer(P1, Direction.LEFT);
+                        if (!canvas.selecting)
+                            game.movePlayer(P1, Direction.LEFT);
+                        else
+                            game.changeCharacter(0, -1);
                         break;
                     case KeyEvent.VK_D:
-                        game.movePlayer(P1, Direction.RIGHT);
+                        if (!canvas.selecting)
+                            game.movePlayer(P1, Direction.RIGHT);
+                        else
+                            game.changeCharacter(0, 1);
                         break;
                     case KeyEvent.VK_E:
-                        game.attack(P1);
+                        if (!canvas.selecting)
+                            game.attack(P1);
                         break;
                     case KeyEvent.VK_I:
-                        game.movePlayer(P2, Direction.UP);
+                        if (!canvas.selecting)
+                            game.movePlayer(P2, Direction.UP);
                         break;
                     case KeyEvent.VK_K:
-                        game.movePlayer(P2, Direction.DOWN);
+                        if (!canvas.selecting)
+                            game.movePlayer(P2, Direction.DOWN);
                         break;
                     case KeyEvent.VK_J:
-                        game.movePlayer(P2, Direction.LEFT);
+                        if (!canvas.selecting)
+                            game.movePlayer(P2, Direction.LEFT);
+                        else
+                            game.changeCharacter(1, -1);
                         break;
                     case KeyEvent.VK_L:
-                        game.movePlayer(P2, Direction.RIGHT);
+                        if (!canvas.selecting)
+                            game.movePlayer(P2, Direction.RIGHT);
+                        else
+                            game.changeCharacter(1, 1);
                         break;
                     case KeyEvent.VK_U:
-                        game.attack(P2);
+                        if (!canvas.selecting)
+                            game.attack(P2);
                         break;
+                    case KeyEvent.VK_ENTER:
+                        if (canvas.selecting)
+                            canvas.setSelecting(false);
                 }
             }
 
@@ -84,28 +102,36 @@ public class GameView extends JFrame {
             public void keyReleased(KeyEvent keyEvent) {
                 switch (keyEvent.getKeyCode()) {
                     case KeyEvent.VK_W:
-                        game.stopPlayer(P1, Direction.UP);
+                        if (!canvas.selecting)
+                            game.stopPlayer(P1, Direction.UP);
                         break;
                     case KeyEvent.VK_S:
-                        game.stopPlayer(P1, Direction.DOWN);
+                        if (!canvas.selecting)
+                            game.stopPlayer(P1, Direction.DOWN);
                         break;
                     case KeyEvent.VK_A:
-                        game.stopPlayer(P1, Direction.LEFT);
+                        if (!canvas.selecting)
+                            game.stopPlayer(P1, Direction.LEFT);
                         break;
                     case KeyEvent.VK_D:
-                        game.stopPlayer(P1, Direction.RIGHT);
+                        if (!canvas.selecting)
+                            game.stopPlayer(P1, Direction.RIGHT);
                         break;
                     case KeyEvent.VK_I:
-                        game.stopPlayer(P2, Direction.UP);
+                        if (!canvas.selecting)
+                            game.stopPlayer(P2, Direction.UP);
                         break;
                     case KeyEvent.VK_K:
-                        game.stopPlayer(P2, Direction.DOWN);
+                        if (!canvas.selecting)
+                            game.stopPlayer(P2, Direction.DOWN);
                         break;
                     case KeyEvent.VK_J:
-                        game.stopPlayer(P2, Direction.LEFT);
+                        if (!canvas.selecting)
+                            game.stopPlayer(P2, Direction.LEFT);
                         break;
                     case KeyEvent.VK_L:
-                        game.stopPlayer(P2, Direction.RIGHT);
+                        if (!canvas.selecting)
+                            game.stopPlayer(P2, Direction.RIGHT);
                         break;
                 }
             }
@@ -116,11 +142,14 @@ public class GameView extends JFrame {
         private World world;
         private boolean over;
         private Counter counter;
+        private boolean selecting = true;
+        private characterSelector char_selector;
 
         @Override
-        public void render(World world, Counter counter) {
+        public void render(World world, Counter counter, characterSelector char_selector) {
             this.world = world;
             this.counter = counter;
+            this.char_selector = char_selector;
             repaint(); // ask the JPanel to repaint, it will invoke paintComponent(g) after a while.
         }
 
@@ -133,13 +162,7 @@ public class GameView extends JFrame {
             g.fillRect(0, 0, GameView.WIDTH, GameView.HEIGHT);
 
 
-            if (!over) {
-                // world
-                world.render(g); // ask the world to paint itself and paint the sprites on the canvas
-                // grids
-                drawGrids(g);
-            }
-            else {
+            if (over){
                 for (Sprite sprite : world.getSprites()) {
                     if (sprite instanceof Player && sprite.isAlive()) {
                         sprite.update();
@@ -147,6 +170,15 @@ public class GameView extends JFrame {
                     }
                 }
                 drawOver(g);
+            }
+            else if (!selecting) {
+                // world
+                world.render(g); // ask the world to paint itself and paint the sprites on the canvas
+                // grids
+                drawGrids(g);
+            }
+            else {
+                char_selector.render(g);
             }
             // timer
             drawTimer(g);
@@ -159,6 +191,12 @@ public class GameView extends JFrame {
         public void roundStart() {
             this.over = false;
         }
+
+        public void setSelecting(boolean selecting) {
+            this.selecting = selecting;
+            this.over = false;
+        }
+        public boolean getSelecting() { return selecting; }
 
         private void drawGrids(Graphics g) {
             int line_w = 1;

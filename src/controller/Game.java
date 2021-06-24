@@ -3,20 +3,26 @@ package controller;
 import model.Counter;
 import model.Direction;
 import model.World;
+import model.characterSelector;
 import player.Player;
 
 /**
  * @author - johnny850807@gmail.com (Waterball)
  */
 public class Game extends GameLoop {
-    private final Player p1;
-    private final Player p2;
+    private Player p1;
+    private Player p2;
     private final World world;
+    private final characterSelector char_selector;
 
-    public Game(World world, Player p1, Player p2) {
+    public Game(World world, characterSelector char_selector) {
+        this.world = world;
+        this.char_selector = char_selector;
+    }
+
+    public void setPlayer(Player p1, Player p2) {
         this.p1 = p1;
         this.p2 = p2;
-        this.world = world;
     }
 
     public void movePlayer(int playerNumber, Direction direction) {
@@ -47,5 +53,14 @@ public class Game extends GameLoop {
             over = true;
         }
         return over;
+    }
+
+    public void changeCharacter(int player, int change) {
+        char_selector.changeCharacter(player, change);
+    }
+
+    @Override
+    protected characterSelector getChar_selector() {
+        return char_selector;
     }
 }
