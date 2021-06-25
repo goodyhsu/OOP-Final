@@ -34,12 +34,12 @@ import static utils.ImageStateUtils.readImage;
             int width = (int) (hp * owner.getRange().getWidth() / maxHp);
             g.setColor(new Color(134, 112, 112, 255));
             g.fillRect(range.x, range.y, (int) owner.getRange().getWidth(), range.height);
-            if (((HealthPointSprite)this.owner).isStar())
+            if (((HealthPointSprite) owner).isStar())
                 g.setColor(new Color(232, 214, 108));
-            else if (((Player) this.owner).getIndex() == 0)
+            else if (((Player) owner).getIndex() == 0)
                 g.setColor(new Color(105, 192, 192));
             else
-                g.setColor(new Color(169, 155, 238, 255));
+                g.setColor(new Color(183, 176, 247, 255));
             g.fillRect(range.x, range.y, width, range.height);
         }
 
@@ -54,7 +54,7 @@ import static utils.ImageStateUtils.readImage;
 
         @Override
         public Rectangle getRange() {
-            return new Rectangle(owner.getX(), owner.getY() - 15, (int) owner.getRange().getWidth(), 10);
+            return new Rectangle(owner.getX(), owner.getY() - 10, (int) owner.getRange().getWidth(), 7);
         }
 
         @Override
