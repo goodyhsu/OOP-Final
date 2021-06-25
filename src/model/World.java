@@ -23,9 +23,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toSet;
 
-import static utils.LocationUtils.coordinateToLocation;
-import static utils.LocationUtils.locationToCoordinate;
-
 /**
  * @author - johnny850807@gmail.com (Waterball)
  */

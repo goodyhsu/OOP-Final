@@ -3,19 +3,15 @@ package views;
 import controller.Game;
 import controller.GameLoop;
 import model.*;
-//import model.Sprite;
-import player.Player;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.ColorModel;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-//import javax.swing.event.*;
+
+import static utils.ImageIO.getImage;
 
 public class GameView extends JFrame {
     public static final int HEIGHT = 700;
@@ -96,8 +92,17 @@ public class GameView extends JFrame {
                             game.attack(P2);
                         break;
                     case KeyEvent.VK_ENTER:
-                        if (canvas.selecting)
+                        if (canvas.selecting && !canvas.instructions)
                             canvas.setSelecting(false);
+                    case KeyEvent.VK_H:
+                        if (canvas.selecting) {
+                            canvas.setInstructions(true);
+                        }
+                        break;
+                    case KeyEvent.VK_BACK_SPACE:
+                        if (canvas.selecting && canvas.instructions)
+                            canvas.setInstructions(false);
+                        break;
                 }
             }
 
@@ -146,6 +151,7 @@ public class GameView extends JFrame {
         private boolean over = false;
         private Counter counter;
         private boolean selecting = true;
+        private boolean instructions = false;
         private characterSelector char_selector;
 
         @Override
@@ -161,19 +167,10 @@ public class GameView extends JFrame {
             super.paintComponent(g);
 
             // Now, let's paint
-//            g.setColor(Color.WHITE); // paint background with all white
-//            g.fillRect(0, 0, GameView.WIDTH, GameView.HEIGHT);
-            File f = new File("background", "1" + ".png");
-            if (f == null) {
-                System.out.println("Image not found :((");
-            }
-            Image image;
-            try {
-                image = ImageIO.read(f);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            g.drawImage(image, 0, 0, GameView.WIDTH, GameView.HEIGHT, null);
+            g.setColor(Color.WHITE); // paint background with all white
+            g.fillRect(0, 0, GameView.WIDTH, GameView.HEIGHT);
+//            Image image = getImage("img", "1.png");
+//            g.drawImage(image, 0, 0, GameView.WIDTH, GameView.HEIGHT, null);
 
 
             if (over){
@@ -193,7 +190,12 @@ public class GameView extends JFrame {
                     drawTimer(g);
             }
             else {
-                char_selector.render(g);
+//                System.out.println(instructions);
+                if (!instructions)
+                    char_selector.render(g);
+                else {
+                    char_selector.renderInstructions(g);
+                }
             }
 
         }
@@ -211,6 +213,10 @@ public class GameView extends JFrame {
             this.over = false;
         }
         public boolean getSelecting() { return selecting; }
+
+        public void setInstructions(boolean instructions) {
+            this.instructions = instructions;
+        }
 
         private void drawGrids(Graphics g) {
             int line_w = 1;

@@ -1,17 +1,15 @@
 package model;
 
 import controller.Game;
-import controller.GameLoop;
 import player.Cat;
 import player.Dog;
 import player.Player;
 import views.GameView;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+
+import static utils.ImageIO.getImage;
 
 public class characterSelector {
     private String dir = "sprites/characters/";
@@ -43,37 +41,48 @@ public class characterSelector {
     public void render(Graphics g) {
         for (int i = 0; i < player_num; i++) {
             int idx = img_idx.get(i);
-            File f = new File(dir, player_names.get(idx) + ".png");
-            if (f == null) {
-                System.out.println("Image not found :((");
-            }
-            Image image;
-            try {
-                image = ImageIO.read(f);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            Image image = getImage(dir, player_names.get(idx) + ".png");
+
             int periphery = 100;
             int img_size = 150;
             int x = (GameView.WIDTH + periphery - (i * (periphery*2+img_size)))%GameView.WIDTH;
             int y = (int)(GameView.HEIGHT/2);
             g.drawImage(image, x, y, img_size, img_size, null);
 
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 64));
-            g.drawString("Round " + Integer.toString(round), (int) (GameView.WIDTH / 2 - 120), periphery);
-
-            g.setColor(Color.darkGray);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 32));
-            g.drawString("Choose your favorite character :))", periphery*3, periphery*2);
+            drawString(g, "Round " + Integer.toString(round), Color.BLACK, 64, (int) (GameView.WIDTH / 2 - 120), periphery);
+            drawString(g, "Choose your favorite character :))", Color.darkGray, 32, periphery*3, periphery*2);
 
             g.setColor(Color.pink);
             g.fillRoundRect(280, GameView.HEIGHT-135, 480, 50, 20, 20);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 32));
-            g.setColor(Color.BLACK);
-            g.drawString("Press \"Enter\" to start the game!", 300, GameView.HEIGHT-periphery);
+            drawString(g, "Press \"Enter\" to start the game!", Color.BLACK, 32, 300, GameView.HEIGHT-periphery);
+
+            // instructions
+            image = getImage("img", "Instruction_key.png");
+            int img_w = (int) image.getWidth(null)/3*2;
+            int img_h = (int) image.getHeight(null)/3*2;
+            g.drawImage(image, GameView.WIDTH-img_w-20, GameView.HEIGHT-img_h-20, img_w, img_h, null);
         }
     }
+
+    public void renderInstructions(Graphics g) {
+        Image image = getImage("img", "Instruction.png");
+        float scale = 1;
+        int img_w = (int) image.getWidth(null);
+        scale = (float) GameView.WIDTH / img_w;
+        int img_h = (int) image.getHeight(null);
+        scale = Math.min(scale, (float) GameView.HEIGHT / img_h);
+        img_w = (int) (img_w * scale);
+        img_h = (int) (img_h * scale);
+        g.drawImage(image, (int) ((GameView.WIDTH-img_w) / 2), (int) ((GameView.HEIGHT-img_h)/2), img_w, img_h, null);
+    }
+
+    private void drawString(Graphics g, String string, Color color, int font_size, int x, int y) {
+        g.setColor(color);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, font_size));
+        g.drawString(string, x, y);
+    }
+
+
 
     public void setPlayers(Game game, World world){
         world.getSprites().clear();
