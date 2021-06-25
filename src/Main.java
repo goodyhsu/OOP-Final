@@ -7,7 +7,9 @@ import model.characterSelector;
 import player.Dog;
 import player.Cat;
 import player.PlayerCollisionHandler;
+import utils.MusicUtils;
 import views.GameView;
+import utils.MusicUtils;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,6 +19,10 @@ public class Main {
         // players
 //        Dog p1 = new Dog(new Point(75, 75));
 //        Cat p2 = new Cat(new Point(900, 525));
+
+        //Music Test
+        MusicUtils musicUtils = new MusicUtils();
+        musicUtils.playMusic("music/bgm/map2.wav");
 
         //world
         // world - set Obstacles
