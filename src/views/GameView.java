@@ -11,6 +11,9 @@ import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.ColorModel;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 //import javax.swing.event.*;
 
@@ -158,8 +161,19 @@ public class GameView extends JFrame {
             super.paintComponent(g);
 
             // Now, let's paint
-            g.setColor(Color.WHITE); // paint background with all white
-            g.fillRect(0, 0, GameView.WIDTH, GameView.HEIGHT);
+//            g.setColor(Color.WHITE); // paint background with all white
+//            g.fillRect(0, 0, GameView.WIDTH, GameView.HEIGHT);
+            File f = new File("background", "1" + ".png");
+            if (f == null) {
+                System.out.println("Image not found :((");
+            }
+            Image image;
+            try {
+                image = ImageIO.read(f);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            g.drawImage(image, 0, 0, GameView.WIDTH, GameView.HEIGHT, null);
 
 
             if (over){
@@ -200,7 +214,7 @@ public class GameView extends JFrame {
 
         private void drawGrids(Graphics g) {
             int line_w = 1;
-            g.setColor(Color.GRAY);
+            g.setColor(Color.darkGray);
             for (int x = 0; x <= GameView.WIDTH; x += GameView.BLOCK_WIDTH) {
                 g.fillRect(x, 0, line_w, GameView.HEIGHT+line_w);
             }
