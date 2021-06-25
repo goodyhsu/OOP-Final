@@ -20,12 +20,15 @@ public class Cat extends Player {
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/smallFish/0.png");
 
         ImageRenderer imageRenderer = new PlayerImageRenderer(this);
-        State idle = new WaitingPerFrame(4,
+        State idle = new WaitingPerFrame(5,
                 new Idle(imageStatesFromFolder("sprites/player/cat/idle", imageRenderer)));
-        State walking = new WaitingPerFrame(2,
+        State walking = new WaitingPerFrame(3,
                 new Walking(this, imageStatesFromFolder("sprites/player/cat/walk", imageRenderer)));
         State attacking = new WaitingPerFrame(3,
                 new Attacking(this, fsm, imageStatesFromFolder("sprites/player/cat/attack", imageRenderer)));
+        //State damaged = new WaitingPerFrame(3,
+        //        new Damaged(this, fsm, imageStatesFromFolder("sprite/player/cat/damaged", imageRenderer)));
+
 
         fsm.setInitialState(idle);
         fsm.addTransition(from(idle).when(WALK).to(walking));
