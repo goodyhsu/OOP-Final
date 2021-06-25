@@ -16,10 +16,11 @@ public class ItemCollisionHandler implements CollisionHandler {
         for (Sprite to: from.getWorld().getSprites()) {
             SpriteCoordinate to_coordinate = locationToCoordinate(to.getLocation());
             if (to != from && to_coordinate.equals(from_coordinate)) {
-                if (to instanceof Item)
+                /*if (to instanceof Item)
                     return true;
                 else if (to instanceof Obstacle)
-                    return true;
+                    return true;*/
+                return true;
             }
         }
         return false;
