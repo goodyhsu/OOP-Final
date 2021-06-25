@@ -74,15 +74,20 @@ public class World {
     }
 
     public void setItems(int item_num) {
-        while (item_num > 0) {
-            int item_idx = getRandomNumber((item_num%2)*items.size()/2, (item_num%2+1)*items.size()/2);
+        int i = 0;
+        int item_idx = 0;
+        while (i < item_num) {
+            if (i % items.size() == 0) {
+                item_idx = getRandomNumber(0, items.size());
+            }
             int x = getRandomNumber(0, GameView.WIDTH / GameView.BLOCK_WIDTH);
             int y = getRandomNumber(0, GameView.HEIGHT / GameView.BLOCK_HEIGHT);
             Item new_item = createItemFromName(items.get(item_idx), new SpriteCoordinate(x, y));
             if (!(itemCollisionHandler.isCollision(new_item, new_item.getBodyOffset()))) {
                 addSprites(new_item);
-                item_num--;
+                i++;
             }
+            item_idx = (item_idx + 1) % items.size();
         }
     }
 
