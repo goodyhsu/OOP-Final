@@ -16,6 +16,7 @@ public class Cat extends Player {
     public Cat(Point location) {
 
         this.location = location;
+        this.speed = 10;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/fish/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/smallFish/0.png");
 
