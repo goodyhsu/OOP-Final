@@ -39,7 +39,7 @@ public class World {
 
     public World(ArrayList<String> obstacle_img_list) {
         this.obstacle_img_list = obstacle_img_list;
-        items.addAll(Arrays.asList("DamageUp", "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "Star")); // "SpeedUp",
+        items.addAll(Arrays.asList("DamageUp", "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "SpeedUp", "Star"));
     }
 
     public void setObstacles(){
@@ -55,8 +55,6 @@ public class World {
             addObstacle(obstacle_img_list, "Stone", new SpriteCoordinate(num_block_w-1, y));
         }
         setMap(obstacle_img_list);
-//        for (Sprite sprite : getSprites()) {
-//        }
     }
 
     private void setMap(ArrayList<String> obstacle_img_list) {
@@ -80,7 +78,7 @@ public class World {
 
     public void setItems(int item_num) {
         while (item_num > 0) {
-            int item_idx = getRandomNumber(0, items.size());
+            int item_idx = getRandomNumber((item_num%2)*items.size()/2, (item_num%2+1)*items.size()/2);
             int x = getRandomNumber(0, GameView.WIDTH / GameView.BLOCK_WIDTH);
             int y = getRandomNumber(0, GameView.HEIGHT / GameView.BLOCK_HEIGHT);
             Item new_item = createItemFromName(items.get(item_idx), new SpriteCoordinate(x, y));

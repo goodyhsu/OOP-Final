@@ -7,7 +7,7 @@ import static utils.ImageStateUtils.readImage;
 import java.io.File;
 
 public class SpeedUp extends Item{
-    public SpeedUp(SpriteCoordinate coordinate, Player owner){
+    public SpeedUp(SpriteCoordinate coordinate){
         super(coordinate);
         File imageFile = new File("sprites/item/speedUp/0.png");
         this.image = readImage(imageFile);

@@ -66,7 +66,7 @@ public abstract class GameLoop {
             delay(15);
         }
         getChar_selector().setPlayers((Game)this, getWorld());
-        getWorld().setObstacles();
+//        getWorld().setObstacles();
     }
 
     protected abstract World getWorld();
