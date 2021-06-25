@@ -16,7 +16,7 @@ public class Cat extends Player {
     public Cat(Point location) {
 
         this.location = location;
-        this.speed = 10;
+        speed = 8;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/fish/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/smallFish/0.png");
 
@@ -27,15 +27,19 @@ public class Cat extends Player {
                 new Walking(this, imageStatesFromFolder("sprites/player/cat/walk", imageRenderer)));
         State attacking = new WaitingPerFrame(3,
                 new Attacking(this, fsm, imageStatesFromFolder("sprites/player/cat/attack", imageRenderer)));
-        //State damaged = new WaitingPerFrame(3,
-        //        new Damaged(this, fsm, imageStatesFromFolder("sprite/player/cat/damaged", imageRenderer)));
-
+        State damaged = new WaitingPerFrame(4,
+                new Damaged(this, fsm, imageStatesFromFolder("sprites/player/cat/damaged", imageRenderer)));
 
         fsm.setInitialState(idle);
         fsm.addTransition(from(idle).when(WALK).to(walking));
         fsm.addTransition(from(walking).when(STOP).to(idle));
         fsm.addTransition(from(idle).when(ATTACK).to(attacking));
         fsm.addTransition(from(walking).when(ATTACK).to(attacking));
+        fsm.addTransition(from(idle).when(DAMAGED).to(damaged));
+        fsm.addTransition(from(damaged).when(WALK).to(walking));
+        fsm.addTransition(from(damaged).when(ATTACK).to(attacking));
+
+        setOwner(this);
     }
 
 }

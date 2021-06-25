@@ -1,6 +1,7 @@
 package model;
 
 import player.HealthPointBar;
+import player.Player;
 
 import java.awt.*;
 
@@ -8,6 +9,7 @@ public abstract class HealthPointSprite extends Sprite {
     protected HealthPointBar hpBar;
     protected boolean isStar;
     protected Counter star_counter;
+    private Player owner;
 
     public HealthPointSprite(int hp) {
         this.hpBar = new HealthPointBar(hp);
@@ -15,10 +17,15 @@ public abstract class HealthPointSprite extends Sprite {
         this.isStar = false;
     }
 
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
+
     @Override
     public void damaged(int value) {
         if (this.isStar)
             return;
+        owner.damaged();
         hpBar.damaged(value);
         if (hpBar.isDead()) {
             world.removeSprite(this);

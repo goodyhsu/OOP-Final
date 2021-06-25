@@ -3,6 +3,7 @@ package player;
 import bomb.Bomb;
 import bomb.NormalBomb;
 import fsm.FiniteStateMachine;
+
 import model.Direction;
 import model.HealthPointSprite;
 import model.SpriteShape;
@@ -21,6 +22,8 @@ public abstract class Player extends HealthPointSprite {
 
     private final SpriteShape shape;
     public final FiniteStateMachine fsm;
+    //public final FiniteStateMachine fsm_default;
+    //public final FiniteStateMachine fsm_damaged;
     private final Set<Direction> directions = new CopyOnWriteArraySet<>();
 
     private int HP_full;
@@ -44,10 +47,12 @@ public abstract class Player extends HealthPointSprite {
         num_bomb_max = 1;
         num_bomb_current = 0;
 
-        shape = new SpriteShape(new Dimension(70, 80),
-                new Dimension(10, 15), new Dimension(50, 50));
+        shape = new SpriteShape(new Dimension(50, 50),
+                new Dimension(6, 6), new Dimension(36, 36));
 
         fsm = new FiniteStateMachine();
+        //fsm_default = new FiniteStateMachine();
+        //fsm_damaged = new FiniteStateMachine();
     }
 
     public int getDamage() {
@@ -73,6 +78,10 @@ public abstract class Player extends HealthPointSprite {
             world.setBomb(bomb);
             setNum_bomb_current(num_bomb_current + 1);
         }
+    }
+
+    public void damaged() {
+        fsm.trigger(DAMAGED);
     }
 
     public void move(Direction direction) {

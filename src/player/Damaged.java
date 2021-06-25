@@ -4,16 +4,13 @@ import fsm.Sequence;
 import fsm.State;
 import fsm.StateMachine;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class Attacking extends Sequence {
+public class Damaged extends Sequence {
     private final Player player;
     private final StateMachine stateMachine;
-    private final Set<Integer> damagingStateNumbers = new HashSet<>(List.of(6));
 
-    public Attacking(Player player, StateMachine stateMachine, List<? extends State> states) {
+    public Damaged(Player player, StateMachine stateMachine, List<? extends State> states) {
         super(states);
         this.player = player;
         this.stateMachine = stateMachine;

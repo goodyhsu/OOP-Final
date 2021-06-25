@@ -89,15 +89,15 @@ public class characterSelector {
         world.getSprites().clear();
         Player p1, p2;
         if (img_idx.get(0) == 0) {
-            p1 = new Tom(new Point(75, 75));
+            p1 = new Dog(new Point(50, 50));
         } else {
-            p1 = new Cat(new Point(75, 75));
+            p1 = new Cat(new Point(50, 50));
         }
 
         if (img_idx.get(1) == 0) {
-            p2 = new Dog(new Point(900, 525));
+            p2 = new Dog(new Point(950, 600));
         } else {
-            p2 = new Cat(new Point(900, 525));
+            p2 = new Cat(new Point(950, 600));
         }
         game.setPlayer(p1, p2);
         world.addSprites(p1, p2);
