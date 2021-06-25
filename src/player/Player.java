@@ -26,6 +26,7 @@ public abstract class Player extends HealthPointSprite {
     //public final FiniteStateMachine fsm_damaged;
     private final Set<Direction> directions = new CopyOnWriteArraySet<>();
 
+    public int index;
     private int HP_full;
     public int HP;
     private int damage_area;
@@ -55,13 +56,12 @@ public abstract class Player extends HealthPointSprite {
         //fsm_damaged = new FiniteStateMachine();
     }
 
+    public int getIndex() {return index;}
     public int getDamage() {
         return damage;
     }
-
     public int getNum_bomb_current(){ return num_bomb_current; }
     public void setNum_bomb_current(int num){ num_bomb_current = num; }
-
     public int getSpeed() {return speed;}
 
     // for items

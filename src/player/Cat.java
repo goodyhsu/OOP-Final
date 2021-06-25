@@ -13,9 +13,10 @@ import static utils.ImageStateUtils.imageStatesFromFolder;
 
 public class Cat extends Player {
 
-    public Cat(Point location) {
+    public Cat(Point location, int index) {
 
         this.location = location;
+        this.index = index;
         speed = 8;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/fish/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/smallFish/0.png");

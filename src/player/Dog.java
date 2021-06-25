@@ -13,9 +13,10 @@ import static utils.ImageStateUtils.imageStatesFromFolder;
 
 public class Dog extends Player {
 
-    public Dog(Point location) {
+    public Dog(Point location, int index) {
 
         this.location = location;
+        this.index = index;
         this.speed = 8;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/bone/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/smallBone/0.png");

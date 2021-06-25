@@ -13,9 +13,10 @@ import static utils.ImageStateUtils.imageStatesFromFolder;
 
 public class Tom extends Player {
 
-    public Tom(Point location) {
+    public Tom(Point location, int index) {
 
         this.location = location;
+        this.index = index;
         this.speed = 12;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/seagull/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/seagullEgg/0.png");

@@ -9,7 +9,7 @@ public abstract class HealthPointSprite extends Sprite {
     protected HealthPointBar hpBar;
     protected boolean isStar;
     protected Counter star_counter;
-    private Player owner;
+    public Player owner;
 
     public HealthPointSprite(int hp) {
         this.hpBar = new HealthPointBar(hp);

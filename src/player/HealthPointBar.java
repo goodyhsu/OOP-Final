@@ -32,12 +32,14 @@ import static utils.ImageStateUtils.readImage;
         public void render(Graphics g) {
             Rectangle range = getRange();
             int width = (int) (hp * owner.getRange().getWidth() / maxHp);
-            g.setColor(Color.RED);
+            g.setColor(new Color(134, 112, 112, 255));
             g.fillRect(range.x, range.y, (int) owner.getRange().getWidth(), range.height);
             if (((HealthPointSprite)this.owner).isStar())
-                g.setColor(Color.YELLOW);
+                g.setColor(new Color(232, 214, 108));
+            else if (((Player) this.owner).getIndex() == 0)
+                g.setColor(new Color(105, 192, 192));
             else
-                g.setColor(Color.GREEN);
+                g.setColor(new Color(169, 155, 238, 255));
             g.fillRect(range.x, range.y, width, range.height);
         }
 
