@@ -26,8 +26,9 @@ public class NormalBomb extends Bomb{
 
         for(int i = 0; i < 4; i++) {
             SpriteCoordinate smallBomb_coordinate = coordinateAddition(this.coordinate, coordinate_offset[i]);
-            // check if the smallBomb should be stooped
-            if(isSmallBombCollision(smallBomb_coordinate))
+            // check if the smallBomb should be stopped
+            boolean[] smallBomb_collision = isSmallBombCollision(smallBomb_coordinate);
+            if(smallBomb_collision[0])
                 direction_stop[i] = true;
 
             if (isInBoundary(smallBomb_coordinate) && !direction_stop[i]) { // okay to add a smallBomb
@@ -35,6 +36,9 @@ public class NormalBomb extends Bomb{
                         this.before_explode_counter, this.after_explode_counter, smallBomb_directions[i]);
                 this.world.addSprite(smallBomb);
             }
+
+            if(smallBomb_collision[1])
+                direction_stop[i] = true;
         }
         System.err.println();
     }

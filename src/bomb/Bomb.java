@@ -52,7 +52,6 @@ public abstract class Bomb extends Sprite {
         if(this.after_explode_counter.time_up()) {
             this.world.removeSprite(this);
             this.owner.setNum_bomb_current(this.owner.getNum_bomb_current()-1);
-            System.out.printf("test\n");
         }
     }
 
@@ -67,13 +66,17 @@ public abstract class Bomb extends Sprite {
         return location;
     }
 
-    protected boolean isSmallBombCollision(SpriteCoordinate coordinate){
+    protected boolean[] isSmallBombCollision(SpriteCoordinate coordinate){
         Point location = coordinateToLocation(coordinate);
         Rectangle range = locationToRange(location);
         var sprites = this.world.getSprites(range);
         for(Sprite s: sprites)
-            if(s instanceof Obstacle && !(s instanceof DestroyableObstacle))
-                return true;
-        return false;
+            if(s instanceof Obstacle) {
+                if (!(s instanceof DestroyableObstacle))
+                    return new boolean[]{true, true};
+                else
+                    return new boolean[]{false, true};
+            }
+        return new boolean[]{false, false};
     }
 }
