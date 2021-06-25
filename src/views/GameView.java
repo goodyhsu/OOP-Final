@@ -48,47 +48,47 @@ public class GameView extends JFrame {
             public void keyPressed(KeyEvent keyEvent) {
                 switch (keyEvent.getKeyCode()) {
                     case KeyEvent.VK_W:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.movePlayer(P1, Direction.UP);
                         break;
                     case KeyEvent.VK_S:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.movePlayer(P1, Direction.DOWN);
                         break;
                     case KeyEvent.VK_A:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.movePlayer(P1, Direction.LEFT);
-                        else
+                        else if (!canvas.over)
                             game.changeCharacter(0, -1);
                         break;
                     case KeyEvent.VK_D:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.movePlayer(P1, Direction.RIGHT);
-                        else
+                        else if (!canvas.over)
                             game.changeCharacter(0, 1);
                         break;
                     case KeyEvent.VK_E:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.attack(P1);
                         break;
                     case KeyEvent.VK_I:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.movePlayer(P2, Direction.UP);
                         break;
                     case KeyEvent.VK_K:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.movePlayer(P2, Direction.DOWN);
                         break;
                     case KeyEvent.VK_J:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.movePlayer(P2, Direction.LEFT);
-                        else
+                        else if (!canvas.over)
                             game.changeCharacter(1, -1);
                         break;
                     case KeyEvent.VK_L:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.movePlayer(P2, Direction.RIGHT);
-                        else
+                        else if (!canvas.over)
                             game.changeCharacter(1, 1);
                         break;
                     case KeyEvent.VK_U:
@@ -105,35 +105,35 @@ public class GameView extends JFrame {
             public void keyReleased(KeyEvent keyEvent) {
                 switch (keyEvent.getKeyCode()) {
                     case KeyEvent.VK_W:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.stopPlayer(P1, Direction.UP);
                         break;
                     case KeyEvent.VK_S:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.stopPlayer(P1, Direction.DOWN);
                         break;
                     case KeyEvent.VK_A:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.stopPlayer(P1, Direction.LEFT);
                         break;
                     case KeyEvent.VK_D:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.stopPlayer(P1, Direction.RIGHT);
                         break;
                     case KeyEvent.VK_I:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.stopPlayer(P2, Direction.UP);
                         break;
                     case KeyEvent.VK_K:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.stopPlayer(P2, Direction.DOWN);
                         break;
                     case KeyEvent.VK_J:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.stopPlayer(P2, Direction.LEFT);
                         break;
                     case KeyEvent.VK_L:
-                        if (!canvas.selecting)
+                        if (!canvas.selecting && !canvas.over)
                             game.stopPlayer(P2, Direction.RIGHT);
                         break;
                 }
@@ -143,7 +143,7 @@ public class GameView extends JFrame {
 
     public static class Canvas extends JPanel implements GameLoop.View {
         private World world;
-        private boolean over;
+        private boolean over = false;
         private Counter counter;
         private boolean selecting = true;
         private characterSelector char_selector;
@@ -178,10 +178,8 @@ public class GameView extends JFrame {
 
             if (over){
                 for (Sprite sprite : world.getSprites()) {
-                    if (sprite instanceof Player && sprite.isAlive()) {
-                        sprite.update();
-                        sprite.render(g);
-                    }
+                    sprite.update();
+                    sprite.render(g);
                 }
                 drawOver(g);
             }
@@ -190,12 +188,14 @@ public class GameView extends JFrame {
                 world.render(g); // ask the world to paint itself and paint the sprites on the canvas
                 // grids
                 drawGrids(g);
+                // timer
+                if (counter != null)
+                    drawTimer(g);
             }
             else {
                 char_selector.render(g);
             }
-            // timer
-            drawTimer(g);
+
         }
 
         public void roundOver() {
@@ -232,7 +232,7 @@ public class GameView extends JFrame {
 
         private void drawOver(Graphics g) {
             g.setColor(Color.BLACK);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 64));
+            g.setFont(new Font("PMingLiu", Font.PLAIN, 64));
             g.drawString("Game Over", GameView.WIDTH/2-150, GameView.HEIGHT/2);
         }
     }

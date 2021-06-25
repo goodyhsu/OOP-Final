@@ -1,8 +1,10 @@
 package controller;
 
 import model.Counter;
+import model.Sprite;
 import model.World;
 import model.characterSelector;
+import player.Player;
 import views.GameView;
 
 /**
@@ -11,7 +13,7 @@ import views.GameView;
 public abstract class GameLoop {
     private boolean running;
     private View view;
-    private Counter counter;
+    private Counter counter = null;
     private int total_round;
 
     public void setView(View view) {
@@ -21,7 +23,7 @@ public abstract class GameLoop {
     public void start(int total_round) {
         this.total_round = total_round;
         new Thread(this::gameLoop).start();
-        counter = new Counter(40000);
+//        counter = new Counter(40000);
     }
 
     private void gameLoop() {
@@ -34,6 +36,7 @@ public abstract class GameLoop {
 
     private void nextRound(int r) {
         selectCharacter(r);
+        counter = new Counter(40000);
         ((GameView.Canvas) view).roundStart();
         running = true;
         int last_update_items_time = 0;
@@ -75,6 +78,11 @@ public abstract class GameLoop {
     public void roundOver() {
         running = false;
         counter.stopCounter();
+        for (Sprite sprite : getWorld().getSprites()) {
+            if (!(sprite instanceof Player))
+                getWorld().removeSprite(sprite);
+        }
+
         int over_loop = (int) (5 / 0.015);
         while (over_loop > 0) {
             over_loop--;

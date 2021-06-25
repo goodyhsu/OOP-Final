@@ -34,6 +34,7 @@ public class Counter {
         }
         return false;
     }
+
     public void stopCounter() {
         running = false;
     }
