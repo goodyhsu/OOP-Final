@@ -22,8 +22,6 @@ public abstract class Player extends HealthPointSprite {
 
     private final SpriteShape shape;
     public final FiniteStateMachine fsm;
-    //public final FiniteStateMachine fsm_default;
-    //public final FiniteStateMachine fsm_damaged;
     private final Set<Direction> directions = new CopyOnWriteArraySet<>();
 
     public int index;
@@ -52,8 +50,6 @@ public abstract class Player extends HealthPointSprite {
                 new Dimension(6, 6), new Dimension(36, 36));
 
         fsm = new FiniteStateMachine();
-        //fsm_default = new FiniteStateMachine();
-        //fsm_damaged = new FiniteStateMachine();
     }
 
     public int getIndex() {return index;}
@@ -67,7 +63,7 @@ public abstract class Player extends HealthPointSprite {
     // for items
     public void addDamage() {damage += 1;}
     public void addDamageArea() {damage_area += 1;}
-    public void addSpeed() {speed += 1;}
+    public void addSpeed() {speed += 2;}
     public void addNum_bomb_max(){num_bomb_max += 1;}
 
     public void attack() {
