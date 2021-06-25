@@ -34,8 +34,11 @@ public class PlayerCollisionHandler implements CollisionHandler {
             }
 
             else if (other instanceof Item) {
-                ((Item) other).setOwner((Player) now);
-                ((Item) other).effect();
+                if (originalBody.intersects(other.getBody())) {
+                    ((Item) other).setOwner((Player) now);
+                    ((Item) other).effect();
+                    ((Item) other).remove_item();
+                }
             }
 
         }
