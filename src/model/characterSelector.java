@@ -5,11 +5,12 @@ import player.Player;
 import views.GameView;
 
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static utils.ImageIOUtils.getImage;
 import static utils.CreateInstanceUtils.createPlayerTypeByName;
+import static utils.ImageStateUtils.readImage;
 import static utils.renderUtils.drawString;
 import static utils.renderUtils.drawImage;
 
@@ -44,7 +45,7 @@ public class characterSelector {
         // draw players
         for (int i = 0; i < player_num; i++) {
             int idx = img_idx.get(i);
-            image = getImage(dir, class_names.get(idx) + (idx % 2) + ".png");
+            image = readImage(new File(dir, class_names.get(idx) + (idx % 2) + ".png"));
 
             int img_size = 150;
             int x = (GameView.WIDTH + periphery - (i * (periphery*2+img_size)))%GameView.WIDTH;
@@ -62,14 +63,14 @@ public class characterSelector {
         drawString(g, "Press \"Enter\" to start the game!", Color.BLACK, 32, 300, GameView.HEIGHT-periphery);
 
         // instructions
-        image = getImage("img", "Instruction_key.png");
+        image = readImage(new File("img/Instruction_key.png"));
         int img_w = (int) image.getWidth(null)/3*2;
         int img_h = (int) image.getHeight(null)/3*2;
         g.drawImage(image, GameView.WIDTH-img_w-5, GameView.HEIGHT-img_h-5, img_w, img_h, null);
     }
 
     public void renderInstructions(Graphics g) {
-        Image image = getImage("img", "Instruction.png");
+        Image image = readImage(new File("img/Instruction.png"));
         drawImage(g, image, 0, 0, GameView.WIDTH, GameView.HEIGHT);
     }
 

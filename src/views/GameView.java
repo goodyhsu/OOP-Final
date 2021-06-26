@@ -6,12 +6,7 @@ import model.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import static utils.ImageIOUtils.getImage;
 
 public class GameView extends JFrame {
     public static final int HEIGHT = 700;
