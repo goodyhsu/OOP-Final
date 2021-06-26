@@ -23,8 +23,8 @@ public class Main {
         musicUtils.playMusic("music/bgm/map2.wav");
 
         // Map
-        ArrayList<String> obstacle_list = new ArrayList<String>();
-        ArrayList<String> obstacle_img_list = new ArrayList<String>();
+        ArrayList<String> obstacle_list = new ArrayList<>();
+        ArrayList<String> obstacle_img_list = new ArrayList<>();
         obstacle_list.add("Wood");
         obstacle_list.add("Stone");
         obstacle_img_list.add("sprites/obstacle/wood/0.png");
@@ -41,13 +41,9 @@ public class Main {
         //controller
         characterSelector char_selector = new characterSelector();
         Game game = new Game(world, char_selector);
-//        game.setPlayer(p1, p2);
 
         //view
         GameView view = new GameView(game);
-
-
-//        world.setObstacles(view, obstacle_list, obstacle_img_list);
 
         //game start
         game.start(5);

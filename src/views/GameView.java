@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import static utils.renderUtils.drawString;
+
+
 public class GameView extends JFrame {
     public static final int HEIGHT = 700;
     public static final int WIDTH = 1050;
@@ -15,6 +18,7 @@ public class GameView extends JFrame {
     public static final int P2 = 2;
     private final Canvas canvas = new Canvas();
     private Game game;
+    public enum Status{selecting, instructions, start, in_progress, over, wait};
 
     // Need to define the size of a BLOCK
     public static final int BLOCK_HEIGHT = 50;
@@ -39,64 +43,64 @@ public class GameView extends JFrame {
             public void keyPressed(KeyEvent keyEvent) {
                 switch (keyEvent.getKeyCode()) {
                     case KeyEvent.VK_W:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.movePlayer(P1, Direction.UP);
                         break;
                     case KeyEvent.VK_S:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.movePlayer(P1, Direction.DOWN);
                         break;
                     case KeyEvent.VK_A:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.movePlayer(P1, Direction.LEFT);
-                        else if (!canvas.over)
+                        else if (canvas.status == Status.selecting)
                             game.changeCharacter(0, -1);
                         break;
                     case KeyEvent.VK_D:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.movePlayer(P1, Direction.RIGHT);
-                        else if (!canvas.over)
+                        else if (canvas.status == Status.selecting)
                             game.changeCharacter(0, 1);
                         break;
                     case KeyEvent.VK_E:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.attack(P1);
                         break;
                     case KeyEvent.VK_I:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.movePlayer(P2, Direction.UP);
                         break;
                     case KeyEvent.VK_K:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.movePlayer(P2, Direction.DOWN);
                         break;
                     case KeyEvent.VK_J:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.movePlayer(P2, Direction.LEFT);
-                        else if (!canvas.over)
+                        else if (canvas.status == Status.selecting)
                             game.changeCharacter(1, -1);
                         break;
                     case KeyEvent.VK_L:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.movePlayer(P2, Direction.RIGHT);
-                        else if (!canvas.over)
+                        else if (canvas.status == Status.selecting)
                             game.changeCharacter(1, 1);
                         break;
                     case KeyEvent.VK_U:
-                        if (!canvas.selecting)
+                        if (canvas.status == Status.in_progress)
                             game.attack(P2);
                         break;
                     case KeyEvent.VK_ENTER:
-                        if (canvas.selecting && !canvas.instructions)
-                            canvas.setSelecting(false);
+                        if (canvas.status == Status.selecting)
+                            canvas.setStatus(Status.wait);
                     case KeyEvent.VK_H:
-                        if (canvas.selecting) {
-                            canvas.setInstructions(true);
+                        if (canvas.status == Status.selecting) {
+                            canvas.setStatus(Status.instructions);
                         }
                         break;
                     case KeyEvent.VK_BACK_SPACE:
-                        if (canvas.selecting && canvas.instructions)
-                            canvas.setInstructions(false);
+                        if (canvas.status == Status.instructions)
+                            canvas.setStatus(Status.selecting);
                         break;
                 }
             }
@@ -105,35 +109,35 @@ public class GameView extends JFrame {
             public void keyReleased(KeyEvent keyEvent) {
                 switch (keyEvent.getKeyCode()) {
                     case KeyEvent.VK_W:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.stopPlayer(P1, Direction.UP);
                         break;
                     case KeyEvent.VK_S:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.stopPlayer(P1, Direction.DOWN);
                         break;
                     case KeyEvent.VK_A:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.stopPlayer(P1, Direction.LEFT);
                         break;
                     case KeyEvent.VK_D:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.stopPlayer(P1, Direction.RIGHT);
                         break;
                     case KeyEvent.VK_I:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.stopPlayer(P2, Direction.UP);
                         break;
                     case KeyEvent.VK_K:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.stopPlayer(P2, Direction.DOWN);
                         break;
                     case KeyEvent.VK_J:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.stopPlayer(P2, Direction.LEFT);
                         break;
                     case KeyEvent.VK_L:
-                        if (!canvas.selecting && !canvas.over)
+                        if (canvas.status == Status.in_progress)
                             game.stopPlayer(P2, Direction.RIGHT);
                         break;
                 }
@@ -143,11 +147,9 @@ public class GameView extends JFrame {
 
     public static class Canvas extends JPanel implements GameLoop.View {
         private World world;
-        private boolean over = false;
         private Counter counter;
-        private boolean selecting = true;
-        private boolean instructions = false;
         private characterSelector char_selector;
+        private Status status = Status.selecting;
 
         @Override
         public void render(World world, Counter counter, characterSelector char_selector) {
@@ -164,18 +166,15 @@ public class GameView extends JFrame {
             // Now, let's paint
             g.setColor(Color.WHITE); // paint background with all white
             g.fillRect(0, 0, GameView.WIDTH, GameView.HEIGHT);
-//            Image image = getImage("img", "1.png");
-//            g.drawImage(image, 0, 0, GameView.WIDTH, GameView.HEIGHT, null);
 
-
-            if (over){
-                for (Sprite sprite : world.getSprites()) {
-                    sprite.update();
-                    sprite.render(g);
-                }
-                drawOver(g);
+            if (status == Status.over){
+                drawOver(g, world);
             }
-            else if (!selecting) {
+            else if (status == Status.start) {
+                drawStart(g, world);
+                setStatus(Status.in_progress);
+            }
+            else if (status == Status.in_progress) {
                 // world
                 world.render(g); // ask the world to paint itself and paint the sprites on the canvas
                 // grids
@@ -184,34 +183,27 @@ public class GameView extends JFrame {
                 if (counter != null)
                     drawTimer(g);
             }
-            else {
-//                System.out.println(instructions);
-                if (!instructions)
-                    char_selector.render(g);
-                else {
-                    char_selector.renderInstructions(g);
-                }
+            else if (status == Status.selecting){
+                char_selector.render(g);
             }
+            else if (status == Status.instructions) {
+                char_selector.renderInstructions(g);
+            }
+        }
 
+        public void setStatus(Status status) {
+            this.status = status;
         }
 
         public void roundOver() {
-            this.over = true;
+            setStatus(Status.over);
         }
 
         public void roundStart() {
-            this.over = false;
+            setStatus(Status.start);
         }
 
-        public void setSelecting(boolean selecting) {
-            this.selecting = selecting;
-            this.over = false;
-        }
-        public boolean getSelecting() { return selecting; }
-
-        public void setInstructions(boolean instructions) {
-            this.instructions = instructions;
-        }
+        public Status getStatus() { return status; }
 
         private void drawGrids(Graphics g) {
             int line_w = 1;
@@ -225,16 +217,23 @@ public class GameView extends JFrame {
         }
 
         private void drawTimer(Graphics g) {
-            g.setColor(Color.WHITE);
             int left_time = (int) ((counter.getTime_limit() - counter.getCurrent_time())*0.015);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 32));
-            g.drawString(Integer.toString(left_time), GameView.WIDTH/2, 50);
+            drawString(g, Integer.toString(left_time), Color.WHITE,
+                    new Font("TimesRoman", Font.PLAIN, 32), GameView.WIDTH/2, 50);
         }
 
-        private void drawOver(Graphics g) {
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 64));
-            g.drawString("Game Over", GameView.WIDTH/2-150, GameView.HEIGHT/2);
+        private void drawStart(Graphics g, World world) {
+            world.render(g);
+            drawTimer(g);
+            drawString(g, "Game Start!", Color.BLACK,
+                    new Font("TimesRoman", Font.PLAIN, 64), GameView.WIDTH/2-150, GameView.HEIGHT/2);
+        }
+
+        private void drawOver(Graphics g, World world) {
+            world.render(g);
+            world.update();
+            drawString(g, "Game Over", Color.BLACK,
+                    new Font("TimesRoman", Font.PLAIN, 64), GameView.WIDTH/2-150, GameView.HEIGHT/2);
         }
     }
 

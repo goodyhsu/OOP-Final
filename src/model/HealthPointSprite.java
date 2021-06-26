@@ -38,7 +38,7 @@ public abstract class HealthPointSprite extends Sprite {
 
     public void setStar() {
         this.isStar = true;
-        this.star_counter = new Counter(10000/15);
+        this.star_counter = new Counter(10000/15, true);
     }
 
     public void endStar() {

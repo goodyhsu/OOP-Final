@@ -23,7 +23,6 @@ public abstract class GameLoop {
     public void start(int total_round) {
         this.total_round = total_round;
         new Thread(this::gameLoop).start();
-//        counter = new Counter(40000);
     }
 
     private void gameLoop() {
@@ -35,10 +34,9 @@ public abstract class GameLoop {
     }
 
     private void nextRound(int r) {
+        counter = new Counter(40000, false);
         selectCharacter(r);
-        counter = new Counter(40000);
-        ((GameView.Canvas) view).roundStart();
-        running = true;
+        roundStart();
         int last_update_items_time = 0;
         while (running) {
             last_update_items_time = updateItems(last_update_items_time);
@@ -62,18 +60,26 @@ public abstract class GameLoop {
     }
 
     private void selectCharacter(int round) {
-        ((GameView.Canvas) view).setSelecting(true);
+        ((GameView.Canvas) view).setStatus(GameView.Status.selecting);
         getChar_selector().reset(round);
-        while (((GameView.Canvas) view).getSelecting()) {
+        while (((GameView.Canvas) view).getStatus() != GameView.Status.wait) {
             view.render(getWorld(), counter, getChar_selector());
             delay(15);
         }
-        getChar_selector().setPlayers((Game)this, getWorld());
-        getWorld().getMap().setMap();
     }
 
     protected abstract World getWorld();
     protected abstract characterSelector getChar_selector();
+
+    private void roundStart() {
+        getChar_selector().setPlayers((Game)this, getWorld());
+        getWorld().getMap().setMap();
+        ((GameView.Canvas) view).roundStart();
+        view.render(getWorld(), counter, getChar_selector());
+        delay(1000);    // view: Game start
+        counter.start();
+        running = true;
+    }
 
     public void roundOver() {
         running = false;

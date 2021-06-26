@@ -26,8 +26,8 @@ public abstract class Bomb extends Sprite {
         this.damage = damage;
         this.explode_range = explode_range;
         this.num_smallBomb = 0;
-        this.before_explode_counter = new Counter(3000/15);
-        this.after_explode_counter = new Counter(4000/15);
+        this.before_explode_counter = new Counter(3000/15, true);
+        this.after_explode_counter = new Counter(4000/15, true);
         this.exploded = false;
         this.renderer = new BombImageRenderer(this);
     }

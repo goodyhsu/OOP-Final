@@ -55,12 +55,15 @@ public class characterSelector {
         }
 
         // print round and some information
-        drawString(g, "Round " + Integer.toString(round), Color.BLACK, 64, (int) (GameView.WIDTH / 2 - 120), periphery);
-        drawString(g, "Choose your favorite character :))", Color.darkGray, 32, periphery*3, periphery*2);
+        drawString(g, "Round " + Integer.toString(round), Color.BLACK,
+                new Font("TimesRoman", Font.PLAIN, 64), (int) (GameView.WIDTH / 2 - 120), periphery);
+        drawString(g, "Choose your favorite character :))", Color.darkGray,
+                new Font("TimesRoman", Font.PLAIN, 32), periphery*3, periphery*2);
 
         g.setColor(Color.pink);
         g.fillRoundRect(280, GameView.HEIGHT-135, 480, 50, 20, 20);
-        drawString(g, "Press \"Enter\" to start the game!", Color.BLACK, 32, 300, GameView.HEIGHT-periphery);
+        drawString(g, "Press \"Enter\" to start the game!", Color.BLACK,
+                new Font("TimesRoman", Font.PLAIN, 32), 300, GameView.HEIGHT-periphery);
 
         // instructions
         image = readImage(new File("img/Instruction_key.png"));

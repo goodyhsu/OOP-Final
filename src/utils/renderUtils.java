@@ -3,9 +3,9 @@ package utils;
 import java.awt.*;
 
 public class renderUtils {
-    public static void drawString(Graphics g, String string, Color color, int font_size, int x, int y) {
+    public static void drawString(Graphics g, String string, Color color, Font font, int x, int y) {
         g.setColor(color);
-        g.setFont(new Font("TimesRoman", Font.PLAIN, font_size));
+        g.setFont(font);
         g.drawString(string, x, y);
     }
 
