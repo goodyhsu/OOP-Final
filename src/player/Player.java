@@ -8,6 +8,7 @@ import model.Direction;
 import model.HealthPointSprite;
 import model.SpriteShape;
 import model.World;
+import utils.MusicUtils;
 
 import java.awt.*;
 import java.util.Set;
@@ -33,6 +34,9 @@ public abstract class Player extends HealthPointSprite {
     private int num_bomb_max;
     private int num_bomb_current;
 
+    private final MusicUtils musicUtils = new MusicUtils();
+    String music_file;
+
     public enum Event {
         WALK, STOP, ATTACK, DAMAGED
     }
@@ -41,7 +45,7 @@ public abstract class Player extends HealthPointSprite {
         super(500);
         HP_full = 500;
         HP = HP_full;
-        damage_area = 3;
+        damage_area = 1;
         damage = 1;
         num_bomb_max = 1;
         num_bomb_current = 0;
@@ -77,6 +81,7 @@ public abstract class Player extends HealthPointSprite {
     }
 
     public void damaged() {
+        musicUtils.playMusic(music_file, false, false);
         fsm.trigger(DAMAGED);
     }
 

@@ -1,8 +1,6 @@
 package utils;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import javax.sound.sampled.*;
 import java.io.File;
 
 public class MusicUtils {
@@ -10,10 +8,15 @@ public class MusicUtils {
     public boolean isPlaying = false;
     private Clip clip;
 
-    public void playMusic(String musicLocation, boolean isLoop) {
+    public void playMusic(String musicLocation, boolean isLoop, boolean isCover) {
         try  {
-            if (isPlaying)
-                endMusic();
+            if (isPlaying) {
+                if (isCover) {
+                    endMusic();
+                } else {
+                    return;
+                }
+            }
             File musicPath = new File(musicLocation);
             if(musicPath.exists()) {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
@@ -21,10 +24,18 @@ public class MusicUtils {
                 clip.open(audioInput);
                 clip.start();
                 isPlaying = true;
-                if (isLoop)
+                if (isLoop) {
                     clip.loop(Clip.LOOP_CONTINUOUSLY);
-                //if (!clip.isActive())
-                //    endMusic();
+                } else {
+                    clip.addLineListener(new LineListener() {
+                        @Override
+                        public void update(final LineEvent event) {
+                            if (event.getType().equals(LineEvent.Type.STOP)) {
+                                endMusic();
+                            }
+                        }
+                    });
+                }
             }
         }
         catch(Exception ex) {
@@ -34,6 +45,7 @@ public class MusicUtils {
 
     public void endMusic() {
         clip.close();
+        clip = null;
         isPlaying = false;
     }
 }

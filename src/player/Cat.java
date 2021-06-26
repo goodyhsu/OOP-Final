@@ -19,6 +19,7 @@ public class Cat extends PlayerType {
         speed = 8;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/fish/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/smallFish/0.png");
+        music_file = "music/SE/cat.wav";
 
         ImageRenderer imageRenderer = new PlayerImageRenderer(this);
 

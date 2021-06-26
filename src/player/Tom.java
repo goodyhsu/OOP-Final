@@ -22,6 +22,7 @@ public class Tom extends PlayerType {
         this.speed = 12;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/seagull/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/seagullEgg/0.png");
+        music_file = "music/SE/tom.wav";
 
         ImageRenderer imageRenderer = new PlayerImageRenderer(this);
 
