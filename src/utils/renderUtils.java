@@ -10,6 +10,7 @@ public class renderUtils {
     }
 
     public static void drawImage(Graphics g, Image image, int x, int y, int width, int height) {
+        // adjust image to a proper size
         float scale = 1;
         int img_w = (int) image.getWidth(null);
         scale = (float) width / img_w;

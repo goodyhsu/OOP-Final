@@ -11,14 +11,19 @@ import views.GameView;
  * @author - johnny850807@gmail.com (Waterball)
  */
 public abstract class GameLoop {
-    private boolean running;
     private View view;
     private Counter counter = null;
     private int total_round;
+    private final GameRenderer gameRenderer = new GameRenderer(this);
+    private final GameRound gameRound = new GameRound(this);
+    public enum Status{selecting, instructions, start, in_progress, over, wait};
+    Status status;
+
 
     public void setView(View view) {
         this.view = view;
     }
+    protected View getView() {return view;}
 
     public void start(int total_round) {
         this.total_round = total_round;
@@ -28,86 +33,42 @@ public abstract class GameLoop {
     private void gameLoop() {
         int r = 1;
         while (r <= total_round) {
-            nextRound(r++);
+            counter = new Counter(40000, false);
+            gameRound.nextRound(r++, counter);
         }
         return;
     }
 
-    private void nextRound(int r) {
-        counter = new Counter(40000, false);
-        selectCharacter(r);
-        roundStart();
-        int last_update_items_time = 0;
-        while (running) {
-            last_update_items_time = updateItems(last_update_items_time);
-            World world = getWorld();
-            world.update();
-            view.render(world, counter, getChar_selector());
-            delay(15);
-            if (isOver(counter)) {
-                ((GameView.Canvas) view).roundOver();
-                roundOver();
-            }
-        }
-    }
-
-    private int updateItems(int last_update_items_time) {
-        if (counter.getCurrent_time() - last_update_items_time >= (2*60*1000/15) || last_update_items_time == 0) {
-            getWorld().getMap().setItems(5);
-            last_update_items_time = counter.getCurrent_time() + 1;
-        }
-        return last_update_items_time;
-    }
-
-    private void selectCharacter(int round) {
-        ((GameView.Canvas) view).setStatus(GameView.Status.selecting);
-        getChar_selector().reset(round);
-        while (((GameView.Canvas) view).getStatus() != GameView.Status.wait) {
-            view.render(getWorld(), counter, getChar_selector());
-            delay(15);
-        }
-    }
 
     protected abstract World getWorld();
     protected abstract characterSelector getChar_selector();
 
-    private void roundStart() {
-        getChar_selector().setPlayers((Game)this, getWorld());
-        getWorld().getMap().setMap();
-        ((GameView.Canvas) view).roundStart();
-        view.render(getWorld(), counter, getChar_selector());
-        delay(1000);    // view: Game start
-        counter.start();
-        running = true;
-    }
-
-    public void roundOver() {
-        running = false;
-        counter.stopCounter();
-        for (Sprite sprite : getWorld().getSprites()) {
-            if (!(sprite instanceof Player))
-                getWorld().removeSprite(sprite);
-        }
-
-        int over_loop = (int) (5 / 0.015);
-        while (over_loop > 0) {
-            over_loop--;
-            view.render(getWorld(), counter, getChar_selector());
-            delay(15);
-        }
-    }
-
-    private void delay(long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public Counter getCounter() {
+        return counter;
     }
 
     protected abstract boolean isOver(Counter counter);
 
     public interface View {
-        void render(World world, Counter counter, characterSelector char_selector);
+        void render(GameLoop game);
+    }
+    public GameRenderer getGameRenderer() {
+        return gameRenderer;
+    }
+
+    protected void roundStart() {
+        setStatus(Status.start);
+    }
+
+    protected void roundOver() {
+        setStatus(Status.over);
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 }
