@@ -238,7 +238,7 @@ public class GameView extends JFrame {
 
         private void drawOver(Graphics g) {
             g.setColor(Color.BLACK);
-            g.setFont(new Font("PMingLiu", Font.PLAIN, 64));
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 64));
             g.drawString("Game Over", GameView.WIDTH/2-150, GameView.HEIGHT/2);
         }
     }

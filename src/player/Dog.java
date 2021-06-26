@@ -11,25 +11,26 @@ import static player.Player.Event.*;
 
 import static utils.ImageStateUtils.imageStatesFromFolder;
 
-public class Dog extends Player {
+public class Dog extends PlayerType {
 
-    public Dog(Point location, int index) {
+    public Dog(Point location, int index, int type) {
+        super(location, index, type);
 
-        this.location = location;
-        this.index = index;
         this.speed = 8;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/bone/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/smallBone/0.png");
 
         ImageRenderer imageRenderer = new PlayerImageRenderer(this);
+
+        String dir = "sprites/player/dog" + Integer.toString(type);
         State idle = new WaitingPerFrame(5,
-                new Idle(imageStatesFromFolder("sprites/player/dog/idle", imageRenderer)));
+                new Idle(imageStatesFromFolder(dir + "/idle", imageRenderer)));
         State walking = new WaitingPerFrame(3,
-                new Walking(this, imageStatesFromFolder("sprites/player/dog/walk", imageRenderer)));
+                new Walking(this, imageStatesFromFolder(dir + "/walk", imageRenderer)));
         State attacking = new WaitingPerFrame(3,
-                new Attacking(this, fsm, imageStatesFromFolder("sprites/player/dog/attack", imageRenderer)));
+                new Attacking(this, fsm, imageStatesFromFolder(dir + "/attack", imageRenderer)));
         State damaged = new WaitingPerFrame(4,
-                new Damaged(this, fsm, imageStatesFromFolder("sprites/player/dog/damaged", imageRenderer)));
+                new Damaged(this, fsm, imageStatesFromFolder(dir + "/damaged", imageRenderer)));
 
         fsm.setInitialState(idle);
         fsm.addTransition(from(idle).when(WALK).to(walking));

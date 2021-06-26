@@ -16,16 +16,11 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        // players
-//        Dog p1 = new Dog(new Point(75, 75));
-//        Cat p2 = new Cat(new Point(900, 525));
-
         //Music Test
         MusicUtils musicUtils = new MusicUtils();
         musicUtils.playMusic("music/bgm/map2.wav");
 
         //world
-        // world - set Obstacles
         ArrayList<String> obstacle_list = new ArrayList<String>();
         ArrayList<String> obstacle_img_list = new ArrayList<String>();
         obstacle_list.add("Wood");
@@ -34,7 +29,6 @@ public class Main {
         obstacle_img_list.add("sprites/obstacle/stone/0.png");
 
         World world = new World(obstacle_img_list);
-//        world.addSprites(p1, p2);
 
         //controller
         characterSelector char_selector = new characterSelector();

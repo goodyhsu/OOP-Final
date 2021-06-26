@@ -14,14 +14,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toSet;
+import static utils.CreateInstance.createSpriteByName;
 
 /**
  * @author - johnny850807@gmail.com (Waterball)
@@ -39,22 +38,8 @@ public class World {
         items.addAll(Arrays.asList("DamageUp", "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "SpeedUp", "Star"));
     }
 
-    public void setObstacles(){
-        int num_block_w = GameView.WIDTH / GameView.BLOCK_WIDTH;
-        int num_block_h = GameView.HEIGHT / GameView.BLOCK_HEIGHT;
-        // boundary
-        for (int x = 0; x < num_block_w; x++) {
-            addObstacle(obstacle_img_list, "Stone", new SpriteCoordinate(x, 0));
-            addObstacle(obstacle_img_list, "Stone", new SpriteCoordinate(x, num_block_h-1));
-        }
-        for (int y = 1; y < num_block_h-1; y++) {
-            addObstacle(obstacle_img_list, "Stone", new SpriteCoordinate(0, y));
-            addObstacle(obstacle_img_list, "Stone", new SpriteCoordinate(num_block_w-1, y));
-        }
-        setMap(obstacle_img_list);
-    }
-
-    private void setMap(ArrayList<String> obstacle_img_list) {
+    public void setMap() {
+        setMapBoundary();
         try {
             File file=new File("maps/map_1.txt");    //creates a new file instance
             FileReader fr= new FileReader(file);   //reads the file
@@ -82,7 +67,7 @@ public class World {
             }
             int x = getRandomNumber(0, GameView.WIDTH / GameView.BLOCK_WIDTH);
             int y = getRandomNumber(0, GameView.HEIGHT / GameView.BLOCK_HEIGHT);
-            Item new_item = createItemFromName(items.get(item_idx), new SpriteCoordinate(x, y));
+            Item new_item = (Item) createSpriteByName("item." + items.get(item_idx), new SpriteCoordinate(x, y));
             if (!(itemCollisionHandler.isCollision(new_item, new_item.getBodyOffset()))) {
                 addSprites(new_item);
                 i++;
@@ -143,19 +128,33 @@ public class World {
 
     // Actually, directly couple your model with the class "java.awt.Graphics" is not a good design
     // If you want to decouple them, create an interface that encapsulates the variation of the Graphics.
+
     public void render(Graphics g) {
         // sprites
         for (Sprite sprite : sprites) {
             sprite.render(g);
         }
     }
-
     public PlayerCollisionHandler getPlayerCollisionHandler() {
         return playerCollisionHandler;
     }
 
     public BombCollisionHandler getBombCollisionHandler() {
         return bombCollisionHandler;
+    }
+
+    private void setMapBoundary(){
+        int num_block_w = GameView.WIDTH / GameView.BLOCK_WIDTH;
+        int num_block_h = GameView.HEIGHT / GameView.BLOCK_HEIGHT;
+        // boundary
+        for (int x = 0; x < num_block_w; x++) {
+            addObstacle(obstacle_img_list, "Stone", new SpriteCoordinate(x, 0));
+            addObstacle(obstacle_img_list, "Stone", new SpriteCoordinate(x, num_block_h-1));
+        }
+        for (int y = 1; y < num_block_h-1; y++) {
+            addObstacle(obstacle_img_list, "Stone", new SpriteCoordinate(0, y));
+            addObstacle(obstacle_img_list, "Stone", new SpriteCoordinate(num_block_w-1, y));
+        }
     }
 
     private void addObstacle(ArrayList<String> obstacle_img_list, String name, SpriteCoordinate coordinate) {
@@ -170,17 +169,5 @@ public class World {
             obstacle = new Stone(file, coordinate);
         }
         addSprite(obstacle);
-    }
-
-    private Item createItemFromName(String class_name, SpriteCoordinate coordinate) {
-        Item item = null;
-        try {
-            Class<?> clazz = Class.forName("item." + class_name);
-            Constructor<?> ctor = clazz.getConstructor(SpriteCoordinate.class);
-            item = (Item) ctor.newInstance(coordinate);
-        } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return item;
     }
 }
