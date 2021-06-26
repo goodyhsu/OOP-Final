@@ -1,18 +1,10 @@
-import bomb.BombCollisionHandler;
 import controller.Game;
-import item.ItemCollisionHandler;
-import model.Sprite;
 import model.World;
 import model.characterSelector;
-import player.Dog;
-import player.Cat;
-import player.PlayerCollisionHandler;
 import utils.MusicUtils;
 import views.GameView;
-import utils.MusicUtils;
 import map.Map;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,7 +35,6 @@ public class Main {
         //controller
         characterSelector char_selector = new characterSelector();
         Game game = new Game(world, char_selector);
-//        game.setPlayer(p1, p2);
 
         //view
         GameView view = new GameView(game);

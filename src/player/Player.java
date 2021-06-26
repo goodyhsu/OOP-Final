@@ -20,7 +20,7 @@ public abstract class Player extends HealthPointSprite {
     public Image bomb_image;
     public Image smallBomb_image;
 
-    private final SpriteShape shape;
+    protected SpriteShape shape;
     public final FiniteStateMachine fsm;
     private final Set<Direction> directions = new CopyOnWriteArraySet<>();
 
