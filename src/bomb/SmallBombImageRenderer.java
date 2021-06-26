@@ -27,11 +27,6 @@ public class SmallBombImageRenderer extends BombImageRenderer{
         else{
             rotate_drawImage(90, (Graphics2D) g, image, range.x, range.y, range.width, range.height);
         }
-
-        Rectangle body = this.smallBomb.getBody();
-        g.drawRect(range.x, range.y, range.width, range.height);
-        g.drawRect(body.x, body.y, body.width, body.height);
-
     }
 
     private void rotate_drawImage( int angle, Graphics2D g, Image image, int x, int y,

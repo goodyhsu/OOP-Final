@@ -13,8 +13,5 @@ public class BombImageRenderer implements ImageRenderer {
     public void render(Image image, Graphics g) {
         Rectangle range = this.bomb.getRange();
         g.drawImage(image, range.x, range.y, range.width, range.height, null);
-
-        g.setColor(Color.BLUE);
-        g.drawRect(range.x, range.y, range.width, range.height);
-    }
+   }
 }

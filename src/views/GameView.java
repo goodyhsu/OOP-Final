@@ -3,9 +3,11 @@ package views;
 import controller.Game;
 import controller.GameLoop;
 import model.*;
+import static utils.ImageStateUtils.readImage;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import javax.swing.*;
 
 import static utils.renderUtils.drawString;
@@ -166,6 +168,8 @@ public class GameView extends JFrame {
             // Now, let's paint
             g.setColor(Color.WHITE); // paint background with all white
             g.fillRect(0, 0, GameView.WIDTH, GameView.HEIGHT);
+            Image image = readImage(new File("img/0.png"));
+            g.drawImage(image, 0, 0, GameView.WIDTH, GameView.HEIGHT, null);
 
             if (status == Status.over){
                 drawOver(g, world);

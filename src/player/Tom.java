@@ -3,6 +3,7 @@ package player;
 import fsm.ImageRenderer;
 import fsm.State;
 import fsm.WaitingPerFrame;
+import model.SpriteShape;
 
 import java.awt.*;
 
@@ -16,6 +17,8 @@ public class Tom extends PlayerType {
     public Tom(Point location, int index, int type) {
         super(location, index, type);
 
+        this.shape = new SpriteShape(new Dimension(70, 150),
+                new Dimension(26, 106), new Dimension(36, 36));
         this.speed = 12;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/seagull/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/seagullEgg/0.png");
