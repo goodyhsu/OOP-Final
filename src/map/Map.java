@@ -4,7 +4,6 @@ import item.Item;
 import model.SpriteCoordinate;
 import model.World;
 import views.GameView;
-import static utils.ImageIO.getImage;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -12,7 +11,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static utils.CreateInstance.createSpriteByName;
+import static utils.CreateInstanceUtils.createSpriteByName;
+import static utils.ImageStateUtils.readImage;
 
 public class Map {
     World world;
@@ -22,7 +22,7 @@ public class Map {
 
     public Map(World world, String background_file, String map_file, String music_file){
         this.world = world;
-        this.background_image = getImage("maps/backgrounds", background_file);
+        this.background_image = readImage(new File("maps/backgrounds", background_file));
         this.map_file = new File(map_file);
         this.music_file = music_file;
     }
