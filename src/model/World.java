@@ -41,7 +41,7 @@ public class World {
     public void setMap() {
         setMapBoundary();
         try {
-            File file=new File("maps/map_1.txt");    //creates a new file instance
+            File file=new File("maps/files/map_2.txt");    //creates a new file instance
             FileReader fr= new FileReader(file);   //reads the file
             BufferedReader br= new BufferedReader(fr);  //creates a buffering character input stream
             String line;
