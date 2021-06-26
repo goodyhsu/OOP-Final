@@ -38,7 +38,7 @@ public abstract class GameLoop {
         while (round <= total_round) {
             selectCharacter(round);
             setMapAndWorld(round);
-            counter = new Counter(3000/15, false);
+            counter = new Counter(30000/15, false);
             gameRound.nextRound(counter);
             round++;
         }
