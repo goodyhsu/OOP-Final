@@ -13,11 +13,9 @@ public class Game extends GameLoop {
     private Player p1;
     private Player p2;
     private final World world;
-    private final characterSelector char_selector;
 
-    public Game(World world, characterSelector char_selector) {
+    public Game(World world) {
         this.world = world;
-        this.char_selector = char_selector;
     }
 
     public void setPlayer(Player p1, Player p2) {
@@ -53,14 +51,5 @@ public class Game extends GameLoop {
             over = true;
         }
         return over;
-    }
-
-    public void changeCharacter(int player, int change) {
-        char_selector.changeCharacter(player, change);
-    }
-
-    @Override
-    protected characterSelector getChar_selector() {
-        return char_selector;
     }
 }

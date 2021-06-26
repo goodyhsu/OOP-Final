@@ -34,7 +34,7 @@ public class Main {
 
         //controller
         characterSelector char_selector = new characterSelector();
-        Game game = new Game(world, char_selector);
+        Game game = new Game(world);
 
         //view
         GameView view = new GameView(game);

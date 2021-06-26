@@ -2,9 +2,7 @@ package controller;
 
 import model.Counter;
 import model.Sprite;
-import model.World;
 import player.Player;
-import views.GameView;
 
 public class GameRound {
     GameLoop gameLoop;
@@ -16,17 +14,14 @@ public class GameRound {
 
     protected void nextRound(int r, Counter counter) {
         running = false;
-        selectCharacter(r);
         roundStart();
         int last_update_items_time = 0;
         while (running) {
             last_update_items_time = updateItems(last_update_items_time);
-            World world = gameLoop.getWorld();
-            world.update();
+            gameLoop.getWorld().update();
             gameLoop.getView().render(gameLoop);
-            delay(15);
+            gameLoop.delay(15);
             if (gameLoop.isOver(counter)) {
-                gameLoop.roundOver();
                 roundOver();
             }
         }
@@ -41,26 +36,20 @@ public class GameRound {
         return last_update_items_time;
     }
 
-    private void selectCharacter(int round) {
-        gameLoop.setStatus(GameLoop.Status.selecting);
-        gameLoop.getChar_selector().reset(round);
-        while (gameLoop.getStatus() != GameLoop.Status.wait) {
-            gameLoop.getView().render(gameLoop);
-            delay(15);
-        }
-    }
+
 
     private void roundStart() {
         gameLoop.getChar_selector().setPlayers((Game)gameLoop, gameLoop.getWorld());
         gameLoop.getWorld().getMap().setMap();
-        gameLoop.roundStart();
+        gameLoop.setStatus(GameLoop.Status.start);
         gameLoop.getView().render(gameLoop);
-        delay(1000);    // view: Game start
+        gameLoop.delay(1000);    // view: Game start
         gameLoop.getCounter().start();
         running = true;
     }
 
     public void roundOver() {
+        gameLoop.setStatus(GameLoop.Status.over);
         running = false;
         gameLoop.getCounter().stopCounter();
         for (Sprite sprite : gameLoop.getWorld().getSprites()) {
@@ -72,15 +61,7 @@ public class GameRound {
         while (over_loop > 0) {
             over_loop--;
             gameLoop.getView().render(gameLoop);
-            delay(15);
-        }
-    }
-
-    private void delay(long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            gameLoop.delay(15);
         }
     }
 }
