@@ -20,8 +20,8 @@ public abstract class Obstacle extends Sprite{
         this.location = coordinateToLocation(coordinate);
         this.image = readImage(file);
         this.renderer = new ObstacleImageRenderer(this);
-        this.shape = new SpriteShape(new Dimension(75, 75),
-                new Dimension(5, 5), new Dimension(60, 60));
+        this.shape = new SpriteShape(new Dimension(50, 50),
+                new Dimension(5, 5), new Dimension(40, 40));
     }
 
     @Override

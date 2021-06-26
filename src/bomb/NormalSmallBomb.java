@@ -13,8 +13,8 @@ public class NormalSmallBomb extends SmallBomb{
     public NormalSmallBomb(Player owner, Point location, int damage, int explode_range,
                            Direction face, Counter after_counter){
         super(owner, location, damage, explode_range, face, after_counter);
-        this.shape = new SpriteShape(new Dimension(75, 75),
-                new Dimension(28, 31), new Dimension(15, 15));
+        this.shape = new SpriteShape(new Dimension(50, 50),
+                new Dimension(20, 20), new Dimension(10, 10));
     }
 
     @Override

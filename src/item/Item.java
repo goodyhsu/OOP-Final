@@ -18,8 +18,8 @@ public abstract class Item extends Sprite {
         this.coordinate = coordinate;
         this.location = coordinateToLocation(coordinate);
         this.renderer = new ItemImageRenderer(this);
-        this.shape = new SpriteShape(new Dimension(75, 75),
-                new Dimension(5, 5), new Dimension(60, 60));
+        this.shape = new SpriteShape(new Dimension(50, 50),
+                new Dimension(5, 5), new Dimension(40, 40));
     }
 
     public abstract void effect();

@@ -22,10 +22,10 @@ public class SmallBombImageRenderer extends BombImageRenderer{
             g.drawImage(image, range.x, range.y, range.width, range.height, null);
         }
         else if(face == Direction.UP){
-            rotate_drawImage(-90, (Graphics2D) g, image, range.x+10, range.y-10, range.width, range.height);
+            rotate_drawImage(-90, (Graphics2D) g, image, range.x, range.y, range.width, range.height);
         }
         else{
-            rotate_drawImage(90, (Graphics2D) g, image, range.x-12, range.y+14, range.width, range.height);
+            rotate_drawImage(90, (Graphics2D) g, image, range.x, range.y, range.width, range.height);
         }
 
         Rectangle body = this.smallBomb.getBody();

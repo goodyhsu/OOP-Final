@@ -2,7 +2,6 @@ package obstacle;
 
 import model.SpriteCoordinate;
 
-import java.awt.*;
 import java.io.File;
 
 public abstract class DestroyableObstacle extends Obstacle{

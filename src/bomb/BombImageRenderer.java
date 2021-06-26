@@ -14,7 +14,6 @@ public class BombImageRenderer implements ImageRenderer {
         Rectangle range = this.bomb.getRange();
         g.drawImage(image, range.x, range.y, range.width, range.height, null);
 
-        //debug QQ
         g.setColor(Color.BLUE);
         g.drawRect(range.x, range.y, range.width, range.height);
     }

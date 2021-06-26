@@ -7,7 +7,6 @@ import player.Player;
 import static utils.LocationUtils.*;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public abstract class Bomb extends Sprite {
     protected final Player owner;
@@ -19,8 +18,6 @@ public abstract class Bomb extends Sprite {
     protected boolean exploded;
     protected BombImageRenderer renderer;
     protected boolean[] direction_stop;
-
-    public static ArrayList<Bomb> bomb_list = new ArrayList<Bomb>();
 
     public Bomb(Player owner, Point owner_location, int damage, int explode_range){
         this.owner = owner;

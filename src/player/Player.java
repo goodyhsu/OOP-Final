@@ -41,7 +41,7 @@ public abstract class Player extends HealthPointSprite {
         super(500);
         HP_full = 500;
         HP = HP_full;
-        damage_area = 1;
+        damage_area = 3;
         damage = 1;
         num_bomb_max = 1;
         num_bomb_current = 0;

@@ -1,7 +1,6 @@
 package item;
 
 import model.SpriteCoordinate;
-import player.Player;
 import static utils.ImageStateUtils.readImage;
 
 import java.io.File;
