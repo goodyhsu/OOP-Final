@@ -32,7 +32,7 @@ public class Main {
         ArrayList<String> items = new ArrayList<String>();
         items.addAll(Arrays.asList("DamageUp", "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "SpeedUp", "Star"));
 
-        Map map1 = new Map("maps/backgrounds/0.png", "maps/files/2.txt", "None",
+        Map map1 = new Map("maps/backgrounds/0.png", "maps/files/1.txt", "None",
                 obstacle_img_list, items);
         Map map = map1; // Preferred map can be chosen
         World world = new World(map);
