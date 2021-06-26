@@ -20,7 +20,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toSet;
-import static utils.CreateInstance.createSpriteByName;
+import static utils.CreateInstanceUtils.createSpriteByName;
 
 /**
  * @author - johnny850807@gmail.com (Waterball)

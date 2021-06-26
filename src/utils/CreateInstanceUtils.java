@@ -8,7 +8,7 @@ import java.awt.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class CreateInstance {
+public class CreateInstanceUtils {
     public static Sprite createSpriteByName(String class_name, SpriteCoordinate coordinate) {
         Sprite sprite = null;
         try {

@@ -4,7 +4,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class ImageIO {
+public class ImageIOUtils {
     public static Image getImage(String dir, String filename) {
         File f = new File(dir, filename);
         if (f == null) {
