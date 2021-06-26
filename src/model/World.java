@@ -19,9 +19,11 @@ public class World {
     private static final List<Sprite> sprites = new CopyOnWriteArrayList<>();
     private PlayerCollisionHandler playerCollisionHandler = new PlayerCollisionHandler();
     private BombCollisionHandler bombCollisionHandler = new BombCollisionHandler();
-    private Map map;
+    private Map map = null;
 
-    public World(Map map) {
+    public World() {}
+
+    public void setMap(Map map) {
         this.map = map;
     }
 

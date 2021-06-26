@@ -22,9 +22,10 @@ public class GameRound {
             gameLoop.getView().render(gameLoop);
             gameLoop.delay(15);
             if (gameLoop.isOver(counter)) {
-                roundOver();
+                running = false;
             }
         }
+        roundOver();
     }
 
     private int updateItems(int last_update_items_time) {
@@ -50,7 +51,7 @@ public class GameRound {
 
     public void roundOver() {
         gameLoop.setStatus(GameLoop.Status.over);
-        running = false;
+//        running = false;
         gameLoop.getCounter().stopCounter();
         for (Sprite sprite : gameLoop.getWorld().getSprites()) {
             if (!(sprite instanceof Player))
@@ -60,6 +61,7 @@ public class GameRound {
         int over_loop = (int) (5 / 0.015);
         while (over_loop > 0) {
             over_loop--;
+            gameLoop.getWorld().update();
             gameLoop.getView().render(gameLoop);
             gameLoop.delay(15);
         }

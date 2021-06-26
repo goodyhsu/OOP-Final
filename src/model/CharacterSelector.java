@@ -14,7 +14,7 @@ import static utils.ImageStateUtils.readImage;
 import static utils.renderUtils.drawString;
 import static utils.renderUtils.drawImage;
 
-public class characterSelector {
+public class CharacterSelector {
     private String dir = "sprites/characters/";
     private ArrayList<String> class_names = new ArrayList<String>();
     private ArrayList<Integer> img_idx = new ArrayList<Integer>();
@@ -22,7 +22,7 @@ public class characterSelector {
     private final int player_num = 2;
     private int round;
 
-    public characterSelector() {
+    public CharacterSelector() {
         this.class_names.addAll(Arrays.asList("Dog", "Dog", "Cat", "Cat", "Tom"));
         this.img_idx.addAll(Arrays.asList(0, 1));
     }

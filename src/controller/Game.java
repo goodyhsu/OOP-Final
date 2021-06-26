@@ -1,10 +1,12 @@
 package controller;
 
+import map.Map;
 import model.Counter;
 import model.Direction;
 import model.World;
-import model.characterSelector;
 import player.Player;
+
+import java.util.ArrayList;
 
 /**
  * @author - johnny850807@gmail.com (Waterball)
@@ -13,9 +15,11 @@ public class Game extends GameLoop {
     private Player p1;
     private Player p2;
     private final World world;
+    private ArrayList<map.Map> maps;
 
-    public Game(World world) {
+    public Game(World world, ArrayList<map.Map> maps) {
         this.world = world;
+        this.maps = maps;
     }
 
     public void setPlayer(Player p1, Player p2) {
@@ -42,6 +46,11 @@ public class Game extends GameLoop {
     @Override
     protected World getWorld() {
         return world;
+    }
+
+    @Override
+    protected Map getMap(int round){
+        return maps.get(round % maps.size());
     }
 
     @Override

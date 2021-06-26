@@ -1,8 +1,9 @@
 package controller;
 
+import map.Map;
+import model.CharacterSelector;
 import model.Counter;
 import model.World;
-import model.characterSelector;
 
 /**
  * @author - johnny850807@gmail.com (Waterball)
@@ -12,7 +13,7 @@ public abstract class GameLoop {
     private Counter counter = null;
     private int total_round;
 
-    private final characterSelector char_selector = new characterSelector();
+    private final CharacterSelector char_selector = new CharacterSelector();
     private final GameRenderer gameRenderer = new GameRenderer(this);
     private final GameRound gameRound = new GameRound(this);
 
@@ -33,13 +34,20 @@ public abstract class GameLoop {
     }
 
     private void gameLoop() {
-        int r = 1;
-        while (r <= total_round) {
-            selectCharacter(r);
-            counter = new Counter(40000, false);
-            gameRound.nextRound(r++, counter);
+        int round = 1;
+        while (round <= total_round) {
+            selectCharacter(round);
+            setMapAndWorld(round);
+            counter = new Counter(3000/15, false);
+            gameRound.nextRound(round++, counter);
         }
         return;
+    }
+
+    private void setMapAndWorld(int round) {
+        Map map = getMap(round-1);
+        getWorld().setMap(map);
+        map.setWorld(getWorld());
     }
 
     private void selectCharacter(int round) {
@@ -69,11 +77,13 @@ public abstract class GameLoop {
 
     protected abstract World getWorld();
 
+    protected abstract Map getMap(int round);
+
     public void changeCharacter(int player, int change) {
         char_selector.changeCharacter(player, change);
     }
 
-    protected characterSelector getChar_selector() {
+    protected CharacterSelector getChar_selector() {
         return char_selector;
     }
 

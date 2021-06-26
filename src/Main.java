@@ -1,6 +1,5 @@
 import controller.Game;
 import model.World;
-import model.characterSelector;
 import utils.MusicUtils;
 import views.GameView;
 import map.Map;
@@ -24,17 +23,18 @@ public class Main {
         ArrayList<String> items = new ArrayList<String>();
         items.addAll(Arrays.asList("DamageUp", "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "SpeedUp", "Star"));
 
+        ArrayList<map.Map> maps= new ArrayList<map.Map>();
         Map map0 = new Map("maps/backgrounds/0.png", "maps/files/0.txt", "None",
                 obstacle_img_list, items);
         Map map1 = new Map("maps/backgrounds/1.png", "maps/files/1.txt", "None",
                 obstacle_img_list, items);
-        Map map = map1; // Preferred map can be chosen
-        World world = new World(map);
-        map.setWorld(world);
+        maps.addAll(Arrays.asList(map0, map1));
+//        Map map = map0; // Preferred map can be chosen
+        World world = new World();
+//        map.setWorld(world);
 
-        //controller
-        characterSelector char_selector = new characterSelector();
-        Game game = new Game(world);
+        // Game
+        Game game = new Game(world, maps);
 
         //view
         GameView view = new GameView(game);

@@ -65,7 +65,6 @@ public class GameRenderer {
 
     private void drawOver(Graphics g, World world) {
         world.render(g);
-        world.update();
         drawString(g, "Game Over", Color.BLACK,
                 new Font("TimesRoman", Font.PLAIN, 64), GameView.WIDTH/2-150, GameView.HEIGHT/2);
     }
