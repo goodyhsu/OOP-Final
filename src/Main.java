@@ -9,9 +9,6 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        //Music Test
-        MusicUtils musicUtils = new MusicUtils();
-        musicUtils.playMusic("music/bgm/map1.wav");
 
         // Map
         ArrayList<String> obstacle_img_list = new ArrayList<>();
@@ -21,9 +18,9 @@ public class Main {
                 "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "SpeedUp", "Star"));
 
         ArrayList<map.Map> maps= new ArrayList<>();
-        Map map0 = new Map("maps/backgrounds/0.png", "maps/files/0.txt", "None",
+        Map map0 = new Map("maps/backgrounds/0.png", "maps/files/0.txt", "music/bgm/map0.wav",
                 obstacle_img_list, items);
-        Map map1 = new Map("maps/backgrounds/1.png", "maps/files/1.txt", "None",
+        Map map1 = new Map("maps/backgrounds/1.png", "maps/files/1.txt", "music/bgm/map1.wav",
                 obstacle_img_list, items);
         maps.addAll(Arrays.asList(map0, map1));
 //        Map map = map0; // Preferred map can be chosen

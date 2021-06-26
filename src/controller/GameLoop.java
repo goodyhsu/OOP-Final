@@ -4,6 +4,7 @@ import map.Map;
 import model.CharacterSelector;
 import model.Counter;
 import model.World;
+import utils.MusicUtils;
 
 /**
  * @author - johnny850807@gmail.com (Waterball)
@@ -16,6 +17,7 @@ public abstract class GameLoop {
     private final CharacterSelector char_selector = new CharacterSelector();
     private final GameRenderer gameRenderer = new GameRenderer(this);
     private final GameRound gameRound = new GameRound(this);
+    private final MusicUtils musicUtils = new MusicUtils();
 
     public enum Status{selecting, instructions, start, in_progress, over, wait}
     Status status;
@@ -38,7 +40,7 @@ public abstract class GameLoop {
         while (round <= total_round) {
             selectCharacter(round);
             setMapAndWorld(round);
-            counter = new Counter(30000/15, false);
+            counter = new Counter(10000/15, false);
             gameRound.nextRound(counter);
             round++;
         }
@@ -48,9 +50,11 @@ public abstract class GameLoop {
         Map map = getMap(round-1);
         getWorld().setMap(map);
         map.setWorld(getWorld());
+        musicUtils.playMusic(map.getMusic_file(), true);
     }
 
     private void selectCharacter(int round) {
+        musicUtils.playMusic("music/bgm/default.wav", true);
         setStatus(GameLoop.Status.selecting);
         getChar_selector().reset(round);
         while (getStatus() != GameLoop.Status.wait) {
