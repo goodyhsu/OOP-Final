@@ -3,7 +3,10 @@ package controller;
 import map.Map;
 import model.CharacterSelector;
 import model.Counter;
+import model.SpriteCoordinate;
 import model.World;
+
+import java.util.ArrayList;
 
 /**
  * @author - johnny850807@gmail.com (Waterball)
@@ -12,13 +15,14 @@ public abstract class GameLoop {
     private View view;
     private Counter counter = null;
     private int total_round;
+    private int round = 1;
 
     private final CharacterSelector char_selector = new CharacterSelector();
     private final GameRenderer gameRenderer = new GameRenderer(this);
     private final GameRound gameRound = new GameRound(this);
 
     public enum Status{selecting, instructions, start, in_progress, over, wait}
-    Status status;
+    Status status = Status.selecting;
 
     public void setView(View view) {
         this.view = view;
@@ -34,23 +38,16 @@ public abstract class GameLoop {
     }
 
     private void gameLoop() {
-        int round = 1;
         while (round <= total_round) {
-            selectCharacter(round);
-            setMapAndWorld(round);
             counter = new Counter(3000/15, false);
+            selectCharacter();
+            setMapAndWorld(round);
             gameRound.nextRound(counter);
             round++;
         }
     }
 
-    private void setMapAndWorld(int round) {
-        Map map = getMap(round-1);
-        getWorld().setMap(map);
-        map.setWorld(getWorld());
-    }
-
-    private void selectCharacter(int round) {
+    private void selectCharacter() {
         setStatus(GameLoop.Status.selecting);
         getChar_selector().reset(round);
         while (getStatus() != GameLoop.Status.wait) {
@@ -77,7 +74,9 @@ public abstract class GameLoop {
 
     protected abstract World getWorld();
 
-    protected abstract Map getMap(int round);
+    protected abstract Map getMap();
+
+    protected abstract void setMapAndWorld(int round);
 
     public void changeCharacter(int player, int change) {
         char_selector.changeCharacter(player, change);
@@ -85,6 +84,10 @@ public abstract class GameLoop {
 
     protected CharacterSelector getChar_selector() {
         return char_selector;
+    }
+
+    protected ArrayList<SpriteCoordinate> getPlayerCoordinates() {
+        return getMap().getPlayerCoordinates();
     }
 
     protected void delay(long ms) {

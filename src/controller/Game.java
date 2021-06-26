@@ -16,6 +16,7 @@ public class Game extends GameLoop {
     private Player p2;
     private final World world;
     private final ArrayList<map.Map> maps;
+    private Map map;
 
     public Game(World world, ArrayList<map.Map> maps) {
         this.world = world;
@@ -49,8 +50,17 @@ public class Game extends GameLoop {
     }
 
     @Override
-    protected Map getMap(int round){
-        return maps.get(round % maps.size());
+    protected Map getMap(){
+        return map;
+    }
+
+    @Override
+    protected void setMapAndWorld(int round) {
+        world.reset();
+        map = maps.get((round-1)%maps.size());
+        world.setMap(map);
+        map.setWorld(world);
+        map.setMap();   // obstacles & ...
     }
 
     @Override

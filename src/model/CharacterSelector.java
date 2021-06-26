@@ -11,6 +11,7 @@ import java.util.Arrays;
 
 import static utils.CreateInstanceUtils.createPlayerTypeByName;
 import static utils.ImageStateUtils.readImage;
+import static utils.LocationUtils.coordinateToLocation;
 import static utils.renderUtils.drawString;
 import static utils.renderUtils.drawImage;
 
@@ -25,6 +26,7 @@ public class CharacterSelector {
     public CharacterSelector() {
         this.class_names.addAll(Arrays.asList("Dog", "Dog", "Cat", "Cat", "Tom"));
         this.img_idx.addAll(Arrays.asList(0, 1));
+        round = 1;
     }
     public void changeCharacter(int player, int idx_change) {
         int idx = img_idx.get(player) + idx_change;
@@ -51,7 +53,6 @@ public class CharacterSelector {
             int x = (GameView.WIDTH + periphery - (i * (periphery*2+img_size)))%GameView.WIDTH;
             int y = (int)(GameView.HEIGHT/2);
             drawImage(g, image, x, y, img_size, (int) (img_size * ((float) image.getHeight(null)) / image.getWidth(null)));
-
         }
 
         // print round and some information
@@ -77,14 +78,15 @@ public class CharacterSelector {
         drawImage(g, image, 0, 0, GameView.WIDTH, GameView.HEIGHT);
     }
 
-    public void setPlayers(Game game, World world){
-        World.getSprites().clear();
+    public void setPlayers(Game game, World world, ArrayList<SpriteCoordinate> player_coordinates){
         ArrayList<Player> players = new ArrayList<Player>();
 
         for (int i = 0; i < player_num; i++) {
-            int x = 50 + 900 * i;
-            int y = 50 + 550 * i;
-            Player p = createPlayerTypeByName("player." + class_names.get(img_idx.get(i)), new Point(x, y), i, img_idx.get(i)%2);
+//            int x = 50 + 900 * i;
+//            int y = 50 + 550 * i;
+//            Point point = new Point(x, y);
+            Point point = coordinateToLocation(player_coordinates.get(i));
+            Player p = createPlayerTypeByName("player." + class_names.get(img_idx.get(i)), point, i, img_idx.get(i)%2);
             players.add(p);
         }
         game.setPlayer(players.get(0), players.get(1));

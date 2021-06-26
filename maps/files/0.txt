@@ -1,3 +1,5 @@
+p1 1 1
+p2 19 12
 Stone 1 4
 Stone 1 5
 Stone 1 9

@@ -28,6 +28,7 @@ public class GameView extends JFrame {
 
     public GameView(Game game) throws HeadlessException {
         this.game = game;
+        canvas.gameLoop = game;
         game.setView(canvas);
     }
 
@@ -165,8 +166,8 @@ public class GameView extends JFrame {
             g.fillRect(0, 0, GameView.WIDTH, GameView.HEIGHT);
             Image image = readImage(new File("img/0.png"));
             g.drawImage(image, 0, 0, GameView.WIDTH, GameView.HEIGHT, null);
-
-            gameLoop.getGameRenderer().render(g);
+            if (gameLoop != null)
+                gameLoop.getGameRenderer().render(g);
         }
     }
 

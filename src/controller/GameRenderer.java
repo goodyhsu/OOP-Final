@@ -16,20 +16,14 @@ public class GameRenderer {
 
     public void render(Graphics g) {
         if (gameLoop.getStatus() == Game.Status.over){
-            drawOver(g, gameLoop.getWorld());
+            drawOver(g);
         }
         else if (gameLoop.getStatus() == Game.Status.start) {
-            drawStart(g, gameLoop.getWorld());
+            drawStart(g);
             gameLoop.setStatus(Game.Status.in_progress);
         }
         else if (gameLoop.getStatus() == Game.Status.in_progress) {
-            // world
-            gameLoop.getWorld().render(g); // ask the world to paint itself and paint the sprites on the canvas
-            // grids
-            drawGrids(g);
-            // timer
-            if (gameLoop.getCounter() != null)
-                drawTimer(g, gameLoop.getCounter());
+            drawAll(g);
         }
         else if (gameLoop.getStatus() == Game.Status.selecting){
             gameLoop.getChar_selector().render(g);
@@ -37,6 +31,16 @@ public class GameRenderer {
         else if (gameLoop.getStatus() == Game.Status.instructions) {
             gameLoop.getChar_selector().renderInstructions(g);
         }
+    }
+
+    private void drawAll(Graphics g) {
+        // world
+        gameLoop.getWorld().render(g); // ask the world to paint itself and paint the sprites on the canvas
+        // grids
+        drawGrids(g);
+        // timer
+        if (gameLoop.getCounter() != null)
+            drawTimer(g, gameLoop.getCounter());
     }
 
     private void drawGrids(Graphics g) {
@@ -56,15 +60,14 @@ public class GameRenderer {
                 new Font("TimesRoman", Font.PLAIN, 32), GameView.WIDTH/2, 50);
     }
 
-    private void drawStart(Graphics g, World world) {
-        world.render(g);
-        drawTimer(g, gameLoop.getCounter());
+    private void drawStart(Graphics g) {
+        drawAll(g);
         drawString(g, "Game Start!", Color.BLACK,
                 new Font("TimesRoman", Font.PLAIN, 64), GameView.WIDTH/2-150, GameView.HEIGHT/2);
     }
 
-    private void drawOver(Graphics g, World world) {
-        world.render(g);
+    private void drawOver(Graphics g) {
+        gameLoop.getWorld().render(g);
         drawString(g, "Game Over", Color.BLACK,
                 new Font("TimesRoman", Font.PLAIN, 64), GameView.WIDTH/2-150, GameView.HEIGHT/2);
     }

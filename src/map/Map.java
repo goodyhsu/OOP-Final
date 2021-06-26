@@ -27,6 +27,7 @@ public class Map {
     private String music_file;
     private ArrayList<String> obstacle_img_list;
     private ArrayList<String> items;
+    private ArrayList<SpriteCoordinate> player_coordinates = new ArrayList<>();
 
     public Map(String background_file, String map_file, String music_file,
                ArrayList<String> obstacle_img_list, ArrayList<String> items){
@@ -44,6 +45,7 @@ public class Map {
     public String getMusic_file(){ return this.music_file; }
 
     public void setMap() {
+        player_coordinates.clear();
         setMapBoundary();
         try {
             FileReader fr= new FileReader(this.map_file);   //reads the file
@@ -54,7 +56,11 @@ public class Map {
                 String name = splitLine[0];
                 int x = Integer.parseInt(splitLine[1]);
                 int y = Integer.parseInt(splitLine[2]);
-                addObstacle(obstacle_img_list, name, new SpriteCoordinate(x, y));
+                if (name.equals("p1") || (name.equals("p2"))) {
+                    player_coordinates.add(new SpriteCoordinate(x, y));
+                }
+                else
+                    addObstacle(obstacle_img_list, name, new SpriteCoordinate(x, y));
             }
             fr.close();    //closes the stream and release the resources
         } catch(IOException e) {
@@ -111,6 +117,10 @@ public class Map {
     private int getRandomNumber(int min, int max) {
         Random random = new Random();
         return random.nextInt(max - min) + min;
+    }
+
+    public ArrayList<SpriteCoordinate> getPlayerCoordinates() {
+        return player_coordinates;
     }
 
     public void render(Graphics g) {

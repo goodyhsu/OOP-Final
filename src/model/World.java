@@ -35,6 +35,10 @@ public class World {
         }
     }
 
+    public void reset() {
+        sprites.clear();
+    }
+
     public void addSprites(Sprite... sprites) {
         stream(sprites).forEach(this::addSprite);
     }

@@ -40,8 +40,7 @@ public class GameRound {
 
 
     private void roundStart() {
-        gameLoop.getChar_selector().setPlayers((Game)gameLoop, gameLoop.getWorld());
-        gameLoop.getWorld().getMap().setMap();
+        gameLoop.getChar_selector().setPlayers((Game)gameLoop, gameLoop.getWorld(), gameLoop.getPlayerCoordinates());
         gameLoop.setStatus(GameLoop.Status.start);
         gameLoop.getView().render(gameLoop);
         gameLoop.delay(1000);    // view: Game start
