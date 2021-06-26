@@ -15,9 +15,9 @@ import static utils.renderUtils.drawString;
 import static utils.renderUtils.drawImage;
 
 public class CharacterSelector {
-    private String dir = "sprites/characters/";
-    private ArrayList<String> class_names = new ArrayList<String>();
-    private ArrayList<Integer> img_idx = new ArrayList<Integer>();
+    private final String dir = "sprites/characters/";
+    private final ArrayList<String> class_names = new ArrayList<>();
+    private final ArrayList<Integer> img_idx = new ArrayList<>();
     private final int img_num = 5;
     private final int player_num = 2;
     private int round;
@@ -27,7 +27,7 @@ public class CharacterSelector {
         this.img_idx.addAll(Arrays.asList(0, 1));
     }
     public void changeCharacter(int player, int idx_change) {
-        Integer idx = img_idx.get(player) + idx_change;
+        int idx = img_idx.get(player) + idx_change;
         idx = (idx < 0)? idx + img_num : idx % img_num;
         img_idx.set(player, idx);
     }
@@ -55,7 +55,7 @@ public class CharacterSelector {
         }
 
         // print round and some information
-        drawString(g, "Round " + Integer.toString(round), Color.BLACK,
+        drawString(g, "Round " + (round), Color.BLACK,
                 new Font("TimesRoman", Font.PLAIN, 64), (int) (GameView.WIDTH / 2 - 120), periphery);
         drawString(g, "Choose your favorite character :))", Color.darkGray,
                 new Font("TimesRoman", Font.PLAIN, 32), periphery*3, periphery*2);
@@ -78,7 +78,7 @@ public class CharacterSelector {
     }
 
     public void setPlayers(Game game, World world){
-        world.getSprites().clear();
+        World.getSprites().clear();
         ArrayList<Player> players = new ArrayList<Player>();
 
         for (int i = 0; i < player_num; i++) {

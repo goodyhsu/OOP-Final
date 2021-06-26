@@ -17,7 +17,7 @@ public abstract class GameLoop {
     private final GameRenderer gameRenderer = new GameRenderer(this);
     private final GameRound gameRound = new GameRound(this);
 
-    public enum Status{selecting, instructions, start, in_progress, over, wait};
+    public enum Status{selecting, instructions, start, in_progress, over, wait}
     Status status;
 
     public void setView(View view) {
@@ -39,9 +39,9 @@ public abstract class GameLoop {
             selectCharacter(round);
             setMapAndWorld(round);
             counter = new Counter(3000/15, false);
-            gameRound.nextRound(round++, counter);
+            gameRound.nextRound(counter);
+            round++;
         }
-        return;
     }
 
     private void setMapAndWorld(int round) {

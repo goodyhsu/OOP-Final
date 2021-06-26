@@ -12,7 +12,7 @@ public class GameRound {
         this.gameLoop = gameLoop;
     }
 
-    protected void nextRound(int r, Counter counter) {
+    protected void nextRound(Counter counter) {
         running = false;
         roundStart();
         int last_update_items_time = 0;

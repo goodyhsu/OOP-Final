@@ -2,7 +2,7 @@ package model;
 
 public class Counter {
     private int current_time;
-    private int time_limit;
+    private final int time_limit;
     private boolean running;
     public Counter(int time_limit, boolean start){
         this.current_time = 0;

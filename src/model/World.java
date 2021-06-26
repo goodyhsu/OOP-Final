@@ -17,8 +17,8 @@ import static java.util.stream.Collectors.toSet;
  */
 public class World {
     private static final List<Sprite> sprites = new CopyOnWriteArrayList<>();
-    private PlayerCollisionHandler playerCollisionHandler = new PlayerCollisionHandler();
-    private BombCollisionHandler bombCollisionHandler = new BombCollisionHandler();
+    private final PlayerCollisionHandler playerCollisionHandler = new PlayerCollisionHandler();
+    private final BombCollisionHandler bombCollisionHandler = new BombCollisionHandler();
     private Map map = null;
 
     public World() {}

@@ -15,7 +15,7 @@ public class Game extends GameLoop {
     private Player p1;
     private Player p2;
     private final World world;
-    private ArrayList<map.Map> maps;
+    private final ArrayList<map.Map> maps;
 
     public Game(World world, ArrayList<map.Map> maps) {
         this.world = world;
