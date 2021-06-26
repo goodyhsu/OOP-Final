@@ -7,6 +7,8 @@ import model.World;
 import obstacle.*;
 import views.GameView;
 import static utils.ImageStateUtils.readImage;
+import static views.GameView.HEIGHT;
+import static views.GameView.WIDTH;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -109,5 +111,10 @@ public class Map {
     private int getRandomNumber(int min, int max) {
         Random random = new Random();
         return random.nextInt(max - min) + min;
+    }
+
+    public void render(Graphics g) {
+        Rectangle range = new Rectangle(0, 0, WIDTH, HEIGHT);
+        g.drawImage(this.background_image, range.x, range.y, range.width, range.height, null);
     }
 }

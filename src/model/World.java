@@ -134,6 +134,8 @@ public class World {
     // If you want to decouple them, create an interface that encapsulates the variation of the Graphics.
 
     public void render(Graphics g) {
+        // background
+        this.map.render(g);
         // sprites
         for (Sprite sprite : sprites) {
             sprite.render(g);
