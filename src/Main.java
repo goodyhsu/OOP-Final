@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) {
         //Music Test
         MusicUtils musicUtils = new MusicUtils();
-        musicUtils.playMusic("music/bgm/map2.wav");
+        musicUtils.playMusic("music/bgm/map1.wav");
 
         // Map
         ArrayList<String> obstacle_list = new ArrayList<String>();
@@ -32,7 +32,9 @@ public class Main {
         ArrayList<String> items = new ArrayList<String>();
         items.addAll(Arrays.asList("DamageUp", "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "SpeedUp", "Star"));
 
-        Map map1 = new Map("maps/backgrounds/0.png", "maps/files/1.txt", "None",
+        Map map0 = new Map("maps/backgrounds/0.png", "maps/files/0.txt", "None",
+                obstacle_img_list, items);
+        Map map1 = new Map("maps/backgrounds/1.png", "maps/files/1.txt", "None",
                 obstacle_img_list, items);
         Map map = map1; // Preferred map can be chosen
         World world = new World(map);
@@ -45,10 +47,7 @@ public class Main {
 
         //view
         GameView view = new GameView(game);
-
-
-//        world.setObstacles(view, obstacle_list, obstacle_img_list);
-
+        
         //game start
         game.start(5);
 
