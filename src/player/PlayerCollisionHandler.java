@@ -5,6 +5,7 @@ import model.Sprite;
 import item.Item;
 import obstacle.Obstacle;
 import model.World;
+import utils.MusicUtils;
 
 import java.awt.*;
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
  * @author - johnny850807@gmail.com (Waterball)
  */
 public class PlayerCollisionHandler implements CollisionHandler {
+
+    private final MusicUtils musicUtils = new MusicUtils();
 
     @Override
     public boolean isCollision(Sprite now, Dimension offset) {
@@ -32,9 +35,9 @@ public class PlayerCollisionHandler implements CollisionHandler {
                 }
                 now.getLocation().translate(-(offset.width), -(offset.height));
             }
-
             else if (other instanceof Item) {
                 if (originalBody.intersects(other.getBody())) {
+                    musicUtils.playMusic("music/SE/item_get.wav", false, true);
                     ((Item) other).setOwner((Player) now);
                     ((Item) other).effect();
                     ((Item) other).remove_item();

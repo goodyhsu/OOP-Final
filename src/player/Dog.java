@@ -19,6 +19,7 @@ public class Dog extends PlayerType {
         this.speed = 8;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/bone/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/smallBone/0.png");
+        music_file = "music/SE/dog.wav";
 
         ImageRenderer imageRenderer = new PlayerImageRenderer(this);
 

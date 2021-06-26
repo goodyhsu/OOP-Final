@@ -4,6 +4,8 @@ import model.*;
 import obstacle.DestroyableObstacle;
 import obstacle.Obstacle;
 import player.Player;
+import utils.MusicUtils;
+
 import static utils.LocationUtils.*;
 
 import java.awt.*;
@@ -18,6 +20,7 @@ public abstract class Bomb extends Sprite {
     protected boolean exploded;
     protected BombImageRenderer renderer;
     protected boolean[] direction_stop;
+    private final MusicUtils musicUtils = new MusicUtils();
 
     public Bomb(Player owner, Point owner_location, int damage, int explode_range){
         this.owner = owner;
@@ -39,7 +42,10 @@ public abstract class Bomb extends Sprite {
 
     @Override
     public void update(){
-        if(before_explode_counter.time_up()){ this.exploded = true; }
+        if(before_explode_counter.time_up()){
+            this.exploded = true;
+            musicUtils.playMusic("music/SE/explosion.wav", false, false);
+        }
         if(this.exploded)
             explode_effect();
         if(this.exploded && this.num_smallBomb < this.explode_range){

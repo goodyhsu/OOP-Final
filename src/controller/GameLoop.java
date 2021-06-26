@@ -5,6 +5,7 @@ import model.CharacterSelector;
 import model.Counter;
 import model.SpriteCoordinate;
 import model.World;
+import utils.MusicUtils;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ public abstract class GameLoop {
     private final CharacterSelector char_selector = new CharacterSelector();
     private final GameRenderer gameRenderer = new GameRenderer(this);
     private final GameRound gameRound = new GameRound(this);
+    private final MusicUtils musicUtils = new MusicUtils();
 
     public enum Status{selecting, instructions, start, in_progress, over, wait}
     Status status = Status.selecting;
@@ -48,6 +50,7 @@ public abstract class GameLoop {
     }
 
     private void selectCharacter() {
+        musicUtils.playMusic("music/bgm/default.wav", true, true);
         setStatus(GameLoop.Status.selecting);
         getChar_selector().reset(round);
         while (getStatus() != GameLoop.Status.wait) {

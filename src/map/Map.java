@@ -5,6 +5,7 @@ import item.ItemCollisionHandler;
 import model.SpriteCoordinate;
 import model.World;
 import obstacle.*;
+import utils.MusicUtils;
 import views.GameView;
 import static utils.ImageStateUtils.readImage;
 import static views.GameView.HEIGHT;

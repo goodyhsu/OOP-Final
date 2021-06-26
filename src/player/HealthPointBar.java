@@ -33,7 +33,7 @@ import static utils.ImageStateUtils.readImage;
             Rectangle range = getRange();
             int width = (int) (hp * owner.getRange().getWidth() / maxHp);
             g.setColor(new Color(134, 112, 112, 255));
-            g.fillRect(range.x, range.y, (int) owner.getRange().getWidth(), range.height);
+            g.fillRect(range.x - 1, range.y - 1, (int) owner.getRange().getWidth() + 2, range.height + 2);
             if (((HealthPointSprite) owner).isStar())
                 g.setColor(new Color(232, 214, 108));
             else if (((Player) owner).getIndex() == 0)

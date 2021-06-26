@@ -2,6 +2,8 @@ package bomb;
 
 import model.*;
 import player.Player;
+import utils.MusicUtils;
+
 import static utils.LocationUtils.isInBoundary;
 
 import java.awt.*;
@@ -11,6 +13,7 @@ import static utils.LocationUtils.coordinateToLocation;
 
 public class NormalBomb extends Bomb{
     private SpriteShape shape;
+
     public NormalBomb(Player owner, Point owner_location, int damage, int explode_range){
         super(owner, owner_location, damage, explode_range);
         this.shape = new SpriteShape(new Dimension(50, 50),
