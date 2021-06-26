@@ -11,7 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import static utils.ImageIO.getImage;
+import static utils.ImageIOUtils.getImage;
 
 public class GameView extends JFrame {
     public static final int HEIGHT = 700;
