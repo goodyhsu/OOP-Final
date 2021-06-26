@@ -3,6 +3,7 @@ package model;
 import bomb.BombCollisionHandler;
 import item.Item;
 import item.ItemCollisionHandler;
+import map.Map;
 import obstacle.Obstacle;
 import player.PlayerCollisionHandler;
 import views.GameView;
@@ -27,18 +28,21 @@ import static utils.CreateInstanceUtils.createSpriteByName;
  */
 public class World {
     private static final List<Sprite> sprites = new CopyOnWriteArrayList<>();
-    private ArrayList<String> obstacle_img_list;
+//    private ArrayList<String> obstacle_img_list;
     private PlayerCollisionHandler playerCollisionHandler = new PlayerCollisionHandler();
     private BombCollisionHandler bombCollisionHandler = new BombCollisionHandler();
-    private ItemCollisionHandler itemCollisionHandler = new ItemCollisionHandler();
-    ArrayList<String> items = new ArrayList<String>();
+    private Map map;
+//    private ItemCollisionHandler itemCollisionHandler = new ItemCollisionHandler();
+//    ArrayList<String> items = new ArrayList<String>();
 
-    public World(ArrayList<String> obstacle_img_list) {
-        this.obstacle_img_list = obstacle_img_list;
-        items.addAll(Arrays.asList("DamageUp", "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "SpeedUp", "Star"));
+    public World(Map map) {
+//        this.obstacle_img_list = obstacle_img_list;
+//        items.addAll(Arrays.asList("DamageUp", "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "SpeedUp", "Star"));
+        this.map = map;
     }
 
-    public void setMap() {
+    public Map getMap(){ return this.map; }
+    /*public void setMap() {
         setMapBoundary();
         try {
             File file=new File("maps/files/map_2.txt");    //creates a new file instance
@@ -79,7 +83,7 @@ public class World {
     private int getRandomNumber(int min, int max) {
         Random random = new Random();
         return random.nextInt(max - min) + min;
-    }
+    }*/
 
     public void update() {
         for (Sprite sprite : sprites) {
@@ -143,7 +147,7 @@ public class World {
         return bombCollisionHandler;
     }
 
-    private void setMapBoundary(){
+    /*private void setMapBoundary(){
         int num_block_w = GameView.WIDTH / GameView.BLOCK_WIDTH;
         int num_block_h = GameView.HEIGHT / GameView.BLOCK_HEIGHT;
         // boundary
@@ -169,5 +173,5 @@ public class World {
             obstacle = new Stone(file, coordinate);
         }
         addSprite(obstacle);
-    }
+    }*/
 }

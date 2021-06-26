@@ -55,7 +55,7 @@ public abstract class GameLoop {
 
     private int updateItems(int last_update_items_time) {
         if (counter.getCurrent_time() - last_update_items_time >= (2*60*1000/15) || last_update_items_time == 0) {
-            getWorld().setItems(5);
+            getWorld().getMap().setItems(5);
             last_update_items_time = counter.getCurrent_time() + 1;
         }
         return last_update_items_time;
@@ -69,7 +69,7 @@ public abstract class GameLoop {
             delay(15);
         }
         getChar_selector().setPlayers((Game)this, getWorld());
-//        getWorld().setMap();
+        getWorld().getMap().setMap();
     }
 
     protected abstract World getWorld();
