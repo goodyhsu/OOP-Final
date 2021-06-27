@@ -24,7 +24,7 @@ public class CharacterSelector {
     private int round;
 
     public CharacterSelector() {
-        this.class_names.addAll(Arrays.asList("Dog", "Dog", "Cat", "Cat", "Tom"));
+        this.class_names.addAll(Arrays.asList("Dog", "Dog", "Cat", "Cat", "UglyTom"));
         this.img_idx.addAll(Arrays.asList(0, 1));
         round = 1;
     }
