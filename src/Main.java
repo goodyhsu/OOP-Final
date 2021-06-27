@@ -22,7 +22,7 @@ public class Main {
                 obstacle_img_list, items);
         Map map1 = new Map("maps/backgrounds/1.png", "maps/files/1.txt", "music/bgm/map1.wav",
                 obstacle_img_list, items);
-        Map map2 = new Map("maps/backgrounds/2.png", "maps/files/1.txt", "music/bgm/map2.wav",
+        Map map2 = new Map("maps/backgrounds/2.png", "maps/files/2.txt", "music/bgm/map2.wav",
                 obstacle_img_list, items);
         maps.addAll(Arrays.asList(map0, map1, map2));
         World world = new World();
