@@ -3,6 +3,7 @@ package controller;
 import model.Counter;
 import model.Sprite;
 import player.Player;
+import utils.MusicUtils;
 
 public class GameRound {
     GameLoop gameLoop;
@@ -45,6 +46,11 @@ public class GameRound {
         gameLoop.getView().render(gameLoop);
         gameLoop.delay(1000);    // view: Game start
         gameLoop.getCounter().start();
+
+        // play music
+        String music_file = gameLoop.getMap().getMusic_file();
+        gameLoop.getMusicUtils().playMusic(music_file, true, true);
+
         running = true;
     }
 

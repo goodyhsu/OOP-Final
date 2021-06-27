@@ -93,6 +93,8 @@ public abstract class GameLoop {
         return getMap().getPlayerCoordinates();
     }
 
+    public MusicUtils getMusicUtils() { return musicUtils; }
+
     protected void delay(long ms) {
         try {
             Thread.sleep(ms);
