@@ -21,7 +21,7 @@ public class CharacterSelector {
     private final String dir = "sprites/characters/";
     private final ArrayList<String> class_names = new ArrayList<>();
     private final ArrayList<Integer> img_idx = new ArrayList<>();
-    private final int img_num = 5;
+    private ArrayList<Integer> img_num;
     private final int player_num = 2;
     private int round;
 
@@ -29,11 +29,12 @@ public class CharacterSelector {
         this.class_names.addAll(Arrays.asList("Dog", "Dog", "Cat", "Cat", "UglyTom"));
         this.img_idx.addAll(Arrays.asList(0, 1));
         this.gameLoop = gameLoop;
+        this.img_num = new ArrayList<>(Arrays.asList(4, 4));
         round = 1;
     }
     public void changeCharacter(int player, int idx_change) {
         int idx = img_idx.get(player) + idx_change;
-        idx = (idx < 0)? idx + img_num : idx % img_num;
+        idx = (idx < 0)? idx + img_num.get(player) : idx % img_num.get(player);
         img_idx.set(player, idx);
     }
 
@@ -41,6 +42,10 @@ public class CharacterSelector {
         for (int i = 0; i < player_num; i++)
             img_idx.set(i, i*2);
         this.round = round;
+    }
+
+    public void unlockTom(int player) {
+        img_num.set(player, 5);
     }
 
     public void render(Graphics g) {
@@ -65,9 +70,16 @@ public class CharacterSelector {
                     new Font("TimesRoman", Font.PLAIN, 64),
                     (int) (GameView.WIDTH / 2), periphery*2, true);
 
-            // choose
-            drawString(g, "Choose your favorite character :))", Color.darkGray,
-                    new Font("TimesRoman", Font.PLAIN, 24), (int) (GameView.WIDTH/2), periphery*3, true);
+            // score
+            ArrayList<Integer> scores = gameLoop.getScores();
+            string = scores.get(0) + " : " + scores.get(1);
+            drawString(g, string, Color.BLACK,
+                    new Font("TimesRoman", Font.PLAIN, 64),
+                    (int) (GameView.WIDTH / 2), (int) (GameView.WIDTH/2)-100, true);
+
+//            // choose
+//            drawString(g, "Choose your favorite character :))", Color.darkGray,
+//                    new Font("TimesRoman", Font.PLAIN, 24), (int) (GameView.WIDTH/2), periphery*3, true);
 
             // player 1 & player 2
             drawString(g, "Player 1", Color.darkGray,

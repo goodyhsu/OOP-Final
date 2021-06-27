@@ -70,7 +70,17 @@ public class GameRenderer {
 
     private void drawOver(Graphics g) {
         gameLoop.getWorld().render(g);
-        drawString(g, "Game Over", Color.BLACK,
+        int winner = gameLoop.getWinner();
+        String string;
+        if (winner != -1)
+            string = "Player" + (winner+1) + " wins!";
+        else
+            string = "Ties ; )";
+        drawString(g, string, Color.BLACK,
                 new Font("TimesRoman", Font.PLAIN, 64), GameView.WIDTH/2, GameView.HEIGHT/2, true);
+        int height = g.getFontMetrics().getHeight();
+        string = "You can play Ugly Tom now : )";
+        drawString(g, string, Color.BLACK,
+                new Font("TimesRoman", Font.PLAIN, 32), GameView.WIDTH/2, GameView.HEIGHT/2 + height + 5, true);
     }
 }

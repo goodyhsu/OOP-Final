@@ -8,6 +8,7 @@ import model.World;
 import utils.MusicUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author - johnny850807@gmail.com (Waterball)
@@ -40,11 +41,14 @@ public abstract class GameLoop {
     }
 
     private void gameLoop() {
-        while (round <= total_round) {
+        while (true) {
             counter = new Counter(300000 / 15, false);
             selectCharacter();
             setMapAndWorld(round);
             gameRound.nextRound(counter);
+            int winner = getWinner();
+            if (winner != -1)
+                getChar_selector().unlockTom(winner);
             round++;
         }
     }
@@ -58,6 +62,10 @@ public abstract class GameLoop {
             delay(15);
         }
     }
+
+    public abstract ArrayList<Integer> getScores();
+
+    protected abstract int getWinner();
 
     protected abstract boolean isOver(Counter counter);
 

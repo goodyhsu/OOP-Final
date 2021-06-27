@@ -7,6 +7,7 @@ import model.World;
 import player.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author - johnny850807@gmail.com (Waterball)
@@ -17,6 +18,8 @@ public class Game extends GameLoop {
     private final World world;
     private final ArrayList<map.Map> maps;
     private Map map;
+    private ArrayList<Integer> scores = new ArrayList<>(Arrays.asList(0, 0));
+    private int winner = -1;
 
     public Game(World world, ArrayList<map.Map> maps) {
         this.world = world;
@@ -64,11 +67,40 @@ public class Game extends GameLoop {
     }
 
     @Override
+    public ArrayList<Integer> getScores() {
+        return scores;
+    }
+
+    @Override
+    protected int getWinner() {
+        return winner;
+    }
+
+    private void setWinner() {
+        if (p1.isAlive() && !p2.isAlive()) {
+            scores.set(0, scores.get(0)+1);
+            winner = 0;   // player 1 wins
+        }
+        else if (!p1.isAlive() && p2.isAlive()) {
+            scores.set(1, scores.get(1)+1);
+            winner = 1;   // player 2 wins
+        }
+        else {
+            scores.set(0, scores.get(0)+1);
+            scores.set(1, scores.get(1)+1);
+            winner = -1;  // Tie
+        }
+    }
+
+    @Override
     protected boolean isOver(Counter counter) {
         boolean over = false;
         if (!p1.isAlive() || !p2.isAlive() || counter.time_up()) {
             over = true;
+            setWinner();
         }
         return over;
     }
+
+
 }
