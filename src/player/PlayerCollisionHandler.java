@@ -37,7 +37,7 @@ public class PlayerCollisionHandler implements CollisionHandler {
             }
             else if (other instanceof Item) {
                 if (originalBody.intersects(other.getBody())) {
-                    musicUtils.playMusic("music/SE/item_get.wav", false, true);
+                    musicUtils.playMusic("music/SE/item_get.wav", false, true, false);
                     ((Item) other).setOwner((Player) now);
                     ((Item) other).effect();
                     ((Item) other).remove_item();

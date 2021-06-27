@@ -49,7 +49,7 @@ public class GameRound {
 
         // play music
         String music_file = gameLoop.getMap().getMusic_file();
-        gameLoop.getMusicUtils().playMusic(music_file, true, true);
+        gameLoop.getMusicUtils().playMusic(music_file, true, true, true);
 
         running = true;
     }

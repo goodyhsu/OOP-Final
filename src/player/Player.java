@@ -81,7 +81,7 @@ public abstract class Player extends HealthPointSprite {
     }
 
     public void damaged() {
-        musicUtils.playMusic(music_file, false, false);
+        musicUtils.playMusic(music_file, false, false, false);
         fsm.trigger(DAMAGED);
     }
 

@@ -50,7 +50,7 @@ public abstract class GameLoop {
     }
 
     private void selectCharacter() {
-        musicUtils.playMusic("music/bgm/default.wav", true, true);
+        musicUtils.playMusic("music/bgm/default.wav", true, true, true);
         setStatus(GameLoop.Status.selecting);
         getChar_selector().reset(round);
         while (getStatus() != GameLoop.Status.wait) {

@@ -8,7 +8,7 @@ public class MusicUtils {
     public boolean isPlaying = false;
     private Clip clip;
 
-    public void playMusic(String musicLocation, boolean isLoop, boolean isCover) {
+    public void playMusic(String musicLocation, boolean isLoop, boolean isCover, boolean setVolume) {
         try  {
             if (isPlaying) {
                 if (isCover) {
@@ -22,11 +22,8 @@ public class MusicUtils {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 clip = AudioSystem.getClip();
                 clip.open(audioInput);
-                if (isLoop) {
-                    FloatControl gainControl =
-                            (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                    gainControl.setValue(-10.0f);
-                }
+                if (setVolume)
+                    setVolume();
                 clip.start();
                 isPlaying = true;
                 if (isLoop) {
@@ -46,6 +43,12 @@ public class MusicUtils {
         catch(Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void setVolume() {
+        FloatControl gainControl =
+                (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-10.0f);
     }
 
     public void endMusic() {

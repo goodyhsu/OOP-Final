@@ -44,7 +44,7 @@ public abstract class Bomb extends Sprite {
     public void update(){
         if(before_explode_counter.time_up()){
             this.exploded = true;
-            musicUtils.playMusic("music/SE/explosion.wav", false, false);
+            musicUtils.playMusic("music/SE/explosion.wav", false, false, true);
         }
         if(this.exploded)
             explode_effect();
