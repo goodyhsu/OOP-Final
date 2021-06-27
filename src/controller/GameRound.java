@@ -64,7 +64,7 @@ public class GameRound {
                 gameLoop.getWorld().removeSprite(sprite);
         }
 
-        int over_loop = (int) (5 / 0.015);
+        int over_loop = (int) (6 / 0.015);
         while (over_loop > 0) {
             over_loop--;
             gameLoop.getWorld().update();

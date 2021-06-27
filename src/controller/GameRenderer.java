@@ -56,9 +56,9 @@ public class GameRenderer {
         Font font = new Font("TimesRoman", Font.PLAIN, 32);
         int string_width = g.getFontMetrics(font).stringWidth(Integer.toString(left_time));
         int string_height = g.getFontMetrics(font).getHeight();
-        g.setColor(Color.gray);
+        g.setColor(Color.WHITE);
         g.fillRoundRect((int)(GameView.WIDTH/2 - string_width/2)-5, 5, string_width+10, string_height+2, 15, 15);
-        drawString(g, Integer.toString(left_time), Color.WHITE,
+        drawString(g, Integer.toString(left_time), Color.BLACK,
                 new Font("TimesRoman", Font.PLAIN, 32), GameView.WIDTH/2, 40, true);
     }
 
@@ -75,12 +75,14 @@ public class GameRenderer {
         if (winner != -1)
             string = "Player" + (winner+1) + " wins!";
         else
-            string = "Ties ; )";
+            string = "Ties";
         drawString(g, string, Color.BLACK,
                 new Font("TimesRoman", Font.PLAIN, 64), GameView.WIDTH/2, GameView.HEIGHT/2, true);
-        int height = g.getFontMetrics().getHeight();
-        string = "You can play Ugly Tom now : )";
-        drawString(g, string, Color.BLACK,
-                new Font("TimesRoman", Font.PLAIN, 32), GameView.WIDTH/2, GameView.HEIGHT/2 + height + 5, true);
+        if (winner != -1) {
+            int height = g.getFontMetrics().getHeight();
+            string = "You can play Ugly Tom now : )";
+            drawString(g, string, Color.BLACK,
+                    new Font("TimesRoman", Font.PLAIN, 32), GameView.WIDTH/2, GameView.HEIGHT/2 + height + 5, true);
+        }
     }
 }
