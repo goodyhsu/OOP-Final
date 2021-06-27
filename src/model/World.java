@@ -85,6 +85,7 @@ public class World {
         // background
         this.map.render(g);
         // sprites
+//        System.out.println("in world render");
         for (Sprite sprite : sprites) {
             sprite.render(g);
         }

@@ -56,19 +56,24 @@ public class GameRenderer {
 
     private void drawTimer(Graphics g, Counter counter) {
         int left_time = (int) ((counter.getTime_limit() - counter.getCurrent_time())*0.015);
+        Font font = new Font("TimesRoman", Font.PLAIN, 32);
+        int string_width = g.getFontMetrics(font).stringWidth(Integer.toString(left_time));
+        int string_height = g.getFontMetrics(font).getHeight();
+        g.setColor(Color.gray);
+        g.fillRoundRect((int)(GameView.WIDTH/2 - string_width/2)-5, 5, string_width+10, string_height+2, 15, 15);
         drawString(g, Integer.toString(left_time), Color.WHITE,
-                new Font("TimesRoman", Font.PLAIN, 32), GameView.WIDTH/2, 50);
+                new Font("TimesRoman", Font.PLAIN, 32), GameView.WIDTH/2, 40, true);
     }
 
     private void drawStart(Graphics g) {
         drawAll(g);
         drawString(g, "Game Start!", Color.BLACK,
-                new Font("TimesRoman", Font.PLAIN, 64), GameView.WIDTH/2-150, GameView.HEIGHT/2);
+                new Font("TimesRoman", Font.PLAIN, 64), GameView.WIDTH/2, GameView.HEIGHT/2, true);
     }
 
     private void drawOver(Graphics g) {
         gameLoop.getWorld().render(g);
         drawString(g, "Game Over", Color.BLACK,
-                new Font("TimesRoman", Font.PLAIN, 64), GameView.WIDTH/2-150, GameView.HEIGHT/2);
+                new Font("TimesRoman", Font.PLAIN, 64), GameView.WIDTH/2, GameView.HEIGHT/2, true);
     }
 }
