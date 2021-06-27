@@ -58,6 +58,7 @@ public class GameRound {
         gameLoop.setStatus(GameLoop.Status.over);
 //        running = false;
         gameLoop.getCounter().stopCounter();
+        gameLoop.getMusicUtils().playMusic("music/bgm/game_over.wav", false, true, true);
         for (Sprite sprite : gameLoop.getWorld().getSprites()) {
             if (!(sprite instanceof Player))
                 gameLoop.getWorld().removeSprite(sprite);
