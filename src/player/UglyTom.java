@@ -12,9 +12,9 @@ import static player.Player.Event.*;
 
 import static utils.ImageStateUtils.imageStatesFromFolder;
 
-public class Tom extends PlayerType {
+public class UglyTom extends PlayerType {
 
-    public Tom(Point location, int index, int type) {
+    public UglyTom(Point location, int index, int type) {
         super(location, index, type);
 
         this.shape = new SpriteShape(new Dimension(50, 50),
@@ -22,11 +22,11 @@ public class Tom extends PlayerType {
         this.speed = 12;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/seagull/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/seagullEgg/0.png");
-        music_file = "music/SE/tom.wav";
+        music_file = "music/SE/uglyTom.wav";
 
         ImageRenderer imageRenderer = new PlayerImageRenderer(this);
 
-        String dir = "sprites/player/tom" + Integer.toString(type);
+        String dir = "sprites/player/uglyTom" + Integer.toString(type);
         State idle = new WaitingPerFrame(5,
                 new Idle(imageStatesFromFolder(dir + "/idle", imageRenderer)));
         State walking = new WaitingPerFrame(3,
