@@ -25,9 +25,7 @@ public class Main {
         Map map2 = new Map("maps/backgrounds/2.png", "maps/files/1.txt", "music/bgm/map2.wav",
                 obstacle_img_list, items);
         maps.addAll(Arrays.asList(map0, map1, map2));
-//        Map map = map0; // Preferred map can be chosen
         World world = new World();
-//        map.setWorld(world);
 
         // Game
         Game game = new Game(world, maps);
