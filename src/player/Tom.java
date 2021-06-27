@@ -17,8 +17,8 @@ public class Tom extends PlayerType {
     public Tom(Point location, int index, int type) {
         super(location, index, type);
 
-        this.shape = new SpriteShape(new Dimension(60, 60),
-                new Dimension(12, 12), new Dimension(36, 36));
+        this.shape = new SpriteShape(new Dimension(50, 50),
+                new Dimension(6, 6), new Dimension(36, 36));
         this.speed = 12;
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/seagull/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/seagullEgg/0.png");
