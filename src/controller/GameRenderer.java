@@ -25,11 +25,8 @@ public class GameRenderer {
         else if (gameLoop.getStatus() == Game.Status.in_progress) {
             drawAll(g);
         }
-        else if (gameLoop.getStatus() == Game.Status.selecting){
+        else if (gameLoop.getStatus() == Game.Status.selecting || gameLoop.getStatus() == Game.Status.instructions){
             gameLoop.getChar_selector().render(g);
-        }
-        else if (gameLoop.getStatus() == Game.Status.instructions) {
-            gameLoop.getChar_selector().renderInstructions(g);
         }
     }
 

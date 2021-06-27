@@ -18,7 +18,7 @@ public abstract class GameLoop {
     private int total_round;
     private int round = 1;
 
-    private final CharacterSelector char_selector = new CharacterSelector();
+    private final CharacterSelector char_selector = new CharacterSelector(this);
     private final GameRenderer gameRenderer = new GameRenderer(this);
     private final GameRound gameRound = new GameRound(this);
     private final MusicUtils musicUtils = new MusicUtils();

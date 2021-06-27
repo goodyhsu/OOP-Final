@@ -1,6 +1,7 @@
 package model;
 
 import controller.Game;
+import controller.GameLoop;
 import player.Player;
 import views.GameView;
 
@@ -16,6 +17,7 @@ import static utils.renderUtils.drawString;
 import static utils.renderUtils.drawImage;
 
 public class CharacterSelector {
+    private final GameLoop gameLoop;
     private final String dir = "sprites/characters/";
     private final ArrayList<String> class_names = new ArrayList<>();
     private final ArrayList<Integer> img_idx = new ArrayList<>();
@@ -23,9 +25,10 @@ public class CharacterSelector {
     private final int player_num = 2;
     private int round;
 
-    public CharacterSelector() {
+    public CharacterSelector(GameLoop gameLoop) {
         this.class_names.addAll(Arrays.asList("Dog", "Dog", "Cat", "Cat", "UglyTom"));
         this.img_idx.addAll(Arrays.asList(0, 1));
+        this.gameLoop = gameLoop;
         round = 1;
     }
     public void changeCharacter(int player, int idx_change) {
@@ -41,40 +44,51 @@ public class CharacterSelector {
     }
 
     public void render(Graphics g) {
-        int periphery = 100;
+        if (gameLoop.getStatus() == GameLoop.Status.selecting) {
+            int periphery = 100;
+            drawPlayers(g, 100);
 
-        drawPlayers(g, 100);
+            String string;
 
-        // print round and some information
-        String string;
-        string = "狗狗貓貓";
-        drawString(g, string, Color.BLACK,
-                new Font("TimesRoman", Font.PLAIN, 64),
-                (int) (GameView.WIDTH/2), periphery, true);
+            // title
+            if (round == 1)
+                string = "狗狗貓貓";
+            else
+                string = "狗狗貓貓醜湯姆";
+            drawString(g, string, Color.BLACK,
+                    new Font("TimesRoman", Font.PLAIN, 64),
+                    (int) (GameView.WIDTH/2), periphery, true);
 
-        string = "Round " + (round);
-        drawString(g, string, Color.BLACK,
-                new Font("TimesRoman", Font.PLAIN, 64),
-                (int) (GameView.WIDTH / 2), periphery*2, true);
-        drawString(g, "Choose your favorite character :))", Color.darkGray,
-                new Font("TimesRoman", Font.PLAIN, 24), (int) (GameView.WIDTH/2), periphery*3, true);
+            // round
+            string = "Round " + (round);
+            drawString(g, string, Color.BLACK,
+                    new Font("TimesRoman", Font.PLAIN, 64),
+                    (int) (GameView.WIDTH / 2), periphery*2, true);
 
-        drawString(g, "Player 1", Color.darkGray,
-                new Font("TimesRoman", Font.PLAIN, 32), 130, 220, false);
+            // choose
+            drawString(g, "Choose your favorite character :))", Color.darkGray,
+                    new Font("TimesRoman", Font.PLAIN, 24), (int) (GameView.WIDTH/2), periphery*3, true);
 
-        drawString(g, "Player 2", Color.darkGray,
-                new Font("TimesRoman", Font.PLAIN, 32), 820, 220, false);
+            // player 1 & player 2
+            drawString(g, "Player 1", Color.darkGray,
+                    new Font("TimesRoman", Font.PLAIN, 32), 130, 220, false);
 
-        // StartTheGame
-        drawStartTheGame(g, 100);
+            drawString(g, "Player 2", Color.darkGray,
+                    new Font("TimesRoman", Font.PLAIN, 32), 820, 220, false);
 
-        // instructions key
-        drawInstructionKey(g, 5);
+            // StartTheGame
+            drawStartTheGame(g, 100);
 
+            // instructions key
+            drawInstructionKey(g, 5);
+        }
+        else {
+            drawInstructions(g);
+        }
     }
 
-    public void renderInstructions(Graphics g) {
-        Image image = readImage(new File("img/Instruction.png"));
+    public void drawInstructions(Graphics g) {
+        Image image = readImage(new File("img/Instruction_2.png"));
         drawImage(g, image, 0, 0, GameView.WIDTH, GameView.HEIGHT);
     }
 
