@@ -3,6 +3,7 @@ package views;
 import controller.Game;
 import controller.GameLoop;
 import controller.GameRenderer;
+import imageRenderer.ImageRenderer;
 import model.*;
 import static utils.ImageStateUtils.readImage;
 
@@ -162,6 +163,10 @@ public class GameView extends JFrame {
             super.paintComponent(g);
 
             // Now, let's paint
+            World world = gameLoop.getWorld();
+            ImageRenderer world_renderer = new WorldRenderer(g, world);
+            world.setRenderer(world_renderer);
+
             g.setColor(Color.WHITE); // paint background with all white
             g.fillRect(0, 0, GameView.WIDTH, GameView.HEIGHT);
             Image image = readImage(new File("img/0.png"));

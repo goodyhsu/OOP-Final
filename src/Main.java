@@ -18,9 +18,9 @@ public class Main {
                 "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "SpeedUp", "Star"));
 
         ArrayList<map.Map> maps= new ArrayList<>();
-        Map map0 = new Map("maps/backgrounds/0.png", "maps/files/2.txt", "music/bgm/map0.wav",
+        Map map0 = new Map("maps/backgrounds/0.png", "maps/files/0.txt", "music/bgm/map0.wav",
                 obstacle_img_list, items);
-        Map map1 = new Map("maps/backgrounds/1.png", "maps/files/2.txt", "music/bgm/map1.wav",
+        Map map1 = new Map("maps/backgrounds/1.png", "maps/files/1.txt", "music/bgm/map1.wav",
                 obstacle_img_list, items);
         Map map2 = new Map("maps/backgrounds/2.png", "maps/files/2.txt", "music/bgm/map2.wav",
                 obstacle_img_list, items);

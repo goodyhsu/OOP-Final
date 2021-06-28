@@ -1,5 +1,6 @@
 package controller;
 
+import imageRenderer.ImageRenderer;
 import model.Counter;
 import model.World;
 import views.GameView;
@@ -32,7 +33,7 @@ public class GameRenderer {
 
     private void drawAll(Graphics g) {
         // world
-        gameLoop.getWorld().render(g); // ask the world to paint itself and paint the sprites on the canvas
+        gameLoop.getWorld().render(); // ask the world to paint itself and paint the sprites on the canvas
         // grids
         drawGrids(g);
         // timer
@@ -69,7 +70,7 @@ public class GameRenderer {
     }
 
     private void drawOver(Graphics g) {
-        gameLoop.getWorld().render(g);
+        gameLoop.getWorld().render();
         int winner = gameLoop.getWinner();
         String string;
         if (winner != -1)

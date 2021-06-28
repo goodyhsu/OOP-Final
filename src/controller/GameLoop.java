@@ -83,7 +83,7 @@ public abstract class GameLoop {
         return status;
     }
 
-    protected abstract World getWorld();
+    public abstract World getWorld();
 
     protected abstract Map getMap();
 

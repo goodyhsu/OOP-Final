@@ -1,6 +1,7 @@
 package model;
 
 import bomb.BombCollisionHandler;
+import imageRenderer.ImageRenderer;
 import map.Map;
 import player.PlayerCollisionHandler;
 
@@ -20,8 +21,11 @@ public class World {
     private final PlayerCollisionHandler playerCollisionHandler = new PlayerCollisionHandler();
     private final BombCollisionHandler bombCollisionHandler = new BombCollisionHandler();
     private Map map = null;
+    private ImageRenderer renderer;
 
     public World() {}
+
+    public void setRenderer(ImageRenderer renderer) { this.renderer = renderer; }
 
     public void setMap(Map map) {
         this.map = map;
@@ -90,6 +94,9 @@ public class World {
             sprite.render(g);
         }
     }
+
+    public void render(){ this.renderer.render(); }
+
     public PlayerCollisionHandler getPlayerCollisionHandler() {
         return playerCollisionHandler;
     }
