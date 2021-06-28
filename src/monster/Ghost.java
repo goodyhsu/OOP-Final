@@ -3,6 +3,7 @@ package monster;
 import fsm.ImageRenderer;
 import fsm.State;
 import fsm.WaitingPerFrame;
+import model.SpriteCoordinate;
 
 import java.awt.*;
 
@@ -12,8 +13,8 @@ import static utils.ImageStateUtils.imageStatesFromFolder;
 
 public class Ghost extends Monster {
 
-    public Ghost (Point location) {
-        super(location);
+    public Ghost (SpriteCoordinate coordinate) {
+        super(coordinate);
         ImageRenderer imageRenderer = new MonsterImageRenderer(this);
 
         String dir = "sprites/ghost";

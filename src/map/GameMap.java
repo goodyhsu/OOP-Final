@@ -4,6 +4,7 @@ import item.Item;
 import item.ItemCollisionHandler;
 import model.SpriteCoordinate;
 import model.World;
+import monster.Ghost;
 import obstacle.*;
 import views.GameView;
 
@@ -56,9 +57,11 @@ public class GameMap extends Map{
                 int y = Integer.parseInt(splitLine[2]);
                 if (name.equals("p1") || (name.equals("p2"))) {
                     player_coordinates.add(new SpriteCoordinate(x, y));
-                }
-                else
+                } else if (name.equals("Monster")) {
+                    addMonster(new SpriteCoordinate(x, y));
+                } else {
                     addObstacle(obstacle_img_list, name, new SpriteCoordinate(x, y));
+                }
             }
             fr.close();    //closes the stream and release the resources
         } catch(IOException e) {
@@ -99,6 +102,11 @@ public class GameMap extends Map{
                 item_idx = (item_idx + 1) % items.size();
             }
         }
+    }
+
+    private void addMonster(SpriteCoordinate coordinate) {
+        Ghost ghost = new Ghost(coordinate);
+        this.world.addSprite(ghost);
     }
 
     private void addObstacle(ArrayList<String> obstacle_img_list, String name, SpriteCoordinate coordinate) {

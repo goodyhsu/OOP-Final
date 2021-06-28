@@ -3,15 +3,20 @@ package monster;
 import fsm.FiniteStateMachine;
 import model.Direction;
 import model.Sprite;
+import model.SpriteCoordinate;
 import model.SpriteShape;
 
 import java.awt.*;
+import java.nio.channels.spi.SelectorProvider;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import static monster.Monster.Event.*;
+import static utils.LocationUtils.coordinateToLocation;
 
 public abstract class Monster extends Sprite{
+
+    protected SpriteCoordinate coordinate;
 
     private final int speed = 5;
     protected SpriteShape shape;
@@ -22,7 +27,9 @@ public abstract class Monster extends Sprite{
         WALK, STOP
     }
 
-    public Monster(Point location) {
+    public Monster(SpriteCoordinate coordinate) {
+        this.coordinate = coordinate;
+        this.location = coordinateToLocation(coordinate);
         this.shape = new SpriteShape(new Dimension(50, 50),
                 new Dimension(5, 5), new Dimension(40, 40));
         fsm = new FiniteStateMachine();
