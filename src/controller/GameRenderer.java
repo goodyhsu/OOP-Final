@@ -35,22 +35,9 @@ public class GameRenderer extends GraphicsRenderer {
     private void drawAll(Graphics g) {
         // world
         game.getWorld().render(); // ask the world to paint itself and paint the sprites on the canvas
-        // grids
-        drawGrids(g);
         // timer
         if (game.getCounter() != null)
             drawTimer(g, game.getCounter());
-    }
-
-    private void drawGrids(Graphics g) {
-        int line_w = 1;
-        g.setColor(Color.darkGray);
-        for (int x = 0; x <= GameView.WIDTH; x += GameView.BLOCK_WIDTH) {
-            g.fillRect(x, 0, line_w, GameView.HEIGHT+line_w);
-        }
-        for (int y = 0; y <= GameView.HEIGHT; y += GameView.BLOCK_HEIGHT) {
-            g.fillRect(0, y, GameView.WIDTH+line_w, line_w);
-        }
     }
 
     private void drawTimer(Graphics g, Counter counter) {

@@ -1,6 +1,7 @@
 package model;
 
 import bomb.BombCollisionHandler;
+import controller.Game;
 import player.PlayerCollisionHandler;
 
 import java.awt.*;

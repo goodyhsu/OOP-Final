@@ -29,6 +29,7 @@ public class Game extends GameLoop {
     public Game(GameWorld world, ArrayList<GameMap> gameMaps) {
         this.world = world;
         this.gameMaps = gameMaps;
+        this.world.setGame(this);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package model;
 
+import controller.Game;
 import imageRenderer.ImageRenderer;
 import map.GameMap;
 
@@ -18,6 +19,7 @@ public abstract class World {
     private static final List<Sprite> sprites = new CopyOnWriteArrayList<>();
     private ImageRenderer renderer;
     protected GameMap map;
+    private Game game;
 
     public World() {}
 
@@ -62,6 +64,14 @@ public abstract class World {
 
     public static List<Sprite> getSprites() {
         return sprites;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Game getGame() {
+        return this.game;
     }
 
     public void render(){ this.renderer.render(); }
