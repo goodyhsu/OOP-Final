@@ -9,6 +9,7 @@ import java.awt.*;
 import java.util.List;
 
 public class MonsterCollisionHandler implements CollisionHandler {
+
     @Override
     public boolean isCollision(Sprite now, Dimension offset) {
         List<Sprite> sprites = World.getSprites();

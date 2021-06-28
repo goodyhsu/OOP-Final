@@ -3,6 +3,7 @@ package player;
 import model.CollisionHandler;
 import model.Sprite;
 import item.Item;
+import monster.Monster;
 import obstacle.Obstacle;
 import model.World;
 import utils.MusicUtils;
@@ -31,14 +32,15 @@ public class PlayerCollisionHandler implements CollisionHandler {
                     return true;
                 }
                 now.getLocation().translate(-(offset.width), -(offset.height));
-            }
-            else if (other instanceof Item) {
+            } else if (other instanceof Item) {
                 if (originalBody.intersects(other.getBody())) {
                     musicUtils.playMusic("music/SE/item_get.wav", false, true, false);
                     ((Item) other).setOwner((Player) now);
                     ((Item) other).effect();
                     ((Item) other).remove_item();
                 }
+            } else if (other instanceof Monster) {
+                System.out.printf("YA");
             }
 
         }

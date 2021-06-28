@@ -2,7 +2,6 @@ package monster;
 
 import fsm.CyclicSequence;
 import fsm.ImageState;
-import model.Direction;
 
 import java.util.List;
 
