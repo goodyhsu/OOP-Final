@@ -20,7 +20,4 @@ public class ItemCollisionHandler implements CollisionHandler {
         }
         return false;
     }
-
-    @Override
-    public void handle(Point originalLocation, Sprite from, Sprite to) {}
 }

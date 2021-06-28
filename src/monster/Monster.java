@@ -7,7 +7,6 @@ import model.SpriteCoordinate;
 import model.SpriteShape;
 
 import java.awt.*;
-import java.nio.channels.spi.SelectorProvider;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -21,7 +20,8 @@ public abstract class Monster extends Sprite{
     private final int speed = 5;
     protected SpriteShape shape;
     public final FiniteStateMachine fsm;
-    private final Set<Direction> directions = new CopyOnWriteArraySet<>();
+    private Event now_event;
+    private Direction now_direction;
 
     public enum Event {
         WALK, STOP
@@ -35,25 +35,28 @@ public abstract class Monster extends Sprite{
         fsm = new FiniteStateMachine();
     }
 
-    public void move(Direction direction) {
+    private void move(Direction direction) {
+        MonsterCollisionHandler collisionHandler = new MonsterCollisionHandler();
+        Dimension offset = now_direction.translate(speed);
+        boolean collision = collisionHandler.isCollision(this, offset);
+        if (collision) {
+            return;
+        }
+
         if (direction == Direction.LEFT || direction == Direction.RIGHT) {
             face = direction;
         }
-        if (!directions.contains(direction)) {
-            this.directions.add(direction);
-            fsm.trigger(WALK);
-        }
+        fsm.trigger(WALK);
     }
 
-    public void stop(Direction direction) {
-        directions.remove(direction);
-        if (directions.isEmpty()) {
-            fsm.trigger(STOP);
-        }
+    private void stop() {
+        fsm.trigger(STOP);
     }
 
     @Override
     public void update() {
+        //move(Direction.LEFT);
+        fsm.update();
     }
 
     @Override
@@ -68,8 +71,8 @@ public abstract class Monster extends Sprite{
         return speed;
     }
 
-    public Set<Direction> getDirections() {
-        return directions;
+    public Direction getDirections() {
+        return now_direction;
     }
 
     @Override

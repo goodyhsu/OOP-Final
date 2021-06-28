@@ -18,9 +18,9 @@ public class Ghost extends Monster {
         ImageRenderer imageRenderer = new MonsterImageRenderer(this);
 
         String dir = "sprites/ghost";
-        State idle = new WaitingPerFrame(5,
+        State idle = new WaitingPerFrame(15,
                 new Idle(imageStatesFromFolder( dir + "/default", imageRenderer)));
-        State walking = new WaitingPerFrame(5,
+        State walking = new WaitingPerFrame(8,
                 new Idle(imageStatesFromFolder( dir + "/default", imageRenderer)));
 
         fsm.setInitialState(idle);

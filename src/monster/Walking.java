@@ -18,9 +18,7 @@ public class Walking extends CyclicSequence {
     public void update() {
         if (monster.isAlive()) {
             super.update();
-            for (Direction direction : monster.getDirections()) {
-                monster.getWorld().move(monster, direction.translate(monster.getSpeed()));
-            }
+            monster.getWorld().move(monster, monster.getDirections().translate(monster.getSpeed()));
         }
     }
 
