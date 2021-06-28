@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import static player.Player.Event.*;
-import static model.Direction.LEFT;
 
 public abstract class Player extends HealthPointSprite {
     public Image bomb_image;
@@ -86,7 +85,7 @@ public abstract class Player extends HealthPointSprite {
     }
 
     public void move(Direction direction) {
-        if (direction == LEFT || direction == Direction.RIGHT) {
+        if (direction == Direction.LEFT || direction == Direction.RIGHT) {
             face = direction;
         }
         if (!directions.contains(direction)) {

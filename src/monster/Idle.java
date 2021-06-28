@@ -1,4 +1,4 @@
-package player;
+package monster;
 
 import fsm.CyclicSequence;
 import fsm.ImageState;
