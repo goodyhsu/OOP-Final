@@ -3,6 +3,7 @@ package player;
 import fsm.ImageRenderer;
 import fsm.State;
 import fsm.WaitingPerFrame;
+import model.Direction;
 import model.SpriteShape;
 
 import java.awt.*;
@@ -23,6 +24,11 @@ public class UglyTom extends PlayerType {
         bomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/seagull/0.png");
         smallBomb_image = Toolkit.getDefaultToolkit().getImage("sprites/bomb/seagullEgg/0.png");
         music_file = "music/SE/uglyTom.wav";
+        if (index == 0) {
+            this.setFace(Direction.RIGHT);
+        } else {
+            this.setFace(Direction.LEFT);
+        }
 
         ImageRenderer imageRenderer = new PlayerImageRenderer(this);
 

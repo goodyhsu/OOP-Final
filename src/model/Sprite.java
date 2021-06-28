@@ -1,12 +1,7 @@
 package model;
 
-import player.Player;
-
 import java.awt.*;
 
-/**
- * @author - johnny850807@gmail.com (Waterball)
- */
 public abstract class Sprite {
     protected World world;
     protected Point location = new Point();

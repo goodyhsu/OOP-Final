@@ -4,13 +4,7 @@ import model.HealthPointSprite;
 import model.Sprite;
 
 import java.awt.*;
-import java.io.File;
 
-import static utils.ImageStateUtils.readImage;
-
-/**
-     * @author - johnny850807@gmail.com (Waterball)
-     */
     public class HealthPointBar extends Sprite {
         private final int maxHp;
         private Sprite owner;

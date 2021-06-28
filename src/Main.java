@@ -1,14 +1,19 @@
 import controller.Game;
 import model.World;
+import monster.Ghost;
 import utils.MusicUtils;
 import views.GameView;
 import map.Map;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+
+        //Ghost Test
+        //Ghost ghost = new Ghost(new Point(500, 500));
 
         // Map
         ArrayList<String> obstacle_img_list = new ArrayList<>();
