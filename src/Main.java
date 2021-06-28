@@ -1,9 +1,13 @@
 import controller.Game;
+<<<<<<< HEAD
 import model.World;
 import monster.Ghost;
 import utils.MusicUtils;
+=======
+import model.GameWorld;
+>>>>>>> c54f10e96fafec4e2a4e333d730ef5ea5cd7ec13
 import views.GameView;
-import map.Map;
+import map.GameMap;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -22,15 +26,15 @@ public class Main {
         ArrayList<String> items = new ArrayList<>(Arrays.asList("DamageUp",
                 "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "SpeedUp", "Star"));
 
-        ArrayList<map.Map> maps= new ArrayList<>();
-        Map map0 = new Map("maps/backgrounds/0.png", "maps/files/0.txt", "music/bgm/map0.wav",
+        ArrayList<GameMap> maps= new ArrayList<>();
+        GameMap gameMap0 = new GameMap("maps/backgrounds/0.png", "maps/files/0.txt", "music/bgm/map0.wav",
                 obstacle_img_list, items);
-        Map map1 = new Map("maps/backgrounds/1.png", "maps/files/1.txt", "music/bgm/map1.wav",
+        GameMap gameMap1 = new GameMap("maps/backgrounds/1.png", "maps/files/1.txt", "music/bgm/map1.wav",
                 obstacle_img_list, items);
-        Map map2 = new Map("maps/backgrounds/2.png", "maps/files/2.txt", "music/bgm/map2.wav",
+        GameMap gameMap2 = new GameMap("maps/backgrounds/2.png", "maps/files/2.txt", "music/bgm/map2.wav",
                 obstacle_img_list, items);
-        maps.addAll(Arrays.asList(map0, map1, map2));
-        World world = new World();
+        maps.addAll(Arrays.asList(gameMap0, gameMap1, gameMap2));
+        GameWorld world = new GameWorld();
 
         // Game
         Game game = new Game(world, maps);
@@ -38,7 +42,7 @@ public class Main {
         //view
         GameView view = new GameView(game);
         //game start
-        game.start(5);
+        game.start();
 
         // view
         view.launch();
