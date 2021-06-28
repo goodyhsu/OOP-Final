@@ -7,7 +7,7 @@ import fsm.FiniteStateMachine;
 import model.Direction;
 import model.HealthPointSprite;
 import model.SpriteShape;
-import model.World;
+import model.GameWorld;
 import utils.MusicUtils;
 
 import java.awt.*;
@@ -73,7 +73,7 @@ public abstract class Player extends HealthPointSprite {
     public void attack() {
         if (num_bomb_current < num_bomb_max) {
             fsm.trigger(ATTACK);
-            World world = getWorld();
+            GameWorld world = (GameWorld) getWorld();
             Bomb bomb = new NormalBomb(this, this.getLocation(), this.getDamage(), this.getDamageArea());
             world.setBomb(bomb);
             setNum_bomb_current(num_bomb_current + 1);

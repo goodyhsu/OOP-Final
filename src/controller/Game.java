@@ -20,13 +20,13 @@ public class Game extends GameLoop {
 
     private Player p1;
     private Player p2;
-    private final World world;
+    private final GameWorld world;
     private final ArrayList<map.Map> maps;
     private Map map;
     private ArrayList<Integer> scores = new ArrayList<>(Arrays.asList(0, 0));
     private int winner = -1;
 
-    public Game(World world, ArrayList<map.Map> maps) {
+    public Game(GameWorld world, ArrayList<map.Map> maps) {
         this.world = world;
         this.maps = maps;
     }

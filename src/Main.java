@@ -1,4 +1,5 @@
 import controller.Game;
+import model.GameWorld;
 import model.World;
 import utils.MusicUtils;
 import views.GameView;
@@ -25,7 +26,7 @@ public class Main {
         Map map2 = new Map("maps/backgrounds/2.png", "maps/files/2.txt", "music/bgm/map2.wav",
                 obstacle_img_list, items);
         maps.addAll(Arrays.asList(map0, map1, map2));
-        World world = new World();
+        GameWorld world = new GameWorld();
 
         // Game
         Game game = new Game(world, maps);

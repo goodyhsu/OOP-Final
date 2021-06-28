@@ -1,9 +1,9 @@
 package controller;
 
 import model.Counter;
+import model.GameWorld;
 import model.Sprite;
 import player.Player;
-import utils.MusicUtils;
 
 public class GameRound {
     Game game;
