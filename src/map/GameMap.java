@@ -39,12 +39,8 @@ public class GameMap extends Map{
     }
     @Override
     public Image getBackground_image(){ return this.background_image; }
-//    public File getMap_file(){ return this.map_file; }
 
     public String getMusic_file(){ return this.music_file; }
-//    protected void setMap_files(String map_file) {
-//        this.map_file = new File(map_file);
-//    }
 
     @Override
     public void setMap() {
@@ -94,14 +90,17 @@ public class GameMap extends Map{
             if (i % items.size() == 0) {
                 item_idx = getRandomNumber(0, items.size());
             }
-            int x = getRandomNumber(0, GameView.WIDTH / GameView.BLOCK_WIDTH);
-            int y = getRandomNumber(0, GameView.HEIGHT / GameView.BLOCK_HEIGHT);
+            int half_w = (int) (GameView.WIDTH / GameView.BLOCK_WIDTH / 2);
+            int half_h = (int) (GameView.HEIGHT / GameView.BLOCK_HEIGHT / 2);
+            int yy = (i % 4) / 2;
+            int x = getRandomNumber(1 + (i%2)*half_w, half_w * (i % 2 + 1));
+            int y = getRandomNumber(1 + yy*half_h, half_h * (yy+1));
             Item new_item = (Item) createSpriteByName("item." + items.get(item_idx), new SpriteCoordinate(x, y));
             if (!(itemCollisionHandler.isCollision(new_item, new_item.getBodyOffset()))) {
                 this.world.addSprites(new_item);
                 i++;
+                item_idx = (item_idx + 1) % items.size();
             }
-            item_idx = (item_idx + 1) % items.size();
         }
     }
 
