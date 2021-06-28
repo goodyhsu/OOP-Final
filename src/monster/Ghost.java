@@ -17,12 +17,11 @@ public class Ghost extends Monster {
 
         String dir = "sprites/ghost";
         State idle = new WaitingPerFrame(15,
-                new Idle(imageStatesFromFolder("sprites/player/cat0/idle", imageRenderer)));
-
-        State walking = new WaitingPerFrame(8,
+                new Idle(imageStatesFromFolder(dir + "/default", imageRenderer)));
+        State walking = new WaitingPerFrame(10,
                 new Walking(this, imageStatesFromFolder( dir + "/default", imageRenderer)));
 
-        fsm.setInitialState(idle);
+        fsm.setInitialState(walking);
         fsm.addTransition(from(idle).when(WALK).to(walking));
         fsm.addTransition(from(walking).when(STOP).to(idle));
     }

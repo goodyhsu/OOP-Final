@@ -16,13 +16,11 @@ public abstract class Monster extends Sprite {
 
     protected SpriteCoordinate coordinate;
 
-    private final int speed = 5;
-    private int event_count = getEventCount();
+    private final int speed = 4;
+    private final int damage = 3;
     protected SpriteShape shape;
     public final FiniteStateMachine fsm;
-    private Event now_event = WALK;
-    private Direction now_direction = Direction.LEFT;
-    private MonsterCollisionHandler collisionHandler = new MonsterCollisionHandler();
+    private Direction now_direction = getRandomDirection();
 
     public enum Event {
         WALK, STOP
@@ -37,12 +35,12 @@ public abstract class Monster extends Sprite {
     }
 
     private void move(Direction direction) {
-
-        Dimension offset = now_direction.translate(speed);
+        Dimension offset = now_direction.translate(getSpeed());
+        MonsterCollisionHandler collisionHandler = new MonsterCollisionHandler();
         boolean collision = collisionHandler.isCollision(this, offset);
-        System.out.print(collision);
         if (collision) {
-            now_direction = Direction.values()[new Random().nextInt(Direction.values().length)];
+            now_direction = getRandomDirection();
+            stop();
         } else {
             if (direction == Direction.LEFT || direction == Direction.RIGHT)
                 face = direction;
@@ -56,18 +54,8 @@ public abstract class Monster extends Sprite {
 
     @Override
     public void update() {
-        event_count--;
-        switch(now_event) {
-            case STOP:
-                stop();
-            case WALK:
-                move(now_direction);
-        }
+        move(now_direction);
         fsm.update();
-        if (event_count < 0) {
-            event_count = getEventCount();
-            now_event = Event.values()[(now_event.ordinal()+1) % 2];
-        }
     }
 
     @Override
@@ -76,18 +64,24 @@ public abstract class Monster extends Sprite {
     }
 
     @Override
-    public void damaged(int i) {}
+    public void damaged(int value) {
+        this.getWorld().removeSprite(this);
+    }
 
     public int getSpeed() {
         return speed;
     }
 
-    private int getEventCount() {
-        return (new Random().nextInt(7) + 3);
+    public Direction getDirection() {
+        return now_direction;
     }
 
-    public Direction getDirections() {
-        return now_direction;
+    public int getDamage() {
+        return damage;
+    }
+
+    private Direction getRandomDirection() {
+        return Direction.values()[new Random().nextInt(Direction.values().length)];
     }
 
     @Override
