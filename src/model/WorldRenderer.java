@@ -4,6 +4,9 @@ import imageRenderer.GraphicsRenderer;
 
 import java.awt.*;
 
+import static views.GameView.HEIGHT;
+import static views.GameView.WIDTH;
+
 public class WorldRenderer extends GraphicsRenderer{
     World world;
     public WorldRenderer(Graphics g, World world){
@@ -14,7 +17,8 @@ public class WorldRenderer extends GraphicsRenderer{
     @Override
     public void gRender() {
         // background
-        this.world.getMap().render(g);
+        Rectangle range = new Rectangle(0, 0, WIDTH, HEIGHT);
+        g.drawImage(this.world.getMap().getBackground_image(), range.x, range.y, range.width, range.height, null);
         // sprites
         for (Sprite sprite : this.world.getSprites()) {
             sprite.render(g);

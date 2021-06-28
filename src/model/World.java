@@ -1,7 +1,7 @@
 package model;
 
 import imageRenderer.ImageRenderer;
-import map.Map;
+import map.GameMap;
 
 import java.awt.*;
 import java.util.*;
@@ -17,15 +17,15 @@ import static java.util.stream.Collectors.toSet;
 public abstract class World {
     private static final List<Sprite> sprites = new CopyOnWriteArrayList<>();
     private ImageRenderer renderer;
-    protected Map map;
+    protected GameMap map;
 
     public World() {}
 
     public void setRenderer(ImageRenderer renderer) { this.renderer = renderer; }
 
-    public Map getMap(){ return this.map; }
+    public GameMap getMap(){ return this.map; }
 
-    public void setMap(Map map) {
+    public void setMap(GameMap map) {
         this.map = map;
     }
     public void update() {

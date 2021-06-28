@@ -1,6 +1,6 @@
 package controller;
 
-import map.Map;
+import map.GameMap;
 import model.*;
 import player.Player;
 
@@ -21,14 +21,14 @@ public class Game extends GameLoop {
     private Player p1;
     private Player p2;
     private final GameWorld world;
-    private final ArrayList<map.Map> maps;
-    private Map map;
+    private final ArrayList<GameMap> gameMaps;
+    private GameMap gameMap;
     private ArrayList<Integer> scores = new ArrayList<>(Arrays.asList(0, 0));
     private int winner = -1;
 
-    public Game(GameWorld world, ArrayList<map.Map> maps) {
+    public Game(GameWorld world, ArrayList<GameMap> gameMaps) {
         this.world = world;
-        this.maps = maps;
+        this.gameMaps = gameMaps;
     }
 
     @Override
@@ -62,16 +62,16 @@ public class Game extends GameLoop {
         return world;
     }
 
-    protected Map getMap(){
-        return map;
+    protected GameMap getMap(){
+        return gameMap;
     }
 
     protected void setMapAndWorld(int round) {
         world.reset();
-        map = maps.get((round-1)%maps.size());
-        world.setMap(map);
-        map.setWorld(world);
-        map.setMap();   // obstacles & ...
+        gameMap = gameMaps.get((round-1)% gameMaps.size());
+        world.setMap(gameMap);
+        gameMap.setWorld(world);
+        gameMap.setMap();   // obstacles & ...
     }
 
     public ArrayList<Integer> getScores() {
