@@ -110,7 +110,7 @@ public class Game extends GameLoop {
     @Override
     protected void gameLoop() {
         while (true) {
-            counter = new Counter(300000 / 15, false);
+            counter = new Counter(3000 / 15, false);
             selectCharacter();
             setMapAndWorld(round);
             gameRound.nextRound(counter);

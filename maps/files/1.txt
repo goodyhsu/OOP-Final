@@ -116,3 +116,5 @@ Wood 18 11
 Wood 19 3
 Wood 19 5
 Wood 19 6
+Monster 5 6
+Monster 15 7
