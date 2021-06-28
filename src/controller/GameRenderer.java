@@ -1,44 +1,45 @@
 package controller;
 
-import imageRenderer.ImageRenderer;
+import imageRenderer.GraphicsRenderer;
 import model.Counter;
-import model.World;
 import views.GameView;
 
 import java.awt.*;
 
 import static utils.renderUtils.drawString;
 
-public class GameRenderer {
-    GameLoop gameLoop;
-    public GameRenderer(GameLoop gameLoop) {
-        this.gameLoop = gameLoop;
+public class GameRenderer extends GraphicsRenderer {
+    Game game;
+    public GameRenderer(Graphics g, GameLoop gameLoop) {
+        super(g);
+        this.game = (Game) gameLoop;
     }
 
-    public void render(Graphics g) {
-        if (gameLoop.getStatus() == Game.Status.over){
+    @Override
+    public void gRender() {
+        if (game.getStatus() == Game.Status.over){
             drawOver(g);
         }
-        else if (gameLoop.getStatus() == Game.Status.start) {
+        else if (game.getStatus() == Game.Status.start) {
             drawStart(g);
-            gameLoop.setStatus(Game.Status.in_progress);
+            game.setStatus(Game.Status.in_progress);
         }
-        else if (gameLoop.getStatus() == Game.Status.in_progress) {
+        else if (game.getStatus() == Game.Status.in_progress) {
             drawAll(g);
         }
-        else if (gameLoop.getStatus() == Game.Status.selecting || gameLoop.getStatus() == Game.Status.instructions){
-            gameLoop.getChar_selector().render(g);
+        else if (game.getStatus() == Game.Status.selecting || game.getStatus() == Game.Status.instructions){
+            game.getChar_selector().render(g);
         }
     }
 
     private void drawAll(Graphics g) {
         // world
-        gameLoop.getWorld().render(); // ask the world to paint itself and paint the sprites on the canvas
+        game.getWorld().render(); // ask the world to paint itself and paint the sprites on the canvas
         // grids
         drawGrids(g);
         // timer
-        if (gameLoop.getCounter() != null)
-            drawTimer(g, gameLoop.getCounter());
+        if (game.getCounter() != null)
+            drawTimer(g, game.getCounter());
     }
 
     private void drawGrids(Graphics g) {
@@ -70,8 +71,8 @@ public class GameRenderer {
     }
 
     private void drawOver(Graphics g) {
-        gameLoop.getWorld().render();
-        int winner = gameLoop.getWinner();
+        game.getWorld().render();
+        int winner = game.getWinner();
         String string;
         if (winner != -1)
             string = "Player" + (winner+1) + " wins!";

@@ -1,9 +1,7 @@
 package controller;
 
 import map.Map;
-import model.Counter;
-import model.Direction;
-import model.World;
+import model.*;
 import player.Player;
 
 import java.util.ArrayList;
@@ -13,6 +11,13 @@ import java.util.Arrays;
  * @author - johnny850807@gmail.com (Waterball)
  */
 public class Game extends GameLoop {
+    private Counter counter = null;
+    private int round = 1;
+    private final CharacterSelector char_selector = new CharacterSelector(this);
+    private final GameRound gameRound = new GameRound(this);
+    public enum Status{selecting, instructions, start, in_progress, over, wait}
+    public Status status = Status.selecting;
+
     private Player p1;
     private Player p2;
     private final World world;
@@ -24,6 +29,11 @@ public class Game extends GameLoop {
     public Game(World world, ArrayList<map.Map> maps) {
         this.world = world;
         this.maps = maps;
+    }
+
+    @Override
+    public void start() {
+        new Thread(this::gameLoop).start();
     }
 
     public void setPlayer(Player p1, Player p2) {
@@ -52,12 +62,10 @@ public class Game extends GameLoop {
         return world;
     }
 
-    @Override
     protected Map getMap(){
         return map;
     }
 
-    @Override
     protected void setMapAndWorld(int round) {
         world.reset();
         map = maps.get((round-1)%maps.size());
@@ -66,12 +74,10 @@ public class Game extends GameLoop {
         map.setMap();   // obstacles & ...
     }
 
-    @Override
     public ArrayList<Integer> getScores() {
         return scores;
     }
 
-    @Override
     protected int getWinner() {
         return winner;
     }
@@ -92,7 +98,6 @@ public class Game extends GameLoop {
         }
     }
 
-    @Override
     protected boolean isOver(Counter counter) {
         boolean over = false;
         if (!p1.isAlive() || !p2.isAlive() || counter.time_up()) {
@@ -102,5 +107,50 @@ public class Game extends GameLoop {
         return over;
     }
 
+    @Override
+    protected void gameLoop() {
+        while (true) {
+            counter = new Counter(300000 / 15, false);
+            selectCharacter();
+            setMapAndWorld(round);
+            gameRound.nextRound(counter);
+            int winner = getWinner();
+            if (winner != -1)
+                getChar_selector().unlockTom(winner);
+            round++;
+        }
+    }
 
+    private void selectCharacter() {
+        musicUtils.playMusic("music/bgm/default.wav", true, true, true);
+        setStatus(Status.selecting);
+        getChar_selector().reset(round);
+        while (getStatus() != Status.wait) {
+            getView().render(this);
+            delay(15);
+        }
+    }
+
+    public Counter getCounter() {
+        return counter;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void changeCharacter(int player, int change) {
+        char_selector.changeCharacter(player, change);
+    }
+
+    protected CharacterSelector getChar_selector() {
+        return char_selector;
+    }
+
+    protected ArrayList<SpriteCoordinate> getPlayerCoordinates() {
+        return getMap().getPlayerCoordinates();
+    }
 }

@@ -16,7 +16,6 @@ public class WorldRenderer extends GraphicsRenderer{
         // background
         this.world.getMap().render(g);
         // sprites
-//        System.out.println("in world render");
         for (Sprite sprite : this.world.getSprites()) {
             sprite.render(g);
         }

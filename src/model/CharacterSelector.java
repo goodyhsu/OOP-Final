@@ -1,7 +1,7 @@
 package model;
 
 import controller.Game;
-import controller.GameLoop;
+import controller.Game;
 import player.Player;
 import views.GameView;
 
@@ -17,7 +17,7 @@ import static utils.renderUtils.drawString;
 import static utils.renderUtils.drawImage;
 
 public class CharacterSelector {
-    private final GameLoop gameLoop;
+    private final Game game;
     private final String dir = "sprites/characters/";
     private final ArrayList<String> class_names = new ArrayList<>();
     private final ArrayList<Integer> img_idx = new ArrayList<>();
@@ -25,10 +25,10 @@ public class CharacterSelector {
     private final int player_num = 2;
     private int round;
 
-    public CharacterSelector(GameLoop gameLoop) {
+    public CharacterSelector(Game game) {
         this.class_names.addAll(Arrays.asList("Dog", "Dog", "Cat", "Cat", "UglyTom"));
         this.img_idx.addAll(Arrays.asList(0, 1));
-        this.gameLoop = gameLoop;
+        this.game = game;
         this.img_num = new ArrayList<>(Arrays.asList(4, 4));
         round = 1;
     }
@@ -49,7 +49,10 @@ public class CharacterSelector {
     }
 
     public void render(Graphics g) {
-        if (gameLoop.getStatus() == GameLoop.Status.selecting) {
+        if (game.getStatus() == Game.Status.selecting) {
+            Image image = readImage(new File("img/0.png"));
+            g.drawImage(image, 0, 0, GameView.WIDTH, GameView.HEIGHT, null);
+
             int periphery = 100;
             drawPlayers(g, 100);
 
@@ -71,7 +74,7 @@ public class CharacterSelector {
                     (int) (GameView.WIDTH / 2), periphery*2, true);
 
             // score
-            ArrayList<Integer> scores = gameLoop.getScores();
+            ArrayList<Integer> scores = game.getScores();
             string = scores.get(0) + " : " + scores.get(1);
             drawString(g, string, Color.BLACK,
                     new Font("TimesRoman", Font.PLAIN, 64),

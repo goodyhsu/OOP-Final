@@ -162,17 +162,16 @@ public class GameView extends JFrame {
         protected void paintComponent(Graphics g /*paintbrush*/) {
             super.paintComponent(g);
 
-            // Now, let's paint
+            // set world renderer
             World world = gameLoop.getWorld();
             ImageRenderer world_renderer = new WorldRenderer(g, world);
             world.setRenderer(world_renderer);
+            // set game renderer
+            gameLoop.setGamRenderer(new GameRenderer(g, gameLoop));
 
-            g.setColor(Color.WHITE); // paint background with all white
-            g.fillRect(0, 0, GameView.WIDTH, GameView.HEIGHT);
-            Image image = readImage(new File("img/0.png"));
-            g.drawImage(image, 0, 0, GameView.WIDTH, GameView.HEIGHT, null);
+            // Now, let's paint
             if (gameLoop != null)
-                gameLoop.getGameRenderer().render(g);
+                gameLoop.getGameRenderer().render();
         }
     }
 

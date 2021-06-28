@@ -33,7 +33,7 @@ public class Main {
         //view
         GameView view = new GameView(game);
         //game start
-        game.start(5);
+        game.start();
 
         // view
         view.launch();
