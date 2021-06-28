@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static utils.CreateInstanceUtils.createSpriteByName;
+import static utils.ImageStateUtils.readImage;
 
 public class GameMap extends Map{
     private File map_file;
@@ -32,9 +33,17 @@ public class GameMap extends Map{
     }
 
     @Override
+    public void setBackground_image(String background_file) {
+        this.background_image = readImage(new File(background_file));
+    }
+    @Override
     public Image getBackground_image(){ return this.background_image; }
-    public File getMap_file(){ return this.map_file; }
+//    public File getMap_file(){ return this.map_file; }
+
     public String getMusic_file(){ return this.music_file; }
+//    protected void setMap_files(String map_file) {
+//        this.map_file = new File(map_file);
+//    }
 
     @Override
     public void setMap() {

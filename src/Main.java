@@ -1,5 +1,6 @@
 import controller.Game;
 
+import map.AnimationMap;
 import model.GameWorld;
 import views.GameView;
 import map.GameMap;
@@ -18,8 +19,8 @@ public class Main {
                 "Explode_rangeUp", "IncreaseBomb_num", "IncreaseHP", "SpeedUp", "Star"));
 
         ArrayList<GameMap> maps= new ArrayList<>();
-        GameMap gameMap0 = new GameMap("maps/backgrounds/0.png", "maps/files/0.txt", "music/bgm/map0.wav",
-                obstacle_img_list, items);
+        GameMap gameMap0 = new AnimationMap("maps/backgrounds/coolSea", "maps/files/0.txt", "music/bgm/map0.wav",
+                obstacle_img_list, items, 40);
         GameMap gameMap1 = new GameMap("maps/backgrounds/1.png", "maps/files/1.txt", "music/bgm/map1.wav",
                 obstacle_img_list, items);
         GameMap gameMap2 = new GameMap("maps/backgrounds/2.png", "maps/files/2.txt", "music/bgm/map2.wav",

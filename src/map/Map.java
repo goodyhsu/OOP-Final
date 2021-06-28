@@ -12,12 +12,13 @@ public abstract class Map {
     public String music_file;
 
     public Map(String background_file, String music_file){
-        this.background_image = readImage(new File(background_file));
+        setBackground_image(background_file);
         this.music_file = music_file;
     }
 
     public void setWorld(World world) { this.world = world; }
 
     public abstract void setMap();
+    public abstract void setBackground_image(String background_file);
     public abstract Image getBackground_image();
 }
