@@ -5,15 +5,10 @@ import controller.GameLoop;
 import controller.GameRenderer;
 import imageRenderer.ImageRenderer;
 import model.*;
-import static utils.ImageStateUtils.readImage;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import javax.swing.*;
-
-import static utils.renderUtils.drawString;
-
 
 public class GameView extends JFrame {
     public static final int HEIGHT = 700;

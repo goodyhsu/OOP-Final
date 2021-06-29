@@ -1,5 +1,6 @@
 package controller;
 
+import map.GameMap;
 import model.Counter;
 import model.Sprite;
 import player.Player;
@@ -31,7 +32,8 @@ public class GameRound {
     private int updateItems(int last_update_items_time) {
         Counter counter = game.getCounter();
         if (counter.getCurrent_time() - last_update_items_time >= (1*60*1000/15) || last_update_items_time == 0) {
-            game.getWorld().getMap().setItems(6);
+            GameMap map = (GameMap) game.getWorld().getMap();
+            map.setItems(6);
             last_update_items_time = counter.getCurrent_time() + 1;
         }
         return last_update_items_time;

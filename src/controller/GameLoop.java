@@ -4,9 +4,6 @@ import imageRenderer.ImageRenderer;
 import model.World;
 import utils.MusicUtils;
 
-/**
- * @author - johnny850807@gmail.com (Waterball)
- */
 public abstract class GameLoop {
     private View view;
     private ImageRenderer gameRenderer;

@@ -7,9 +7,6 @@ import player.Player;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * @author - johnny850807@gmail.com (Waterball)
- */
 public class Game extends GameLoop {
     private Counter counter = null;
     private int round = 1;
