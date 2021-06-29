@@ -90,9 +90,19 @@ public class Game extends GameLoop {
             winner = 1;   // player 2 wins
         }
         else {
-            scores.set(0, scores.get(0)+1);
-            scores.set(1, scores.get(1)+1);
-            winner = -1;  // Tie
+            if (p1.getHP() > p2.getHP()) {
+                scores.set(0, scores.get(0)+1);
+                winner = 0;
+            }
+            else if (p1.getHP() < p2.getHP()) {
+                scores.set(1, scores.get(1)+1);
+                winner = 1;
+            }
+            else {
+                scores.set(0, scores.get(0)+1);
+                scores.set(1, scores.get(1)+1);
+                winner = -1;  // Tie
+            }
         }
     }
 
