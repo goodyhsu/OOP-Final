@@ -25,8 +25,6 @@ public abstract class Player extends HealthPointSprite {
     private final Set<Direction> directions = new CopyOnWriteArraySet<>();
 
     public int index;
-    private int HP_full;
-    public int HP;
     private int damage_area;
     private int damage;
     public int speed;
@@ -42,8 +40,6 @@ public abstract class Player extends HealthPointSprite {
 
     public Player() {
         super(500);
-        HP_full = 500;
-        HP = HP_full;
         damage_area = 1;
         damage = 1;
         num_bomb_max = 1;
@@ -138,4 +134,6 @@ public abstract class Player extends HealthPointSprite {
     }
 
     public int getDamageArea() {return damage_area;}
+
+    public int getHP() {return this.hpBar.getHP();}
 }

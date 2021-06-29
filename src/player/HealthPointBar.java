@@ -46,6 +46,10 @@ import java.awt.*;
             this.hp = Math.min(hp + value, maxHp);
         }
 
+        public int getHP() {
+            return hp;
+        }
+
         @Override
         public Rectangle getRange() {
             return new Rectangle(owner.getX(), owner.getY() - 10, (int) owner.getRange().getWidth(), 7);
