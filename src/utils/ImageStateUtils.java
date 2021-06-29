@@ -14,9 +14,6 @@ import java.util.regex.Pattern;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author - johnny850807@gmail.com (Waterball)
- */
 public class ImageStateUtils {
     public static final String SUPPORTED_FILE_NAME_PATTERN = "([1-9][0-9]*|0)\\.(bmp|jpg|png)";
 

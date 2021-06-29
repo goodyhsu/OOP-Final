@@ -1,10 +1,8 @@
 package map;
 
 import model.World;
-import static utils.ImageStateUtils.readImage;
 
 import java.awt.*;
-import java.io.File;
 
 public abstract class Map {
     protected World world;

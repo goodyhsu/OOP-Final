@@ -2,12 +2,10 @@ package utils;
 
 import model.SpriteCoordinate;
 
-import static javax.swing.JFrame.isDefaultLookAndFeelDecorated;
 import static views.GameView.BLOCK_HEIGHT;
 import static views.GameView.BLOCK_WIDTH;
 
 import java.awt.*;
-import java.awt.desktop.AboutEvent;
 
 public class LocationUtils {
     public static Point coordinateToLocation(SpriteCoordinate coordinate){

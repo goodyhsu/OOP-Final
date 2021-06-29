@@ -3,7 +3,6 @@ package player;
 import model.CollisionHandler;
 import model.Sprite;
 import item.Item;
-import monster.Monster;
 import obstacle.Obstacle;
 import model.World;
 import utils.MusicUtils;

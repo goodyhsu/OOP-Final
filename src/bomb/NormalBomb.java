@@ -2,7 +2,6 @@ package bomb;
 
 import model.*;
 import player.Player;
-import utils.MusicUtils;
 
 import static utils.LocationUtils.isInBoundary;
 

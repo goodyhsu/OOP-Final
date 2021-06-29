@@ -12,9 +12,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toSet;
 
-/**
- * @author - johnny850807@gmail.com (Waterball)
- */
 public abstract class World {
     private static final List<Sprite> sprites = new CopyOnWriteArrayList<>();
     private ImageRenderer renderer;

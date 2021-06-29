@@ -3,7 +3,6 @@ package map;
 import item.Item;
 import item.ItemCollisionHandler;
 import model.SpriteCoordinate;
-import model.World;
 import monster.Ghost;
 import obstacle.*;
 import views.GameView;

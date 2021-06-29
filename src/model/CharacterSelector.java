@@ -1,7 +1,6 @@
 package model;
 
 import controller.Game;
-import controller.Game;
 import player.Player;
 import views.GameView;
 
