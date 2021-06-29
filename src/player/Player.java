@@ -38,8 +38,10 @@ public abstract class Player extends HealthPointSprite {
         WALK, STOP, ATTACK, DAMAGED
     }
 
-    public Player() {
+    public Player(Point location, int index) {
         super(500);
+        this.location = location;
+        this.index = index;
         damage_area = 1;
         damage = 1;
         num_bomb_max = 1;
