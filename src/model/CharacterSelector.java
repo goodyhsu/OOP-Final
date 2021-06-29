@@ -48,10 +48,9 @@ public class CharacterSelector {
     }
 
     public void render(Graphics g) {
+        Image image = readImage(new File("img/0.png"));
+        g.drawImage(image, 0, 0, GameView.WIDTH, GameView.HEIGHT, null);
         if (game.getStatus() == Game.Status.selecting) {
-            Image image = readImage(new File("img/0.png"));
-            g.drawImage(image, 0, 0, GameView.WIDTH, GameView.HEIGHT, null);
-
             int periphery = 100;
             drawPlayers(g, 100);
 
@@ -102,7 +101,7 @@ public class CharacterSelector {
     }
 
     public void drawInstructions(Graphics g) {
-        Image image = readImage(new File("img/Instruction_2.png"));
+        Image image = readImage(new File("img/Instruction.png"));
         drawImage(g, image, 0, 0, GameView.WIDTH, GameView.HEIGHT);
     }
 
