@@ -27,6 +27,8 @@ public class CreateInstanceUtils {
             Class<?> clazz = Class.forName(class_name);
             Constructor<?> ctor = clazz.getConstructor(Point.class, int.class, int.class);
             playerType = (PlayerType) ctor.newInstance(point, idx, type);
+//            if (class_name.equals("Dog"))
+//                playerType = new Dog(point, idx, type);
         } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         }

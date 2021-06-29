@@ -4,10 +4,10 @@ SRC=src/
 OUT=out/
 
 all:
-	$(CC) -sourcepath $(SRC) -d $(OUT) $(SRC)*.java
+	$(CC) -s $(SRC) -sourcepath $(SRC) -d $(OUT) $(SRC)*.java $(SRC)*/*.java
 
 run:
-	java -classpath out Main
+	java -classpath $(OUT) Main
 
 clean:
 	rm -rf $(OUT)
