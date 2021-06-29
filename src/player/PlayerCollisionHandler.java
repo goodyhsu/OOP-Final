@@ -17,7 +17,7 @@ public class PlayerCollisionHandler implements CollisionHandler {
 
     @Override
     public boolean isCollision(Sprite now, Dimension offset) {
-        System.out.printf("\n");
+//        System.out.printf("\n");
         List<Sprite> sprites = World.getSprites();
         Rectangle originalBody = now.getBody();
         Point originalLocation = new Point(now.getLocation());

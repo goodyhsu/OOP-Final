@@ -43,7 +43,7 @@ public class NormalBomb extends Bomb{
             if(smallBomb_collision[1])
                 direction_stop[i] = true;
         }
-        System.err.println();
+//        System.err.println();
     }
 
     @Override
