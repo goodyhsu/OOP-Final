@@ -57,7 +57,6 @@ public class GameRound {
 
     public void roundOver() {
         game.setStatus(Game.Status.over);
-//        running = false;
         game.getCounter().stopCounter();
         game.getMusicUtils().playMusic("music/bgm/game_over.wav", false, true, true);
         for (Sprite sprite : game.getWorld().getSprites()) {

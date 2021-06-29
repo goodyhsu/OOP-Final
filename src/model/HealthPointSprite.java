@@ -53,5 +53,4 @@ public abstract class HealthPointSprite extends Sprite {
     public void render(Graphics g) {
         hpBar.render(g);
     }
-
 }

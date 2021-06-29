@@ -1,7 +1,6 @@
 package model;
 
 import controller.Game;
-import controller.GameLoop;
 import imageRenderer.GraphicsRenderer;
 import views.GameView;
 

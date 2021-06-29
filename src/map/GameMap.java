@@ -89,8 +89,8 @@ public class GameMap extends Map{
             if (i % items.size() == 0) {
                 item_idx = getRandomNumber(0, items.size());
             }
-            int half_w = (int) (GameView.WIDTH / GameView.BLOCK_WIDTH / 2);
-            int half_h = (int) (GameView.HEIGHT / GameView.BLOCK_HEIGHT / 2);
+            int half_w = (GameView.WIDTH / GameView.BLOCK_WIDTH / 2);
+            int half_h = (GameView.HEIGHT / GameView.BLOCK_HEIGHT / 2);
             int yy = (i % 4) / 2;
             int x = getRandomNumber(1 + (i%2)*half_w, half_w * (i % 2 + 1));
             int y = getRandomNumber(1 + yy*half_h, half_h * (yy+1));

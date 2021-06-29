@@ -32,15 +32,12 @@ public class SmallBombImageRenderer extends BombImageRenderer{
     private void rotate_drawImage( int angle, Graphics2D g, Image image, int x, int y,
                                    int width, int height) {
         AffineTransform tr = new AffineTransform();
-        // X and Y are the coordinates of the image
         tr.translate(x, y);
         tr.rotate(
                 Math.toRadians(angle),
                 width / 2,
                 height / 2
         );
-
-        // img is a BufferedImage instance
         g.drawImage(image, tr, null);
     }
 }

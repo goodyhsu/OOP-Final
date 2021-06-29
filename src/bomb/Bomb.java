@@ -16,7 +16,7 @@ public abstract class Bomb extends Sprite {
     protected final int damage;
     protected final int explode_range;
     protected int num_smallBomb;
-    protected Counter before_explode_counter, after_explode_counter; // 5s, 2s
+    protected Counter before_explode_counter, after_explode_counter;
     protected boolean exploded;
     protected BombImageRenderer renderer;
     protected boolean[] direction_stop;

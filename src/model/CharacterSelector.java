@@ -78,10 +78,6 @@ public class CharacterSelector {
                     new Font("TimesRoman", Font.PLAIN, 64),
                     (int) (GameView.WIDTH / 2), (int) (GameView.WIDTH/2)-100, true);
 
-//            // choose
-//            drawString(g, "Choose your favorite character :))", Color.darkGray,
-//                    new Font("TimesRoman", Font.PLAIN, 24), (int) (GameView.WIDTH/2), periphery*3, true);
-
             // player 1 & player 2
             drawString(g, "Player 1", Color.darkGray,
                     new Font("TimesRoman", Font.PLAIN, 32), 130, 220, false);

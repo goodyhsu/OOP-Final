@@ -17,7 +17,7 @@ public abstract class Monster extends Sprite {
     protected SpriteCoordinate coordinate;
 
     private final int speed = 4;
-    private final int damage = 3;
+    private final int damage = 2;
     protected SpriteShape shape;
     public final FiniteStateMachine fsm;
     private Direction now_direction = getRandomDirection();
