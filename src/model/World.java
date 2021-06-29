@@ -1,8 +1,8 @@
 package model;
 
-import controller.Game;
+import controller.GameLoop;
 import imageRenderer.ImageRenderer;
-import map.GameMap;
+import map.Map;
 
 import java.awt.*;
 import java.util.*;
@@ -15,16 +15,16 @@ import static java.util.stream.Collectors.toSet;
 public abstract class World {
     private static final List<Sprite> sprites = new CopyOnWriteArrayList<>();
     private ImageRenderer renderer;
-    protected GameMap map;
-    private Game game;
+    protected Map map;
+    private GameLoop game;
 
     public World() {}
 
     public void setRenderer(ImageRenderer renderer) { this.renderer = renderer; }
 
-    public GameMap getMap(){ return this.map; }
+    public Map getMap(){ return this.map; }
 
-    public void setMap(GameMap map) {
+    public void setMap(Map map) {
         this.map = map;
     }
     public void update() {
@@ -63,11 +63,11 @@ public abstract class World {
         return sprites;
     }
 
-    public void setGame(Game game) {
+    public void setGame(GameLoop game) {
         this.game = game;
     }
 
-    public Game getGame() {
+    public GameLoop getGame() {
         return this.game;
     }
 

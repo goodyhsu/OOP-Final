@@ -1,6 +1,7 @@
 package model;
 
 import controller.Game;
+import controller.GameLoop;
 import imageRenderer.GraphicsRenderer;
 import views.GameView;
 
@@ -23,7 +24,8 @@ public class WorldRenderer extends GraphicsRenderer{
         g.drawImage(this.world.getMap().getBackground_image(), range.x, range.y, range.width, range.height, null);
 
         // grids
-        if (world.getGame().getStatus() == Game.Status.in_progress)
+        Game game = (Game) world.getGame();
+        if (game.getStatus() == Game.Status.in_progress)
             drawGrids(g);
 
         // sprites
