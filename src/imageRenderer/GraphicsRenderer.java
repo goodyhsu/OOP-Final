@@ -3,7 +3,7 @@ package imageRenderer;
 import java.awt.*;
 
 public abstract class GraphicsRenderer implements ImageRenderer{
-    private Graphics g;
+    protected Graphics g;
     public GraphicsRenderer(Graphics g){ this.g = g; }
 
     public Graphics getG(){ return this.g; }

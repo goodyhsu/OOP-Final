@@ -5,7 +5,7 @@ import fsm.ImageRenderer;
 import java.awt.*;
 
 public class ObstacleImageRenderer implements ImageRenderer{
-    protected Obstacle obstacle;
+    private Obstacle obstacle;
     public ObstacleImageRenderer(Obstacle obstacle){ this.obstacle = obstacle; }
 
     @Override

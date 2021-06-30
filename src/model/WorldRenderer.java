@@ -20,7 +20,7 @@ public class WorldRenderer extends GraphicsRenderer{
     public void gRender() {
         // background
         Rectangle range = new Rectangle(0, 0, WIDTH, HEIGHT);
-        g.drawImage(this.world.getMap().getBackground_image(), range.x, range.y, range.width, range.height, null);
+        this.g.drawImage(this.world.getMap().getBackground_image(), range.x, range.y, range.width, range.height, null);
 
         // grids
         Game game = (Game) world.getGame();
