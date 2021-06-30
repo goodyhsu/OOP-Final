@@ -94,7 +94,7 @@ public class CharacterSelector {
         }
     }
 
-    public void drawInstructions(Graphics g) {
+    private void drawInstructions(Graphics g) {
         Image image = readImage(new File("img/Instruction.png"));
         drawImage(g, image, 0, 0, GameView.WIDTH, GameView.HEIGHT);
     }
