@@ -5,7 +5,7 @@ import java.io.File;
 
 public class MusicUtils {
 
-    public boolean isPlaying = false;
+    private boolean isPlaying = false;
     private Clip clip;
 
     public void playMusic(String musicLocation, boolean isLoop, boolean isCover, boolean setVolume) {
@@ -45,13 +45,13 @@ public class MusicUtils {
         }
     }
 
-    public void setVolume() {
+    private void setVolume() {
         FloatControl gainControl =
                 (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         gainControl.setValue(-10.0f);
     }
 
-    public void endMusic() {
+    private void endMusic() {
         clip.close();
         clip = null;
         isPlaying = false;

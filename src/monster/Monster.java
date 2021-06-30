@@ -19,10 +19,10 @@ public abstract class Monster extends Sprite {
     private final int speed = 4;
     private final int damage = 2;
     protected SpriteShape shape;
-    public final FiniteStateMachine fsm;
+    protected final FiniteStateMachine fsm;
     private Direction now_direction = getRandomDirection();
 
-    public enum Event {
+    protected enum Event {
         WALK, STOP
     }
 

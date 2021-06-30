@@ -21,20 +21,20 @@ public abstract class Player extends HealthPointSprite {
     public Image smallBomb_image;
 
     protected SpriteShape shape;
-    public final FiniteStateMachine fsm;
+    protected final FiniteStateMachine fsm;
     private final Set<Direction> directions = new CopyOnWriteArraySet<>();
 
-    public int index;
+    private int index;
     private int damage_area;
     private int damage;
-    public int speed;
+    protected int speed;
     private int num_bomb_max;
     private int num_bomb_current;
 
     private final MusicUtils musicUtils = new MusicUtils();
     String music_file;
 
-    public enum Event {
+    protected enum Event {
         WALK, STOP, ATTACK, DAMAGED
     }
 
