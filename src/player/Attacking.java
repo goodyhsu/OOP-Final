@@ -11,7 +11,6 @@ import java.util.Set;
 public class Attacking extends Sequence {
     private final Player player;
     private final StateMachine stateMachine;
-    private final Set<Integer> damagingStateNumbers = new HashSet<>(List.of(6));
 
     public Attacking(Player player, StateMachine stateMachine, List<? extends State> states) {
         super(states);
