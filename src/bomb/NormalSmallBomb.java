@@ -18,7 +18,7 @@ public class NormalSmallBomb extends SmallBomb{
     }
 
     @Override
-    public void explode_effect(){
+    protected void explode_effect(){
         // Deal damage
         Rectangle damageArea = getRange();
         var sprites = this.world.getSprites(damageArea);
@@ -28,13 +28,13 @@ public class NormalSmallBomb extends SmallBomb{
     }
 
     @Override
-    public SmallBomb new_smallBomb(Player owner, Point smallBomb_location, int damage, int explode_range,
+    protected SmallBomb new_smallBomb(Player owner, Point smallBomb_location, int damage, int explode_range,
                                    Counter before, Counter after, Direction face){
         return null;
     }
 
     @Override
-    public void add_smallBomb(int num_smallBomb, boolean[] direction_stop){}
+    protected void add_smallBomb(int num_smallBomb, boolean[] direction_stop){}
 
     @Override
     public Rectangle getRange() {

@@ -11,9 +11,10 @@ import java.awt.*;
 public abstract class Item extends Sprite {
     protected SpriteCoordinate coordinate;
     private SpriteShape shape;
-    Image image;
-    ItemImageRenderer renderer;
-    Player owner;
+    protected Image image;
+    protected ItemImageRenderer renderer;
+    protected Player owner;
+
     public Item(SpriteCoordinate coordinate){
         this.coordinate = coordinate;
         this.location = coordinateToLocation(coordinate);

@@ -21,7 +21,7 @@ public class NormalBomb extends Bomb{
     }
 
     @Override
-    public void add_smallBomb(int num_smallBomb, boolean[] direction_stop){
+    protected void add_smallBomb(int num_smallBomb, boolean[] direction_stop){
         Direction[] smallBomb_directions = Direction.values(); // UP, DOWN, LEFT, RIGHT
         SpriteCoordinate[] coordinate_offset = {new SpriteCoordinate(0, -num_smallBomb), new SpriteCoordinate(0, num_smallBomb),
                 new SpriteCoordinate(-num_smallBomb, 0), new SpriteCoordinate(num_smallBomb, 0)};
@@ -45,13 +45,13 @@ public class NormalBomb extends Bomb{
     }
 
     @Override
-    public SmallBomb new_smallBomb(Player owner, Point smallBomb_location, int damage, int explode_range,
+    protected SmallBomb new_smallBomb(Player owner, Point smallBomb_location, int damage, int explode_range,
                                    Counter before, Counter after, Direction face){
         return new NormalSmallBomb(owner, smallBomb_location, damage, explode_range, face, this.after_explode_counter);
     }
 
     @Override
-    public void explode_effect(){
+    protected void explode_effect(){
         // Deal damage
         Rectangle damageArea = getRange();
         var sprites = this.world.getSprites(damageArea);
@@ -74,5 +74,4 @@ public class NormalBomb extends Bomb{
     public Dimension getBodySize() {
         return shape.bodySize;
     }
-
 }

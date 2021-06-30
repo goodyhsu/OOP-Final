@@ -7,7 +7,7 @@ import player.Player;
 import java.awt.*;
 
 public abstract class SmallBomb extends Bomb{
-    Direction face;
+    private Direction face;
     public SmallBomb(Player owner, Point location, int damage, int explode_range,
                      Direction face, Counter after_counter){
         super(owner, location, damage, explode_range);
