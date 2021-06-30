@@ -23,6 +23,7 @@ public class CharacterSelector {
     private ArrayList<Integer> img_num;
     private final int player_num = 2;
     private int round;
+    private String title = "狗狗貓貓";
 
     public CharacterSelector(Game game) {
         this.class_names.addAll(Arrays.asList("Dog", "Dog", "Cat", "Cat", "UglyTom"));
@@ -45,6 +46,7 @@ public class CharacterSelector {
 
     public void unlockTom(int player) {
         img_num.set(player, 5);
+        title = "狗狗貓貓醜湯姆";
     }
 
     public void render(Graphics g) {
@@ -57,11 +59,7 @@ public class CharacterSelector {
             String string;
 
             // title
-            if (round == 1)
-                string = "狗狗貓貓";
-            else
-                string = "狗狗貓貓醜湯姆";
-            drawString(g, string, Color.BLACK,
+            drawString(g, title, Color.BLACK,
                     new Font("TimesRoman", Font.PLAIN, 64),
                     (int) (GameView.WIDTH/2), periphery, true);
 
