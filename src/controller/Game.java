@@ -139,7 +139,7 @@ public class Game extends GameLoop {
         }
     }
 
-    public Counter getCounter() {
+    protected Counter getCounter() {
         return counter;
     }
 

@@ -72,6 +72,4 @@ public class GameRound {
             game.delay(15);
         }
     }
-    //test
-    // 123
 }

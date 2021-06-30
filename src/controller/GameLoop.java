@@ -19,7 +19,7 @@ public abstract class GameLoop {
     public abstract void start();
     protected View getView() { return view; }
     public abstract World getWorld();
-    public MusicUtils getMusicUtils() { return musicUtils; }
+    protected MusicUtils getMusicUtils() { return musicUtils; }
 
     protected void delay(long ms) {
         try {
