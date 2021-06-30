@@ -1,6 +1,7 @@
 # OOP-Final
-![](https://i.imgur.com/MZ5skjP.jpg)
+## Usage
+* To compile: `make`
+* To run: `make run`
 
-## usage
-`make`
-`make run`
+## Design
+![](https://i.imgur.com/MZ5skjP.jpg)
